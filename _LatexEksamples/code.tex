@@ -1,0 +1,32 @@
+% This is an example file showing how code snippets should be inserted into LaTeX documents.
+% 
+% Code snippets should be entered using plaintext, or by inputting a source file.
+
+% Begin lstlisting, display continously, descriptive label, descriptive caption, 15% margin on each side of the snippet
+\begin{lstlisting}[frame=single, label={code:hello_world}, caption={A hello world snippet.}, xleftmargin=.15\textwidth, xrightmargin=.15\textwidth]
+% Actual contents
+#include <stdlib.h>
+#include <stdio.h>
+
+static int main (void) {
+    puts("Hello World!");
+    return EXIT_SUCCESS;
+}
+% end scope
+\end{lstlisting}
+
+
+% ============= COPY PASTEABLE BELOW ================= %
+
+\begin{lstlisting}[frame=single, label={code:FIX_ME_PLEASE}, caption={A descriptive caption.}, xleftmargin=.15\textwidth, xrightmargin=.15\textwidth]
+    CONTENTS
+\end{lstlisting}
+
+% ============= COPY PASTEABLE ABOVE ================= %
+
+% Code input from files:
+\lstinputlisting[language=Python]{source_filename.py}
+
+% Code input from files, with specific lines:
+\lstinputlisting[language=Python, firstline=37, lastline=45]{source_filename.py}
+%https://physics.stackexchange.com/questions/153159/calculate-speed-from-accelerometer

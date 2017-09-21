@@ -1,0 +1,34 @@
+\documentclass[a4paper,11pt,fleqn,twoside,openright]{memoir} % Openright åbner kapitler på højresider (openany begge)
+\usepackage{amssymb}
+\input{preamble}
+\raggedbottom
+
+\begin{document}
+
+\frontmatter
+
+\input{Setup/0meta}
+
+\phantomsection
+\pdfbookmark[0]{Contents}{contents}
+\tableofcontents*
+\listoftodos[Notes] %% List alle elementer lavet med \todo pakken
+
+\mainmatter
+%%% MAIN REPORT %%%
+\input{Documents/0meta}
+
+%\input{Tex-files/Introduction/code-examples}
+
+\begingroup
+\raggedright
+\bibliography{Bibtex/literature}
+\endgroup
+
+\appendix
+\clearforchapter
+
+\phantomsection
+\pdfbookmark[0]{Appendix}{appendix}
+
+\end{document}

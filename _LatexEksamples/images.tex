@@ -1,0 +1,48 @@
+% This is an example file showing how images should be inserted into LaTeX documents.
+% 
+% The following file type rules should be followed as closely as possible.
+% Sometimes, logos and other stuff will only be available as PNG, and that's fine.
+%
+% Allowed file types (anything vector / plaintext):
+%  - svg
+%  - pdf
+%  - eps
+%  - ps
+%
+% Disallowed file types (raster / bitmap graphics):
+%  - png
+%  - bmp
+%  - jpg
+%  - gif
+%
+
+% \begin block starts a new environment of type figure.
+% [H] places the figure very close to the place it's included in the text.
+% [H] aka. PLACE HERE
+\begin{figure}[H]
+% \centering aligns the figure to the middle of the page.
+    \centering
+% This line includes the actual image, sets the width and assures that the img looks correctly.
+% Please avoid writing the file extension. eg "path/pic.svg" should just be "path/pic"
+    \includegraphics[width=12cm,keepaspectratio]{images/subject/pdf/filename}
+% Every figure needs a caption
+    \caption{Very descriptive caption that describes the picture}
+% The figure label should be discriptive, and is used for referencing
+% \ref{fig:unique_figure_label} returns eg "Figure 1.1"
+% figures start with fig:
+    \label{fig:unique_figure_label}
+% Close the current scope.
+\end{figure}
+
+% ============= COPY PASTEABLE BELOW ================= %
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm,keepaspectratio]{images/subject/pdf/filename}
+    \caption{Very descriptive caption that describes the picture.}
+    \label{fig:PLEASE_FIX_ME}
+\end{figure}
+
+% ============= COPY PASTEABLE ABOVE ================= %
+
+

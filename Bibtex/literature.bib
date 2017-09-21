@@ -1,0 +1,286 @@
+%=============Templating=============%
+%% Website
+%% site:kort navn, skal være unikt
+%% Fuldt artikelnavn
+%% Udgivelsesmåned
+%% Udgivelsesår
+%% URL
+%% Dato hvorpå den er indsamlet. HUSK DET.
+% Optional fields: author, title, howpublished, month, year, note
+
+
+%% bruges til technologiske rapporter (aka academiske rapporter %%
+@techreport{label,
+	author = {author},	
+	title = {title},
+	year = {year},
+	month = {month},
+	address = {\url{url}},
+    note = {Visited: date}
+}
+%% Bruges som en go to label til udspecificerede kilder %%
+@manual{Label,
+    author = {author},
+	title = {title},
+	year = {year},
+	month = {month},
+	address = {\url{url}},
+    note = {Visited: date}
+}
+%% bruges til artikler, fra journaler (aka Aviser) %%
+@article{Label,
+	author = {author},
+	title = {title},
+    journal = {journal},
+    year = {year},
+	volume = {Artikel id: id number},
+	pages = {page number},
+    note = {Visited: date}
+}
+%% bruges til bøger %%
+@inbook{label,
+	author = {author},
+    title = {title},
+    year = {year},
+    chapter = {chapter number},
+    pages = {page number},
+    address = {\url{url}},
+    note = {Visited: date}
+}
+% Sources bruges ved \cite{label} husk [] så det ser godt ud!
+%=============/Templating=============%
+% Dates like this: note = {[DD/MM/YYYY]} %
+@manual{overflowgeek,
+    author = {Himanshu Arora},
+	title = {Buffer Overflow Attack Explained with a C Program Example},
+	year = {2013},
+	month = {June},
+	address = {\url{http://www.thegeekstuff.com/2013/06/buffer-overflow/?utm_source=feedly}},
+    note = {Visited: [09/03/2017]}
+}
+
+@manual{ANTLRabout,
+    author = {ANTLR.org},
+    title = {About ANTLR},
+    year = {2011},
+    month = {unkown},
+    address = {\url {http://www.antlr.org/about.html}},
+    note = {Visited: [10/05/2017]}
+}
+
+@manual{ANTLR.org,
+    author = {ANTLR.org},
+    title = {LL(*): The Foundation of the ANTLR Parser Generator},
+    year = {2011},
+    month = {unkown},
+    address = {\url {http://www.antlr.org/papers/LL-star-PLDI11.pdf}},
+    note = {Visited: [06/04/2017]}
+}
+
+@manual{googleblog,
+    author = {Google},
+    title = {Unicode nearing 50\% of the web},
+    year = {2010},
+    month = {January},
+    address = {\url {https://googleblog.blogspot.dk/2010/01/unicode-nearing-50-of-web.html}},
+    note = {Visited: [04/04/2017]}
+}
+
+@manual{ponemon,
+    author = {Ponemon-Institute},
+    title = {2016 cost of data breach study: global analysis},
+    year = {2016},
+    month = {unknown},
+    address = {\url {https://www-01.ibm.com/common/ssi/cgi-bin/ssialias?htmlfid=SEL03094WWEN}},
+    note = {Visited: [17/03/2017]}
+}
+
+@manual{around,
+    author = {James Gleick},
+    title = {Rocket crash due to integer overflow},
+    year = {1996},
+    month = {December},
+    address = {\url {https://around.com/ariane.html}},
+    note = {Visited: [10/03/2017]}
+}
+
+@manual{CBcnet,
+    author = {Patrick Holland},
+	title = {Cloudbleed bug: Everything you need to know},
+	year = {2017},
+	month = {February},
+	address = {\url{https://www.cnet.com/how-to/cloudbleed-bug-everything-you-need-to-know/}},
+    note = {Visited: [09/03/2017]}
+}
+
+@manual{CBforbes,
+    author = {Thomas Fox-Brewster},
+	title = {How Bad Was CloudBleed? 1.2 Million Leaks Bad},
+	year = {2017},
+	month = {March},
+	address = {\url{https://www.forbes.com/sites/thomasbrewster/2017/03/01/cloudbleed-leak-massive-but-not-too-harmful/}},
+    note = {Visited: [09/03/2017]}
+}
+
+@manual{CBhacker,
+    author = {Swati Khandelwal},
+	title = {Serious Bug Exposes Sensitive Data From Millions Sites Sitting Behind CloudFlare},
+	year = {2017},
+	month = {February},
+	address = {\url{http://thehackernews.com/2017/02/cloudflare-vulnerability.html}},
+    note = {Visited: [09/03/2017]}
+}
+
+@manual{HBQuote,
+    author = {Joseph Steinberg},
+	title = {Massive Internet Security Vulnerability -- Here's What You Need To Do},
+	year = {2014},
+	month = {April},
+	address = {\url{https://www.forbes.com/sites/josephsteinberg/2014/04/10/massive-internet-security-vulnerability-you-are-at-risk-what-you-need-to-do/#5624fe513fdf}},
+    note = {Visited: [10/03/2017]}
+}
+
+@manual{HBWeb,
+    author = {Codenomicon},
+	title = {The Heartbleed Bug},
+	year = {2014},
+	month = {April},
+	address = {\url{http://heartbleed.com/}},
+    note = {Visited: [10/03/2017]}
+}
+
+@manual{HBPercent,
+    author = {Paul Mutton - Netcraft},
+	title = {Half a million widely trusted websites vulnerable to Heartbleed bug},
+	year = {2014},
+	month = {April},
+	address = {\url{https://news.netcraft.com/archives/2014/04/08/half-a-million-widely-trusted-websites-vulnerable-to-heartbleed-bug.html}},
+    note = {Visited: [10/03/2017]}
+}
+
+@manual{HBExplain,
+    author = {US-CERT},
+	title = {Alert (TA14-098A) - OpenSSL 'Heartbleed' vulnerability (CVE-2014-0160)},
+	year = {2014},
+	month = {April},
+	address = {\url{https://www.us-cert.gov/ncas/alerts/TA14-098A}},
+    note = {Visited: [10/03/2017]}
+}
+
+@manual{HBCVE,
+    author = {Mitre},
+	title = {CVE-2014-0160},
+	year = {2014},
+	month = {April},
+	address = {\url{https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0160}},
+    note = {Visited: [10/03/2017]}
+}
+
+@techreport{formatguard,
+	author = {Tim Newsham},	
+	title = {Format String Attacks},
+	year = {2000},
+	month = {September},
+	institution = {Guardent, Inc.},
+	address = {\url{http://forum.ouah.org/FormatString.PDF}},
+    note = {Visited: 10/03/2017}
+}
+
+@techreport{formatstanford,
+	author = {Team Tesu},	
+	title = {Exploiting Format String Vulnerabilities},
+	year = {2001},
+	month = {September},
+	institution = {Stanford University},
+	address = {\url{https://crypto.stanford.edu/cs155/papers/formatstring-1.2.pdf}},
+    note = {Visited: 10/03/2017}
+}
+
+@manual{doublefree,
+    author = {OWASP},
+	title = {Double Free},
+	year = {2014},
+	month = {June},
+	address = {\url{https://www.owasp.org/index.php/Double_Free}},
+    note = {Visited: [15/03/2017]}
+}
+
+@manual{danglepoint,
+    author = {Neeraj Mishra},
+	title = {Dangling Pointer in C},
+	year = {N/A},
+	address = {\url{http://www.thecrazyprogrammer.com/2016/03/dangling-pointer-in-c.html}},
+    note = {Visited: [15/03/2017]}
+}
+
+@manual{memleak,
+    author = {OWASP},
+	title = {Memory Leak},
+	year = {2016},
+	month = {January},
+	address = {\url{https://www.owasp.org/index.php/Memory_leak}},
+    note = {Visited: [15/03/2017]}
+}
+
+@book{CodeCom,
+	author = {Steve McConnell},
+    title = {Code Complete, 2nd ed.},
+    year = {2004},
+    publisher = {Microsoft Press},
+    address = {ISBN: 978-0-7356-1967-8},
+}
+
+@manual{tiobe,
+    author = {TIOBE},
+	title = {TIOBE Index for March 2017},
+	year = {2017},
+	month = {March},
+	address = {\url{http://www.tiobe.com/tiobe-index//}},
+    note = {Visited: [15/03/2017]}
+}
+
+@manual{HBAnatomy,
+    author = {The Register},
+	title = {Anatomy of OpenSSL's Heartbleed: Just four bytes trigger horror bug},
+	year = {2014},
+	month = {April},
+	address = {\url{http://www.theregister.co.uk/2014/04/09/heartbleed_explained/}},
+    note = {Visited: [20/03/2017]}
+}
+
+@manual{cloudblog,
+    author = {John Graham-Cumming},
+	title = {Incident report on memory leak caused by Cloudflare parser bug},
+	year = {2017},
+	month = {February},
+	address = {\url{https://blog.cloudflare.com/incident-report-on-memory-leak-caused-by-cloudflare-parser-bug/}},
+    note = {Visited: [22/03/2017]}
+}
+
+@manual{nginx,
+    author = {NGINX},
+	title = {Welcome to NGINX Wiki!},
+	address = {\url{https://www.nginx.com/resources/wiki/}},
+	year= {N/A},
+    note = {Visited: [22/03/2017]}
+}
+
+@manual{nayuki,
+    author = {Nayuki},
+	title = {Undefined behavior in C and C++ programs},
+	year = {2017},
+	month = {February},
+	address = {\url{https://www.nayuki.io/page/undefined-behavior-in-c-and-cplusplus-programs}},
+    note = {Visited: [31/03/2017]}
+}
+
+@inbook{caccfg,
+	author = {Charles N. Fischer},
+    title = {Crafting a Compiler},
+    publisher ={Addison-Wesley},
+    year = {2010},
+    chapter = {4},
+    pages = {113-115},
+    note = {Visited: 07/04/2017}
+}
+

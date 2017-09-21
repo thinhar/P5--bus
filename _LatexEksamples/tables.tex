@@ -1,0 +1,52 @@
+% This is an example file showing how tables should be inserted into LaTeX documents.
+% 
+% Tables should have clearly aligned columns whenever possible.
+% \specialleftcell{word\\word\\word} makes a special left-aligned cell, where the contents are stacked. \\ makes new line
+% 
+
+% Begin table environment, place table HERE
+\begin{table}[H]
+% centering center-aligns the table
+    \centering
+% begin tabular, the actual table
+% {|l|c|}:
+% - vertical line char (|) makes the cell borders visible, and seperates the columns.
+% - l,c,r  left, center and right aligns current columns contents
+    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+% hline makes a horizontal line, starting a new row in the table.
+    \hline
+% this is a row, where each column in the row is seperated by a &, and ended by a newline and hline (\\\hline), to start a new row.
+         Event/Class    & Apples   & Oranges  & Bananas & Grapes   & Figs    & Plums \\\hline
+         Fork           &    *     &    +     &    *    &          &    +    &       \\\hline
+         Spoon          &          &          &    *    &          &         &   *   \\\hline
+         Knife          &          &    *     &         &    *     &         &       \\\hline
+         Bucket         &          &          &         &    *     &    *    &       \\\hline
+         Zebra          &    *     &          &         &          &         &       \\\hline
+% End the tabular
+    \end{tabular}
+% A descriptive caption for the table
+    \caption{Behavior table}
+% A descriptive label, used for referencing
+% tables start with tab:
+    \label{tab:behavior_table}
+% end table
+\end{table}
+
+% ============= COPY PASTEABLE BELOW ================= %
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+    \hline      
+         Event/Class    & Apples   & Oranges  & Bananas & Grapes   & Figs    & Plums \\\hline
+         Fork           &    *     &    +     &    *    &          &    +    &       \\\hline
+         Spoon          &          &          &    *    &          &         &   *   \\\hline
+         Knife          &          &    *     &         &    *     &         &       \\\hline
+         Bucket         &          &          &         &    *     &    *    &       \\\hline
+         Zebra          &    *     &          &         &          &         &       \\\hline
+    \end{tabular}
+    \caption{Behavior table}
+    \label{tab:behavior_table}
+\end{table}
+
+% ============= COPY PASTEABLE ABOVE ================= %

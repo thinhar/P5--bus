@@ -1,0 +1,75 @@
+\chapter{Problem Statement and Requirements for the project}
+
+\section{Problem Statement}
+
+\section{Requirements}
+In this section the requirements for the project will be described. The requirements are meant to be guidelines for the project and the goals which need to be meet to fulfil the project.
+
+The requirements can be categorised in two main parts. Requirements for the track and for the Lego vehicle and its sensors. 
+
+\subsection{Track requirements}
+The track should have two lanes, to illustrate a road with two directions and to make the simulation more realistic. The track should furthermore have small bus stops, the Lego vehicle can drive into then passengers needs to get on/off the bus.
+
+To help the sensors detect then to switch to a bus stop lane. The track should have special formed/colored objects placed besides bus stops (signs). Which the NxtCam-v4 sensor\ref{} can recognise. Also if any people is standing at the bus stop to get onto the bus they should be placed close to the bus stop sign. 
+
+To draw the track black tape should be used, so the light sensors more easily can detect the light reflection and determent the color. And make the line following more consistent.
+
+Last the track should be designed and formed so our (30-40cm)Lego bus vehicle can turn corners without needing to stop.  
+
+
+\subsection{Lego vehicle and sensors}
+INTRO
+
+\subsubsection{Motors}
+The Lego vehicle should use two servo motors. One for the turning mechanism and one for driving forward and backwards. The turning mechanism should be the front wheels. 
+
+\subsubsection{Cruise control}
+The vehicle should have an automated cruise control which can follow a car in front or keep a specific speed in different speed zones. The Cruise control speed should work from the amount of rotations of the wheels crossaxle. And therefor not be determine by the motors power \% since motors power \% can vary from motors. And therefor not be a consistent method.
+
+\subsubsection{Follow line}
+For the vehicle to stay on the track it needs to be able to detect and follow lines in both sides and thereby stay in between the two. This should be done with the use of two Nxt light sensors which can recognise the black tape color by the light reflection \%. 
+
+\subsubsection{Detect obstacles}
+With the use of the Nxt ultrasonic sensor the vehicle should be able to detect obstacles for example a car stopping. And thereby overriding all other protocols to make sure the vehicle don't crash. And give control back then the safety protocol have been executed and the vehicle are safe from crashing again.   
+
+\subsubsection{Bluetooth stop button}
+To illustrate a passenger pressing the stop button. The vehicle should be able to receive information via Bluetooth then the stop button have been pressed on a Bluetooth remote control.
+
+\subsubsection{Switch to bus lane}
+The vehicle should switch to bus lane, if the stop button have been pressed or the bus detects anyone who wants to get on the bus. Once the vehicle have switched lane it should stop at the bus stop sign, and wait for all passengers to get on-board. Once finished the bus should be able to drive back to the main road lane and continue to the next bus stop.
+
+\subsubsection{Detect bus stop signs}
+To make the bus driving more realistic and optimal the bus should drive past bus stops where no one wants to get off or on the bus. Therefor the bus needs to detect potentially passengers at bus stops. To do this the bus needs a sensor with image recognition(NxtCam-v4) which can recognise the bus sign and it's passengers from distance.
+
+
+
+
+\subsubsection{overtake?}
+\subsubsection{traffic light?}
+
+
+
+\begin{table}[]
+\centering
+\caption{Kaj}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}                           & \multicolumn{4}{c|}{\cellcolor[HTML]{C0C0C0}Prototype Number}                                                                                                                                                                                                                                  \\ \cline{2-5} 
+\rowcolor[HTML]{9B9B9B} 
+\cellcolor[HTML]{C0C0C0}                           & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}\textbf{1}}           & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}\textbf{2}}                  & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}\textbf{3}} & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}\textbf{4}}                               \\ \cline{2-5} 
+\cellcolor[HTML]{C0C0C0}                           & \begin{tabular}[c]{@{}l@{}}Motors\\ Detect obstacles\end{tabular} &                                                                          &                                                         &                                                                                       \\ \cline{2-5} 
+\cellcolor[HTML]{C0C0C0}                           &                                                                   & \begin{tabular}[c]{@{}l@{}}Follow line\\ Switch to bus lane\end{tabular} &                                                         &                                                                                       \\ \cline{2-5} 
+\cellcolor[HTML]{C0C0C0}                           &                                                                   &                                                                          & Cruise control                                          &                                                                                       \\ \cline{2-5} 
+\multirow{-6}{*}{\cellcolor[HTML]{C0C0C0}Priority} &                                                                   &                                                                          &                                                         & \begin{tabular}[c]{@{}l@{}}Bluetooth stop button\\ Detect bus stop signs\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+
+% table overview with rankings of both track and car + prototypes
