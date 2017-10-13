@@ -1,71 +1,58 @@
-\chapter{Problem Statement and Requirements for the project}
+\chapter{Problem Statement and Requirements}
 
-\section{Problem Statement}
+%With all of the focus on self-driving vehicles we have chosen to specifically take a closer look at how buses can be automated to fulfil their objectives as if driven by a person. 
 
-\section{Requirements}
-In this section the requirements for the project will be described. The requirements are meant to be guidelines for the project and the goals which need to be meet to fulfil the project.
+%\section{Problem}
+%-\todo{Fix title}.\\
+%\unsure{isn't the introduction the problem?}
+%\section{Problem Statement}
 
-The requirements can be categorised in two main parts. Requirements for the track and for the Lego vehicle and its sensors. 
+\textbf{Is it possible to create a self-driving bus using LEGO hardware, that is able to perform the functionality required of a typical bus, in a scaled down version of the pre-existing infrastructure.}
+\info{In this version of the problem statement it is already specified from the very start that the focus is on the LEGO.}
+%\textbf{Is it possible to create a self-driving bus while working within the hardware limitations of LEGO, that is able to perform the functionality required of a typical bus, in a scaled down version of pre-existing infrastructure.}
 
-\subsection{Track requirements}
-The track should have two lanes, to illustrate a road with two directions and to make the simulation more realistic. The track should furthermore have small bus stops, the Lego vehicle can drive into then passengers needs to get on/off the bus.
-
-To help the sensors detect then to switch to a bus stop lane. The track should have special formed/colored objects placed besides bus stops (signs). Which the NxtCam-v4 sensor\ref{} can recognise. Also if any people is standing at the bus stop to get onto the bus they should be placed close to the bus stop sign. 
-
-To draw the track black tape should be used, so the light sensors more easily can detect the light reflection and determent the color. And make the line following more consistent.
-
-Last the track should be designed and formed so our (30-40cm)Lego bus vehicle can turn corners without needing to stop.  
+\input{Documents/1Introduction/BrainStorm}
+\input{Documents/1Introduction/Priorities}
 
 
-\subsection{Lego vehicle and sensors}
-INTRO
+\section{Project Requirements} \todo{Should be made more specific} \label{Requirements}
+In this section we describe the requirements that the final product will need to meet in order to solve the problem statement. %...the requirements for the project will be described. The requirements are meant to be guidelines for the project and the goals which need to be met. The order of appearance is dependant on their importance.
 
-\subsubsection{Motors}
-The Lego vehicle should use two servo motors. One for the turning mechanism and one for driving forward and backwards. The turning mechanism should be the front wheels. 
+%To test if the bus is able to meet its requirements, test tracks will be constructed. The requirements for the track and the bus will be specified below.
+\info{This section should concern additional elaboration of the chosen requirements from the brainstorm. It should not contain design choices, and it is also doubtful that the requirements should be split into vehicle requirements and track requirements.}
 
-\subsubsection{Cruise control}
-The vehicle should have an automated cruise control which can follow a car in front or keep a specific speed in different speed zones. The Cruise control speed should work from the amount of rotations of the wheels crossaxle. And therefor not be determine by the motors power \% since motors power \% can vary from motors. And therefor not be a consistent method.
+%\subsection{Vehicle Requirements}
+%Metatext
 
-\subsubsection{Follow line}
-For the vehicle to stay on the track it needs to be able to detect and follow lines in both sides and thereby stay in between the two. This should be done with the use of two Nxt light sensors which can recognise the black tape color by the light reflection \%. 
+\begin{description}
+    \item [(1) Follow Track]
+    The bus needs to be able to detect the lines marking the edges of a road lane and stay within these. The relation between the size of the track and the LEGO bus should be the same as the relation real busses have with real roads. This also applies to the turning degrees of real road turns. 
+    
+    \item[(2) Stop at Bus Stops]
+    The bus needs to detect and stop at bus stops on its route and resume driving afterwards. 
 
-\subsubsection{Detect obstacles}
-With the use of the Nxt ultrasonic sensor the vehicle should be able to detect obstacles for example a car stopping. And thereby overriding all other protocols to make sure the vehicle don't crash. And give control back then the safety protocol have been executed and the vehicle are safe from crashing again.   
+    \item[(3) Switching Lanes] 
+    The vehicle should be able to switch lanes, useful both for overtaking other vehicles and stopping at a bus stop in a dedicated lane. 
+    
+    \item[(4) Detecting Obstacles]
+    Detecting obstacles is a crucial part of preventing crashes and other potential accidents. As such the bus needs to be able to detect obstacles in front of it and perform preventative measures to prevent the collision. Implemented in the real world, the response, response time and field of view should be at least on par with normal human drivers. Seeing as this is highly improbable and unnecessary for a LEGO bus, we will consider this requirement fulfilled as long as it can: detect and react to obstacles in a 60 degree cone to the front within less than a second, and detect and react to obstacles within a 150 degree arch whenever the vehicle is switching lanes. \unsure{what are the rules for human? How many degrees do they need to watch (counting the mirrors)?}
+    
+    \item[(5) Stop Button]
+    Busses, unlike trains, are not required to stop at every bus stop, and as such need a button that allows the passengers to signal at which stops they want to get off at. The bus should be able to at any given time receive a signal, and processes this signal as theoretical passengers wanting to get of the bus.
+    
+    \item[(6) Speed Limiter]
+    The bus should have a speed limiter which can detect the current speed limits and keep the specific velocity in the different speed zones. It should be able to switch between at least 2 different speeds, given 2 different signals/physical signals.
+    
+    \item[(7) Indicator Signals]
+    Signalling that a vehicle wants to turn is very helpful for the other vehicles on the road. The bus should have some way of indicating to the surroundings that it is turning/going to turn.
+\end{description}
 
-\subsubsection{Bluetooth stop button}
-To illustrate a passenger pressing the stop button. The vehicle should be able to receive information via Bluetooth then the stop button have been pressed on a Bluetooth remote control.
+%\subsection{Lego vehicle and sensors requirements}
+%This subsection will decide upon the requirements for the LEGO bus and the sensors that it uses.
 
-\subsubsection{Switch to bus lane}
-The vehicle should switch to bus lane, if the stop button have been pressed or the bus detects anyone who wants to get on the bus. Once the vehicle have switched lane it should stop at the bus stop sign, and wait for all passengers to get on-board. Once finished the bus should be able to drive back to the main road lane and continue to the next bus stop.
-
-\subsubsection{Detect bus stop signs}
-To make the bus driving more realistic and optimal the bus should drive past bus stops where no one wants to get off or on the bus. Therefor the bus needs to detect potentially passengers at bus stops. To do this the bus needs a sensor with image recognition(NxtCam-v4) which can recognise the bus sign and it's passengers from distance.
-
-
-
-
-\subsubsection{overtake?}
-\subsubsection{traffic light?}
-
-
-
-\begin{table}[]
-\centering
-\caption{Kaj}
-\label{my-label}
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\rowcolor[HTML]{C0C0C0} 
-\cellcolor[HTML]{C0C0C0}                           & \multicolumn{4}{c|}{\cellcolor[HTML]{C0C0C0}Prototype Number}                                                                                                                                                                                                                                  \\ \cline{2-5} 
-\rowcolor[HTML]{9B9B9B} 
-\cellcolor[HTML]{C0C0C0}                           & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}\textbf{1}}           & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}\textbf{2}}                  & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}\textbf{3}} & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}\textbf{4}}                               \\ \cline{2-5} 
-\cellcolor[HTML]{C0C0C0}                           & \begin{tabular}[c]{@{}l@{}}Motors\\ Detect obstacles\end{tabular} &                                                                          &                                                         &                                                                                       \\ \cline{2-5} 
-\cellcolor[HTML]{C0C0C0}                           &                                                                   & \begin{tabular}[c]{@{}l@{}}Follow line\\ Switch to bus lane\end{tabular} &                                                         &                                                                                       \\ \cline{2-5} 
-\cellcolor[HTML]{C0C0C0}                           &                                                                   &                                                                          & Cruise control                                          &                                                                                       \\ \cline{2-5} 
-\multirow{-6}{*}{\cellcolor[HTML]{C0C0C0}Priority} &                                                                   &                                                                          &                                                         & \begin{tabular}[c]{@{}l@{}}Bluetooth stop button\\ Detect bus stop signs\end{tabular} \\ \hline
-\end{tabular}
-\end{table}
-
+%\subsubsection{Motors}
+%The LEGO vehicle should use two servo motors\unsure{is this not a design thing? why is this a requirement}? One for the turning mechanism and one for driving forward and backwards. The turning mechanism should be the front wheels. 
+%The LEGO bus needs a number of motors in other to drive itself forwards and backwards and in order to steer.\info{Have changed this subsection to be much less specific.}
 
 
 

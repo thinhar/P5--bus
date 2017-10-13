@@ -1,0 +1,30 @@
+
+\subsubsection{Accelerometer}
+
+We first attempted to use a NXT Accelerometer to measure the speed of the bus; however, these attempts failed. In this section we will underline why it went wrong and what our final conclusions were. 
+
+The basic idea was to measure the acceleration of the bus over a certain time frame, then calculate the current speed using the previously accumulated acceleration and the time it was measured in. While writing a program to handle this, we encountered several hurdles. 
+
+The accelerometer works by measuring and returning acceleration in the three directions x, y and z separately.  
+
+Our first instinct was to just ensure that the accelerometer was lying still, and as such we expected that the gravitational acceleration of earth would only affect the z-value of the accelerometer. Then we could have just measured the x and y axis to figure calculate the resulting speed. 
+
+This might have worked in principle, but in practise it proved completely impossible, because we could never get the sensor level enough on the floor (and even then, we'd be dependant on the floor being perpendicular to the earth's gravitational attraction). And even if we could, the sensor returned numbers that were so precise that whenever the sensor would tilt even the slightest bit, the acceleration returned would spike, because now either the x or y axis would be affected by the gravitational attraction of earth. This is of course quite problematic when the sensor is supposed to be on a driving bus, which won't be perfectly level all the time. 
+
+To solve this, we used vector calculations to combine x, y and z measurements to find the resulting acceleration. We do this initially when the sensor is turned on and lying still to save earth's acceleration, which we then subtract from any future measurements of the resulting acceleration. The remaining acceleration would then be unaffected by earth's gravitational force. 
+
+Even still, the sensor was incredibly inconsistent and would suddenly spike to ridiculous numbers whenever we moved it, numbers that were way higher than the acceleration we pushed it with. To combat this, we started gathering 10 measurements before calculating and using the average of those to calculate the speed.
+
+However, after this change we still had issues replicating our experiments and receiving the same results. The accelerometer uses three different sensors to measure the x, y and z axes. Interestingly they have very different precision. We noticed up to a 25 \% difference in regards to which direction the accelerometer was facing. 
+
+And this brings even more issues with regards to the sensor's tilt and earth's gravitational force. If the sensor was tilting in one particular direction at the start where we calculated the acceleration towards the earth, then a unique amount of error would be added by the sensors that were currently being affected by this force. 
+
+The solution to these problems is to calibrate the sensor results in each direction, making sure that they all return the same values if affected by the same force. However, this is where we stopped working with the accelerometer, as we deemed it doubtful whether we could ever make the result as precise as we needed.
+
+If we intend to use this sensor again, doing calibration tests should be our first priority. While the sensor may be needlessly difficult for speed measurements, we may decide to use it if we need to measure the current direction of movement (in degrees to x, y and z). 
+
+%There were expectations that the NXT Acceleration / Tilt sensor could be used to tell the speed of the bus. 
+
+%The way the speed is calculated is by looking at the average acceleration every second and then adding them up to get the speed.
+
+%However there were some issues with this, the gravity caused a constant acceleration towards the earth's centre of gravity. If it was possible to keep the sensor totally still then it would not be a problem, however as the bus drives around it is impossible to keep the sensor still, and if it tilts even slightly, the sensor will think that the bus is accelerating in a direction whilst in reality it might be holding still. Thus the longer time the bus is driving in the more imprecise the measurement becomes, and it is therefore not possible to measure the speed of the bus using this sensor.

@@ -17,7 +17,10 @@
 \usepackage{colortbl} 						% Farver i tabeller (fx \columncolor, \rowcolor og \cellcolor)
 \usepackage[dvipsnames,table,xcdraw]{xcolor}				% Definer farver med \definecolor. Se mere: http://en.wikibooks.org/wiki/LaTeX/Colors
 %\usepackage{flafter}						% Soerger for at floats ikke optraeder i teksten foer deres reference
-%\let\newfloat\relax 						% Justering mellem float-pakken og memoir
+%To add linebreakswithin cells.
+\usepackage{makecell}
+%\let\newfloat\relax 						
+% Justering mellem float-pakken og memoir
 \usepackage{float}							% Muliggoer eksakt placering af floats, f.eks. \begin{figure}[H]
 \usepackage{eso-pic}						% Tilfoej billedekommandoer paa hver side
 \usepackage{wrapfig}						% Indsaettelse af figurer omsvoebt af tekst. \begin{wrapfigure}{Placering}{Stoerrelse}
@@ -30,7 +33,7 @@
 \usepackage{textcomp}                 		% Symbol-udvidelser (f.eks. promille-tegn med \textperthousand )
 \usepackage{siunitx}						% Flot og konsistent praesentation af tal og enheder med \si{enhed} og \SI{tal}{enhed}
 \sisetup{output-decimal-marker = {,}}		% Opsaetning af \SI (DE for komma som decimalseparator) 
-\usepackage[version=3]{mhchem} 				% Kemi-pakke til flot og let notation af formler, f.eks. \ce{Fe2O3}
+%\usepackage[version=3]{mhchem} 				% Kemi-pakke til flot og let notation af formler, f.eks. \ce{Fe2O3}
 %\usepackage{rsphrase}						% Kemi-pakke til RS-saetninger, f.eks. \rsphrase{R1}
 
 % ¤¤ Referencer og kilder ¤¤ %
@@ -261,3 +264,4 @@ basicstyle=\ttfamily\small,
 \usepackage{multirow}
 \usepackage[table,xcdraw]{xcolor}
 
+\usepackage{pdfpages}

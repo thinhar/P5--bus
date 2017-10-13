@@ -1,0 +1,51 @@
+\todo{Make this a "Solving the Requirements" chapter in stead}
+
+Write about:
+
+
+follow track: We assume prefectly consistent road markings with no imperfections and unintentional holes
+
+sign: This probably require the bus to detect some kind of a physical sign.
+we will attempt to solve the requirements about bus stops using NXT cam
+We solve the parking part by:
+We will consider the requirement solved if we can manage to make it consistently park parallel to the side of the track with a maximum distance of 1 cm to the edge. 
+
+Hvilke forskellige busstoppesteder findes?
+Vi afgrænser os fra at kunne detecte ALLE mulige busstoppesteder, men fokuserer i stedet på en eller to (skilt [et rødt legoklodstårn] og 
+
+
+
+----> Videre fra nummer 5, omskriv den til at passe ordentligt!
+
+
+
+
+\section{Requirement Clarification and Scope Limitation}
+While the previously mentioned requirements are nice goals, some of them are either much too difficult to solve fully or not directly actionable in their current state. In this section we specify precisely what we consider to be necessary for each of the previous requirements to be considered fully achieved.
+
+\begin{description}
+    \item [(1) Follow Track]
+
+
+    \unsure{This one is actually already actionable enough with what's written in requirements.  Move stuff around!}
+    
+    \item[(2) Detecting Bus Stops]
+    \unsure{}
+
+    \item[(3) Switching Lanes] 
+    
+    
+    The vehicle should be able to switch lanes, specifically switch to the bus lane. Once the bus has switched lanes it should fully stop at the bus stop, parked parallel to the side of the track with a maximum distance of 1 cm. to the side \unsure{where does this 1 cm. thing come from? That doesn't fit what happens IRL.}. Afterwards, the bus should be able to drive back to the main lane and resume driving.
+    
+    \item[(4) Detecting Obstacles]
+    Detecting obstacles is a crucial part of preventing crashes and other potential accidents. As such the bus needs to be able to detect obstacles in front of it and perform preventative measures to prevent the collision. The response, response time and field of view should be at least on par with normal human drivers. \unsure{more specific, a degree, the human can see 210 degrees, however a one eyed person can drive and what about mirrors.}
+    
+    \item[(5) Stop Button]
+    Busses, unlike trains, are not required to stop at every bus stop, and as such need a button that allows the passengers to signal at which stops they want to get off at. The bus should be able to at any given time receive a signal, and processes this signal as theoretical passengers wanting to get of the bus.
+    
+    \item[(6) Speed Limiter]
+    The bus should have a speed limiter which can detect the current speed limits and keep the specific velocity in the different speed zones. It should be able to switch between at least 2 different speeds, given 2 different signals/physical signals.
+    
+    \item[(7) Indicator Signals]
+    Signalling that a vehicle wants to turn is very helpful for the other vehicles on the road. The bus should have some way of indicating to the surroundings that it is turning/going to turn.
+\end{description}

@@ -1,0 +1,55 @@
+In this chapter, we will take a closer look at potential hardware components that can be used to construct the bus. The first section will be about the platform the bus driven by. The options, due to the choice of LEGO, are: LEGO NXT and LEGO EV3.
+The second section will be about the possible sensors for the bus. The options are: LEGO ultrasound sensor, LEGO light sensor, NXTCam\cite{Mindsensors}, and NXT Acceleration / Tilt Sensor\cite{HiTechnic}.\todo{We have already decided the sensors we use before they are even tested, this means that there are some sensors that could have been viable candidates which are not tested and analysed.}
+The third section is about the possible motors that we can use to make the bus move. The possible option is: NXT motor.\todo{We only have a single option here.} 
+At the end of every section, there will be a small discussion where the choice of hardware is made. This choice will influence the possible options for hardware in the sections following that section.
+
+\subsection{Platform}
+
+The hardware platform has all sensors and motors attached to it. The hardware platform runs the software to make the bus use its sensors and motors. As mentions, the options are: LEGO NXT and LEGO EV3. In \ref{LEGOComparisonChart} comparisons are made between the hardware of the two platforms.
+
+%\subsection{Lego NXT}
+%The LEGO NXT is a small programmable computer made by LEGO and shaped like a brick. The Intended use of the NXT is in a combination with their LEGO Mindstorms software to program robots. The LEGO NXT set was released late July of 2006.\\
+%The NXT uses an Atmel 32-bit ARM AT91SAM7S256 processor. It has a clock speed of 48 MHz. It has 256 KB FLASH-RAM, and 64 KB of RAM.\\
+%It has a co-processor named Atmel 8-Bit AVR, ATmega48. It has a clock speed of 8 MHz. It has 4 KB of FLASH-RAM, and 512 bytes of RAM.\\
+%The NXT has 4 sensor ports and 3 motor ports.\\
+%The NXT is capable of USB communication at 12 Mbits/s.\\
+%The NXT is capable of communicating with Android devices.\\
+%The NXT has a user interface with 4 buttons, and a Monochrome LCD 100 x 64-pixel display.\\ 
+%Besides the USB 2.0 it is also able to communicate using Bluetooth.\\
+%The NXT is powered by either a rechargeable battery or 6 AA batteries.
+
+%\subsection{LEGO EV3}
+
+%Just like the LEGO NXT the LEGO EV3 is also a small programmable computer made by LEGO, and it is also shaped like a brick.
+
+
+
+\begin{table}[H]
+\centering
+\label{LEGOComparisonChart}
+\begin{tabular}{|l|l|l|}
+\hline
+ & NXT & EV3 \\ \hline
+\makecell[l]{Processor} & \makecell[l]{Atmel 32-Bit ARM AT91SAM7S256 \\ 48 MHz \\ 256 KB FLASH-RAM \\ 64 KB RAM} & \makecell[l]{ARM9 \\ 300MHz \\ 16 MB Flash \\ 64 MB RAM} \\ \hline
+Co-Processor & \makecell[l]{Atmel 8-Bit AVR, ATmega48 \\ 8 MHz \\ 4 KB FLASH-RAM \\ 512 Byte RAM} & \makecell[l]{n/a} \\ \hline
+Operating system & \makecell[l]{Proprietary} & \makecell[l]{Linux-based} \\ \hline
+Sensor ports & \makecell[l]{4 \\ Analog \\ Digital: 9600 bit/s (IIC)} & \makecell[l]{4 \\ Analog \\ Digital, up to 460.8 Kbit/s (UART)} \\ \hline
+Motor ports & \makecell[l]{3, with encoders} & \makecell[l]{4, with encoders} \\ \hline
+USB communication & Full speed (12 Mbit/s) & \makecell[l]{High speed (480 Mbit/s)} \\ \hline
+USB host & \makecell[l]{n/a} & \makecell[l]{Daisy-chain ( 3 levels) \\ WiFi dongle \\ \makecell[l]{USB Storage}} \\ \hline
+SD-card & \makecell[l]{n/a} & \makecell[l]{Micro SD-Card Reader \\ can handle up to 32 GB} \\ \hline
+\makecell[l]{Communication with \\ smart devices} & \makecell[l]{Android} & \makecell[l]{Apple \\ Android} \\ \hline
+User-interface & \makecell[l]{4 Buttons} & \makecell[l]{6 Buttons with Backlight \\ handy for debugging and status} \\ \hline
+Display & \makecell[l]{LCD Matrix \\ monochrome
+100 x 64 Pixel} & \makecell[l]{LCD Matrix \\ monochrome
+178 x 128 Pixel} \\ \hline
+Communication & \makecell[l]{Bluetooth \\ USB 2.0} & \makecell[l]{Bluetooth v2.1DER \\ USB 2.0 (To talk with PC) \\ USB 1.1 (for daisy-chaining)} \\ \hline
+\end{tabular}
+\caption{Comparison chart between the LEGO NXT and the LEGO EV3.\cite{brickcomparison}}
+\end{table}
+
+\subsubsection{Choice of platform}
+
+In the end, the NXT was chosen as the platform. The NXT to attempt to make the most out of the hardware and possibly push it to its limitations, and as such using the NXT instead of the much more powerful EV3 would put more focus on these limitations.
+
+\todo{Skal vi ikke have en sammenligning, diskussion beskrivelse ting her.}
