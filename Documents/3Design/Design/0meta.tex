@@ -1,6 +1,37 @@
 \chapter{Design}
+META
 
-We split the problem into a number of components, these components are implemented in different prototype iterations, and thereby tested. 
+\section{Components}
+
+We split the project into a number of components based on the requirements, \unsure{ change to this: different iterations of prototypes will be used to test these components?} these components are implemented in different prototype iterations, and thereby tested. 
+
+
+
+The functionality that we have planned to include in the product (using the requirements), split into components. 
+
+The idea is that these components are mostly separate from each other and each deal with different functionality and concerns. 
+
+Each component is intended to be a complete piece of functionality.
+
+Note that this is not a class diagram over the system architecture that we are going to implement, this follows in section \todo{add ref to class diagram ref{}}. Instead, this component diagram describes only a separation of concerns and dependencies.
+
+
+
+
+
+\includepdf[pages=-, width=\textwidth]{Images/Design/componentDiagram.pdf}
+
+EXPLAIN ANYTHING THATS STILL UNCLEAR
+
+
+
+\section{Software Architecture}
+
+Diagram over our planned implementation, showing both classes and interfaces
+Add function calls to the arrows? Or rather functions to the classes themselves?
+This is still not one-to-one with implementation. The API's don't really communicate directly with their corresponding sensors, instead they all query the NXT block, which gives access to different functions dependant on which sensors are connected.
+
+\includepdf[pages=-, width=\textwidth]{Images/Design/architectureClassDiagram.pdf}
 
 
 

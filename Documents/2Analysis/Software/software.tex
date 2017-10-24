@@ -1,9 +1,11 @@
 \subsection*{NXT-G}
-Despite the NXT and EV3's different platforms, they both ship with the NXT-G programming language. NXT-G is a programming language based on LabView\cite{LabView}. The language uses a drag and drop block system, instead of writing code. This also provides a visual representation of the program.
+Despite the NXT and EV3's different platforms, they both ship with the NXT-G programming language. NXT-G is a programming language based on LabView\cite{LabView}. The language uses a drag and drop block system, instead of writing code, illustrated in figure \ref{NXT-G}. This also provides a visual representation of the program.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Images/Software/Mindstorms/mindstorms_block.png}
+    \caption{Ilustration of the drag and drop block system of NXT-G programming language}
+    \label{NXT-G}
 \end{figure}
 
 This approach is easier to understand, but is limited when it comes to low level programming and when creating more complex programs. Luckily both the EV3 and NXT are flexible platforms, as they allow for custom firmware to be installed, which in turn allows for different programming languages to be used.
@@ -13,25 +15,26 @@ Some of these include RobotC\cite{RobotC}, leJOS\cite{leJOS} and nxtOSEK\cite{nx
 This programming language is designed specifically for robot platforms. It is built on top of C, and is built with the primary purpose of being a educational platform. Noteworthy is that it is not free to use and requires a license.
 
 \subsection*{leJOS}
-leJOS is a open-source firmware that includes the Java Virtual Machine\cite{Java}, and as such allows for writing Java programs. Originally written for LEGO RCX, it has since been updated to run on NXT and EV3. The RCX version has been discontinued since 2006\todo{source}.
+leJOS is a open-source firmware that includes the Java Virtual Machine\cite{Java}, and as such allows for writing Java programs. Originally written for LEGO RCX, a earlier version of the NXT\unsure{maybe rewrite this added sentence}, it has since been updated to run on NXT and EV3.
 
 leJOS has plugins for both Netbeans\cite{Netbeans} and Eclipse\cite{Eclipse} for making development more convenient.
 
 \subsubsection*{nxtOSEK}
 The firmware is a hybrid of leJOS and TOPPERS\cite{TOPPERS}. Using nxtOSEK it is possible to write C and C++ programs.
 
-There are different ways to run nxtOSEK on a NXT. These approaches have different pros and cons.
+There are different ways to run nxtOSEK on a NXT. These approaches have different pros and cons, a listing of differences is shown in table \ref{firmCom}.
 \begin{table}[H]
-\centering
-\label{firmware-comparison}
-\begin{tabular}{|l|l|l|l|}
-\hline
+    \centering
+    \label{firmware-comparison}
+    \begin{tabular}{|l|l|l|l|}
+    \hline
                                                                               & Memory                                                       & Programs & Interface \\ \hline
-Stock Firmware                                                                         & 64KB                                                         & Multiple & Stock     \\ \hline
-\begin{tabular}[c]{@{}l@{}}John Hansen's\\ Enhanced NXT Firmware\end{tabular} & 64KB                                                         & Multiple & Stock     \\ \hline
-NXTBios                                                                       & \begin{tabular}[c]{@{}l@{}}224KB ROM\\ 50KB RAM\end{tabular} & Single   & Barebone  \\ \hline
-\end{tabular}
-\caption{Comparison between firmware}
+    Stock Firmware                                                                         & 64KB                                                         & Multiple & Stock     \\ \hline
+    \begin{tabular}[c]{@{}l@{}}John Hansen's\\ Enhanced NXT Firmware\end{tabular} & 64KB                                                         & Multiple & Stock     \\ \hline
+    NXTBios                                                                       & \begin{tabular}[c]{@{}l@{}}224KB ROM\\ 50KB RAM\end{tabular} & Single   & Barebone  \\ \hline
+    \end{tabular}
+    \caption{Comparison between firmware}
+    \label{firmCom}
 \end{table}
 
-nxtOSEK supports scheduling using Rate Monotic Scheduling\todo{Explain somewhere else and reference}. It uses alarms to define priorities and the execution rate.
+nxtOSEK supports scheduling using priority based scheduling\todo{Explain somewhere else and reference}. It uses alarms to define priorities and the execution rate.
