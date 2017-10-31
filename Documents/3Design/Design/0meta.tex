@@ -1,5 +1,5 @@
 \chapter{Design}
-META
+Using the data gathered in the previous chapter, we design a product that can solve the requirements at \ref{Requirement}. In this chapter we split the product into modular components that contain its functionality and use this to design the program architecture. Afterwards, we define interfaces to be used for implementing the software of the product. Besides the software, we also decide upon the physical design of the car, including which sensors we will use. Lastly, we will plan how we are going to test whether the individual components of the car conform to the requirements or not.
 
 \section{Components}
 
@@ -37,6 +37,7 @@ Mention external bluetooth-sender program
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{Images/Design/architectureClassDiagram.png}
     \caption{Diagram of the program architecture and how these communicate with each other}
+    \label{give label}
 \end{figure}
 
 These classes will be used for implementing the program! It is still, however, kind of an abstraction.
@@ -58,7 +59,17 @@ The diagram showing layers of abstraction in our design, including our NXTosek o
 inclue ecrobot\_interface.h in source code
 Write about the OSEK standard
 And thereby also OIL
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{Images/Design/abstractionLayerDiagram.png}
+    \caption{???}
+\end{figure}
 
+Add bluetooth maybe? Probably not, because it's a stub and therefore implementation-specific, not useful for the architecture
+
+
+The attached ArchitectureClassDiagram describes what we intend for our model implementation. The idea is that we use this diagram directly for our program architecture, so that each object on the diagram becomes a class in the implementation. The light blue coloured API-object are classes that we will create ourselves. The intent with these is that they expose the useful functions that each sensor/actuator has, and also are the place where we calibrate our sensors (so, for instance, we filter out any incorrect measurements).
+
+The attached AbstractionLayerDiagram describes our overall product architecture and abstractions, going from high-level programming to hardware specifics. Our model (eg. everything from the previous diagram) is contained inside the dark blue "Components"-box. The note "coupling to hardware" exists because those are implementation details in nxtOSEK, which we don't really know about.
 
 
 %\input{Documents/3Design/Design/1Design}
