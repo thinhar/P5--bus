@@ -3,14 +3,14 @@
 We will now use object-oriented design to figure out how our own system should be, and figure out what the requirements for our system should be.
 
 \subsection{Use Cases}
-meta
+Bellow are some use cases for how our system should behave. The different actors are the NXT and the testers of the system
 
 Use case 1:\\
 Goal: Switching into the bus lane\\
 Primary actor: NXT\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: A sensor(Camera?) gives data to the NXT that it detects as being a bus stop. The NXT makes the bus turn its wheels and drive into the bus stop, parking it parallel to the line.
+Story: A sensor gives data to the NXT that it detects as being a bus stop. The NXT makes the bus turn its wheels and drive into the bus stop, parking it parallel to the line.
 
 Use case 2:\\
 Goal: Switching out of the bus lane\\
@@ -24,7 +24,7 @@ Goal: Staying in lane\\
 Primary actor: NXT\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The NXT makes the bus drive straight ahead in the lane. It detects the edge of the lane using a sensor(camera?), and makes sure that the bus does not drive over the edges of the lane by turning the wheels of the bus away from the edge.
+Story: The NXT makes the bus drive straight ahead in the lane. It detects the edge of the lane using a sensor, and makes sure that the bus does not drive over the edges of the lane by turning the wheels of the bus away from the edge.
 
 Use case 4:\\
 Goal: Preventing a collision\\
@@ -38,7 +38,7 @@ Goal: Maintaining a speed\\
 Primary actor: NXT\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The NXT wants to maintain a specific speed. The motors tell the NXT how many degrees they are turning, and the NXT already know the circumference of the wheels, thus by also knowing time it can figure out how fast the bus is going. If the NXT sees that the bus is starting to move slower it will add more power to the motors, and if it sees that the bus is starting to move too fast the NXT will slow down the motors.
+Story: The NXT needs to maintain a specific speed. The motors tell the NXT how many degrees they are turning, and the NXT already know the circumference of the wheels, thus by also knowing time it can figure out how fast the bus is going. If the NXT sees that the bus is starting to move slower it will add more power to the motors, and if it sees that the bus is starting to move too fast the NXT will slow down the motors.
 
 Use case 6:\\
 Goal: Knowing to pull over at the next bus stop\\
@@ -52,7 +52,7 @@ Goal: Detecting a bus stop\\
 Primary actor: NXT.\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The NXT continually scans the input from the sensor(Camera?) and if it detects a sign that there is a bus stop, then it will know that there is a bus stop.
+Story: The NXT continually scans the input from the sensor and if it detects a sign that there is a bus stop, then it will know that there is a bus stop.
 
 Use case 8:\\
 Goal: Overtaking an obstacle\\
@@ -73,7 +73,7 @@ Goal: Ensuring that not too many passengers are on the bus\\
 Primary actor: NXT.\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: Every time a hypothetical passenger gets onboard the bus the NXT will count them. Every time a passenger gets off the bus, the NXT will also count them. The NXT prevents more passengers from getting onboard the bus if the limit for total amount of passengers have been reached.
+Story: Every time a hypothetical passenger gets onboard the bus the NXT will count them. Every time a passenger gets off the bus, the NXT will also count them. The NXT prevents more passengers from getting onboard the bus if the limit for total amount of passengers have been reached. \todo{fjern case 10, vi har ikke passenger \& tickets efter OOA}
 
 \subsection{Sequence Diagram}
 meta
@@ -84,3 +84,44 @@ Picture
 meta
 
 Table
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{FFFFFF} 
+Function                                           & Complexity & FunctionType \\ \hline
+\rowcolor[HTML]{9B9B9B} 
+Follow Track                                       & Complex    & Calculating  \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Detect Lines + Shape                               & Medium     &              \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Calculate next action                              & Medium     &              \\ \hline
+\rowcolor[HTML]{9B9B9B} 
+Bus Stop Calculations                              & Complex    & Calculating  \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Calculate stop Position                            & Simple     &              \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Detect Bus Stop                                    & Medium     &              \\ \hline
+\rowcolor[HTML]{9B9B9B} 
+Overtake                                           & Complex    & Calculating  \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Calculate relative speed                           & Simple     &              \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Detect nearby vehicles (opposing and accompanying) & Complex    &              \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Detect available road for overtake                 & Medium     &              \\ \hline
+Speed Controller                                   & Simple     & Update       \\ \hline
+Turn Controller                                    & Simple     & Update       \\ \hline
+Dark Sensor                                        & Simple     & Update       \\ \hline
+Speed Control(Limiter)                             & Simple     & Signaling    \\ \hline
+Push Stop Button                                   & Simple     & Signaling    \\ \hline
+Switch Lanes                                       & Medium     & Calculating  \\ \hline
+Cruise Control                                     & Medium     & Calculating  \\ \hline
+Detecting Obstacles(avoid)                         & Simple     & Beregning    \\ \hline
+\end{tabular}
+\caption{My caption}
+\label{my-label}
+\end{table}
