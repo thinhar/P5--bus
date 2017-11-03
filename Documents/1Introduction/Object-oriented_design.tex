@@ -1,9 +1,9 @@
-\section{Object-Oriented Design}
+\subsection{Object-Oriented Design}
 
 We will now use object-oriented design to figure out how our own system should be, and figure out what the requirements for our system should be.
 
-\subsection{Use Cases}
-Bellow are some use cases for how our system should behave. The different actors are the NXT and the testers of the system
+\subsubsection{Use Cases}
+Bellow are some use cases for how our system should behave. The different actors are the NXT and the testers of the system. The scope of all the use cases are A bus system.\todo{Somewhat unsure that scope is correct.} Possible levels: very high summary(++), summary(+), user goal(!), subfunction(-), Too low(--).
 
 Use case 1:\\
 Goal: Switching into the bus lane\\
@@ -33,7 +33,7 @@ Scope: A bus system\\
 Level: ! User goal\\
 Story: The NXT makes the bus drive forward. A sensor signals to the NXT that the distance between the bus and an object in front of it is getting shorter. The NXT makes the bus brake to prevent a collision.
 
-Use case 5:
+Use case 5:\\
 Goal: Maintaining a speed\\
 Primary actor: NXT\\
 Scope: A bus system\\
@@ -42,48 +42,54 @@ Story: The NXT needs to maintain a specific speed. The motors tell the NXT how m
 
 Use case 6:\\
 Goal: Knowing to pull over at the next bus stop\\
-Primary actor: A hypothetical passenger.\\
+Primary actor: A hypothetical passenger\\
 Scope: A bus system\\
 Level: ! User goal\\
 Story: The hypothetical passenger signals to the NXT that it should make the bus stop at the next bus stop.
 
 Use case 7:\\
 Goal: Detecting a bus stop\\
-Primary actor: NXT.\\
+Primary actor: NXT\\
 Scope: A bus system\\
 Level: ! User goal\\
 Story: The NXT continually scans the input from the sensor and if it detects a sign that there is a bus stop, then it will know that there is a bus stop.
 
 Use case 8:\\
 Goal: Overtaking an obstacle\\
-Primary actor: NXT.\\
+Primary actor: NXT\\
 Scope: A bus system\\
 Level: ! User goal\\
 Story: By sensor input the NXT knows that there is an object ahead of it that is not moving. The NXT will then try to steer the bus left around the object whilst staying within the outer edges of the lane.
 
 Use case 9:\\
 Goal: Stay below a certain speed\\
-Primary actor: NXT.\\
+Primary actor: NXT\\
 Scope: A bus system\\
 Level: ! User goal\\
 Story: The NXT monitors the speed of the bus by knowing knowing the circumference of the wheels and knowing how fast they turn. The NXT then slows down the motors if they begin to approach a set speed limit.
 
 Use case 10:\\
-Goal: Ensuring that not too many passengers are on the bus\\
-Primary actor: NXT.\\
+Goal: Determine if it so dark that the headlights should be turned on\\
+Primary actor: NXT\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: Every time a hypothetical passenger gets onboard the bus the NXT will count them. Every time a passenger gets off the bus, the NXT will also count them. The NXT prevents more passengers from getting onboard the bus if the limit for total amount of passengers have been reached. \todo{fjern case 10, vi har ikke passenger \& tickets efter OOA}
+Story: The NXT uses a sensor to determine how dark it is. When the magnitude of the light is bellow a certain threshold the NXT will turn on the headlights so some of the busses sensors can work better. It also makes it easier for other road users to detect the bus.
 
-\subsection{Sequence Diagram}
-meta
+%Use case 10:\\
+%Goal: Ensuring that not too many passengers are on the bus\\
+%Primary actor: NXT.\\
+%Scope: A bus system\\
+%Level: ! User goal\\
+%Story: Every time a hypothetical passenger gets onboard the bus the NXT will count them. Every time a passenger gets off the bus, the NXT will also count them. The NXT prevents more passengers from getting onboard the bus if the limit for total amount of passengers have been reached. \todo{fjern case 10, vi har ikke passenger \& tickets efter OOA}
+% \todo{maybe add sequence Diagram}
+%\subsubsection{Sequence Diagram}
+%meta
 
-Picture
+%Picture
 
-\subsection{Function List}
-meta
+\subsubsection{Function List}
+A function list has been made to take a further look at the complexity and function type of each of the functions. The functions coloured in dark grey are complex functions that have been opened up to take a closer look at the individual functions that they are composed off. The light grey functions are the functions that the more complex functions contain. The white functions are the functions that are not complex enough to warrant getting split up into smaller functions.
 
-Table
 % Please add the following required packages to your document preamble:
 % \usepackage[table,xcdraw]{xcolor}
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
@@ -120,8 +126,15 @@ Speed Control(Limiter)                             & Simple     & Signaling    \
 Push Stop Button                                   & Simple     & Signaling    \\ \hline
 Switch Lanes                                       & Medium     & Calculating  \\ \hline
 Cruise Control                                     & Medium     & Calculating  \\ \hline
-Detecting Obstacles(avoid)                         & Simple     & Beregning    \\ \hline
+Detecting Obstacles(avoid)                         & Simple     & Calculating    \\ \hline
+Manoeuvre the bus                         & Simple     & Calculating    \\ \hline
 \end{tabular}
-\caption{My caption}
-\label{my-label}
+\caption{The function list.}
+\label{functionlist}
 \end{table}
+
+
+
+
+
+
