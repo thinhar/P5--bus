@@ -1,0 +1,63 @@
+\section{Interfaces}
+In this section we specify interfaces for all objects in the software model, as seen in figure \ref{fig:softwareArchitecture}. This includes the API-objects, which are intended to abstract from hardware specific  information like the calibration of sensors and filtering out incorrect measurements from the raw data. 
+
+\todo{Probably do this inside a draw.io diagram}
+
+\subsection{API classes}
+They all require a calibrate-method, which is called whenever the bus starts in order to ensure the sensors work as intended. 
+
+\unsure{HOW DOES THIS WORK IN RELATION TO RTS and .oil files? How do we split all these functions into multiple tasks that can be scheduled using .oil files?}
+
+\begin{description}
+    \item [Motor]
+    FindCentrum(); ???? Does this make sense for the motor for speed?
+    SetRotation(int rpm, enum direction);
+    
+    \todo{Do I need an API for turning as well? or can I combine speed and turning in one?}
+    
+    The enum contains the choices: forwards and backwards. Rpm abbreviates rotations per minute.
+    
+    \item [LightSensor]
+    \item [SoundSignaling]
+    \item [Bluetooth]
+    \item [Ultrasonic]
+    \item [CamDetectObjects]
+    \item [CamLineTracking]
+\end{description}
+
+\subsection{Other classes}
+\subsection{API-objects}
+\begin{description}
+    \item [Signaling]
+    void StartManeuvre(enum maneuvre);
+    void EndManeuvre(enum maneuvre);
+    enum CurrentManeuvre;
+    
+    The enum contains the choices: stopped, straight, turnLeft, turnRight, brake, reverse and emergency. 
+\end{description}
+
+\subsection{Component classes}
+\begin{description}
+    \item [Driving]
+    void TurnDegrees(int targetDegrees, enum direction);
+    void TurnDegrees(int degrees, enum inDirection);
+    void SetSpeed(int targetKmHr, bool smooth);
+    void IncreaseSpeed(int kmHr, bool smooth);
+    void ReduceSpeed(int kmHr, bool smooth);
+    void Stop(bool smooth);
+    
+    enum currentDirection;
+    int currentTurn;
+    int MaxSpeed;
+    int CurrentSpeed;
+
+    The enum contains the choices: left and right. The bool "smooth" decides whether the speed increase/decrease is gradual or not. 
+    
+    \item [Maneuvre]
+    \item [StayWithinLane]
+    \item [CruiseControl]
+    \item [ObstacleAvoidance]
+    \item [SpeedZoneControl]
+    \item [StopButton]
+    \item [DetectBusStop]
+\end{description}
