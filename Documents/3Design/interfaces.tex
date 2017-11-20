@@ -1,0 +1,102 @@
+\section{Interfaces}
+In this section, we specify interfaces for all objects in the software model, as seen in figure \ref{fig:softwareArchitecture}. This includes the controller-objects, which are intended to abstract from hardware specific information like the calibration of sensors and filtering out incorrect measurements from the raw data. 
+
+\todo{Change API to Controller}
+
+\todo{Probably do this inside a draw.io diagram}
+
+\subsection{Controller classes}
+They all require a calibrate-method, which is called whenever the bus starts in order to ensure the sensors work as intended. 
+
+\unsure{HOW DOES THIS WORK IN RELATION TO RTS and .oil files? How do we split all these functions into multiple tasks that can be scheduled using .oil files?}
+
+\begin{description}
+    \item [Motor]
+    FindCentrum(); ???? Does this make sense for the motor for speed?
+    SetRotation(int rpm, enum direction);
+    
+    \todo{Do I need an API for turning as well? or can I combine speed and turning in one?}
+    
+    The enum contains the choices: forwards and backwards. Rpm abbreviates rotations per minute.
+    
+    \item [LightSensor]
+    \item [SoundSignaling]
+    \item [Bluetooth]
+    \item [Ultrasonic]
+    \item [CamDetectObjects]
+    \item [CamLineTracking]
+    All the steps:
+    (Ren punktdata) NxtCamV4 Line Tracking Driver: Track Line ()
+	(Rå punktdata) Mål med NxtCamV4 ()
+	(Rykket koordinatsystem) Flyt og vend koordinatsystem (Rå punktdata)
+	*(Let modificeret punktdata) Funktion for distortion (Rykket punktdata)
+	*(Ren punktdata) Funktion der sorterer dårlige målinger fra (Let modificeret punktdata)			- Målinger der ligger helt forkert, for eksempel
+	(Punkter på koordinatsystem) NxtCamV4 Line Tracking Driver: Map Points to Koordinates (Ren punktdata)
+	- Property: Bus Point
+
+    
+\end{description}
+
+\subsection{Other classes}
+\subsection{Controller-objects}
+\begin{description}
+    \item [Signaling]
+    void StartManeuvre(enum maneuvre);
+    void EndManeuvre(enum maneuvre);
+    enum CurrentManeuvre;
+    
+    The enum contains the choices: stopped, straight, turnLeft, turnRight, brake, reverse and emergency. 
+\end{description}
+
+\subsection{Component classes}
+\begin{description}
+    \item [Driving]
+    void RequestTurnDegrees(int targetDegrees, enum direction);
+    void RequestTurnDegrees(int degrees, enum inDirection);
+    void RequestSetSpeed(int targetKmHr, bool smooth);
+    void RequestIncreaseSpeed(int kmHr, bool smooth);
+    void RequestReduceSpeed(int kmHr, bool smooth);
+    void RequestStop(bool smooth);
+    
+    enum currentDirection;
+    int currentTurnDegrees;
+    int MaxSpeed;
+    int CurrentSpeed;
+
+    The enum contains the choices: left and right. The bool "smooth" decides whether the speed increase/decrease is gradual or not. 
+    
+    \item [Maneuvre]
+    \item [StayWithinLane]
+    \item [CruiseControl]
+    \item [ObstacleAvoidance]
+    \item [SpeedZoneControl]
+    \item [StopButton]
+    \item [DetectBusStop]
+\end{description}
+
+
+All components send their speed/turning degrees to the driving component, which then prioritizes those and decides how fast to actually drive. 
+
+Turn-kald er mutually exclusive
+
+Kald fra maneurvre er atomare, og må ikke opdeles. 
+
+Det er IKKE de andre componenter der kalder driving, men i stedet så læser driving felter/events fra de andre komponenter i den rigtige rækkefølge. ???
+
+Det bliver det vist nødt til at være, for ellers er der ikke noget klart programflow, og det bliver mærkeligt (?) at schedule
+
+
+
+Hvordan fungerer .oil scheduling? Hvordan deler vi programmet op i tasks? Skal det være klasser? Hvordan taler de med hinanden? Skal hver sensor være en task? (Nok hellere sensor-controller klasserne, no?)
+planlæg hvordan vi scheduler med .oil: hvor er vores tasks? Hvad skal kaldes for at starte det hele?
+Hvordan sørger vi for at kalde obstacle detection oftere end de andre? Det skal så være den, som kalder driving component. Den må vel have direkte access til driving, no?
+
+De andre skriver til driving en gang imellem.
+Senere får driving selv kontrol og styrer så hvad der skal prioriteres. 
+
+ELLER?
+De har alle sammen direkte adgang til driving. Driving sørger bare for at beholde det gamle data. Så snart en komponent siger at drivnig skal gøre noget, så tjekker driving hvad den skal gøre mht prioriteter. 
+Tror det er den rigtige løsning. 
+
+Tegn diagram med programflow: Scheduling -> Bus Stop Detection -> Maneuvre -> Driving -> Signalling -> Sound -> MotorController -> Motor
+Det kan så oversættes til en enkelt "linje" i et uppaal gantt chart. 

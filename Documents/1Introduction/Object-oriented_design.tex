@@ -1,94 +1,107 @@
 \subsection{Object-Oriented Design}
 
-We will now use object-oriented design to figure out how our own system should be, and figure out what the requirements for our system should be.
+%\info{old}We will now use object-oriented design to figure out how our own system should be, i.e. figure out what the requirements for our system should be.
+
+We are now done with analysing the problem domain using the object-oriented methods. We have gained a lot of knowledge about how the system with real busses work, and we can thus decide upon which elements we want to do different in the design off our own system.
+First of all the bus will be scaled down by a lot lot since we will be using LEGO as our hardware as was also stated earlier. The bus driver will be replaced and the drivers functionality will be taken over by the LEGO platform.
+The passenger will be removed since  they can no longer fit into a bus that is scaled down, and thus there will also no longer be a ticketing system.
+Although there are no passengers there will still need to be some way to determine whether or not the bus should stop at the next bus stop.
+The real road will be replaced by a track that we will make, although it will be correct in its relative size to the bus.
+We will have to use sensors instead of the bus drivers ears and eyes.
+With all of this in mind we will make some use cases. After the use cases we will have a function list based on the use cases.
+
 
 \subsubsection{Use Cases}
-Bellow are some use cases for how our system should behave. The different actors are the NXT and the testers of the system. The scope of all the use cases are A bus system.\todo{Somewhat unsure that scope is correct.} Possible levels: very high summary(++), summary(+), user goal(!), subfunction(-), Too low(--).
+Bellow are some use cases for how our system should behave. The different actors are the LEGO platform, which is undecided as of yet, and the testers of the system. The scope of all the use cases are a bus system.\todo{Somewhat unsure that scope is correct.} Possible levels: very high summary(++), summary(+), user goal(!), subfunction(-), Too low(--).
 
 Use case 1:\\
 Goal: Switching into the bus lane\\
-Primary actor: NXT\\
+Primary actor: LEGO platform\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: A sensor gives data to the NXT that it detects as being a bus stop. The NXT makes the bus turn its wheels and drive into the bus stop, parking it parallel to the line.
+Story: A sensor gives data to the LEGO platform that it detects as being a bus stop. The LEGO platform makes the bus turn its wheels and drive into the bus stop, parking it parallel to the line.
 
 Use case 2:\\
 Goal: Switching out of the bus lane\\
-Primary actor: NXT\\
+Primary actor: LEGO platform\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The NXT counts to a specified time and then turns the wheels of the bus and drives the bus back into the main lane.
+Story: The LEGO platform counts to a specified time and then turns the wheels of the bus and drives the bus back into the main lane.
 
 Use case 3:\\
 Goal: Staying in lane\\
-Primary actor: NXT\\
+Primary actor: LEGO platform\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The NXT makes the bus drive straight ahead in the lane. It detects the edge of the lane using a sensor, and makes sure that the bus does not drive over the edges of the lane by turning the wheels of the bus away from the edge.
+Story: The LEGO platform makes the bus drive straight ahead in the lane. It detects the edge of the lane using a sensor, and makes sure that the bus does not drive over the edges of the lane by turning the wheels of the bus away from the edge.
 
 Use case 4:\\
 Goal: Preventing a collision\\
-Primary actor: NXT\\
+Primary actor: LEGO platform\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The NXT makes the bus drive forward. A sensor signals to the NXT that the distance between the bus and an object in front of it is getting shorter. The NXT makes the bus brake to prevent a collision.
+Story: The LEGO platform makes the bus drive forward. A sensor signals to the LEGO platform that the distance between the bus and an object in front of it is getting shorter. The LEGO platform makes the bus brake to prevent a collision.
 
 Use case 5:\\
 Goal: Maintaining a speed\\
-Primary actor: NXT\\
+Primary actor: LEGO platform\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The NXT needs to maintain a specific speed. The motors tell the NXT how many degrees they are turning, and the NXT already know the circumference of the wheels, thus by also knowing time it can figure out how fast the bus is going. If the NXT sees that the bus is starting to move slower it will add more power to the motors, and if it sees that the bus is starting to move too fast the NXT will slow down the motors.
+Story: The LEGO platform needs to maintain a specific speed. 
+%The motors tell the LEGO platform how many degrees they are turning, and the LEGO platform already know the circumference of the wheels, thus by also knowing time it can figure out how fast the bus is going.
+If the LEGO platform sees that the bus is starting to move slower it will add more power to the motors, and if it sees that the bus is starting to move too fast the LEGO platform will slow down the motors.
 
 Use case 6:\\
 Goal: Knowing to pull over at the next bus stop\\
 Primary actor: A hypothetical passenger\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The hypothetical passenger signals to the NXT that it should make the bus stop at the next bus stop.
+Story: The hypothetical passenger signals to the LEGO platform that it should make the bus stop at the next bus stop.
 
 Use case 7:\\
 Goal: Detecting a bus stop\\
-Primary actor: NXT\\
+Primary actor: LEGO platform\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The NXT continually scans the input from the sensor and if it detects a sign that there is a bus stop, then it will know that there is a bus stop.
+Story: The LEGO platform continually scans the input from the sensor and if it detects a sign that there is a bus stop, then it will know that there is a bus stop.
 
 Use case 8:\\
 Goal: Overtaking an obstacle\\
-Primary actor: NXT\\
+Primary actor: LEGO platform\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: By sensor input the NXT knows that there is an object ahead of it that is not moving. The NXT will then try to steer the bus left around the object whilst staying within the outer edges of the lane.
+Story: By sensor input the LEGO platform knows that there is an object ahead of it that is not moving. The LEGO platform will then try to steer the bus left around the object whilst staying within the outer edges of the lane.
 
 Use case 9:\\
 Goal: Stay below a certain speed\\
-Primary actor: NXT\\
+Primary actor: LEGO platform\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The NXT monitors the speed of the bus by knowing knowing the circumference of the wheels and knowing how fast they turn. The NXT then slows down the motors if they begin to approach a set speed limit.
+Story: The LEGO platform monitors the speed of the bus by knowing knowing the circumference of the wheels and knowing how fast they turn. The LEGO platform then slows down the motors if they begin to approach a set speed limit.
 
 Use case 10:\\
 Goal: Determine if it so dark that the headlights should be turned on\\
-Primary actor: NXT\\
+Primary actor: LEGO platform\\
 Scope: A bus system\\
 Level: ! User goal\\
-Story: The NXT uses a sensor to determine how dark it is. When the magnitude of the light is bellow a certain threshold the NXT will turn on the headlights so some of the busses sensors can work better. It also makes it easier for other road users to detect the bus.
+Story: The LEGO platform uses a sensor to determine how dark it is. When the magnitude of the light is bellow a certain threshold the LEGO platform will turn on the headlights so some of the busses sensors can work better. It also makes it easier for other road users to detect the bus.
 
-%Use case 10:\\
-%Goal: Ensuring that not too many passengers are on the bus\\
-%Primary actor: NXT.\\
-%Scope: A bus system\\
-%Level: ! User goal\\
-%Story: Every time a hypothetical passenger gets onboard the bus the NXT will count them. Every time a passenger gets off the bus, the NXT will also count them. The NXT prevents more passengers from getting onboard the bus if the limit for total amount of passengers have been reached. \todo{fjern case 10, vi har ikke passenger \& tickets efter OOA}
-% \todo{maybe add sequence Diagram}
-%\subsubsection{Sequence Diagram}
-%meta
+Use case 11:\\
+Goal: Signal to the testers that the LEGO platform wants to switch lanes.\\
+Primary actor: LEGO platform\\
+Scope: A bus system\\
+Level: ! User goal\\
+Story: The LEGO platform is going to switch lanes, but before it does that it signals that it wants to do so using either some sort of lights or sounds.
 
-%Picture
+Use case 12:\\
+Goal: Follow the object ahead of the bus\\
+Primary actor: LEGO platform\\
+Scope: A bus system\\
+Level: ! User goal\\
+Story: The LEGO platform detects the distance to an object ahead of it, and then makes the bus go faster or slower in order to maintain the distance to the object ahead of it, while staying within the speed limit.
 
 \subsubsection{Function List}
-A function list has been made to take a further look at the complexity and function type of each of the functions. The functions coloured in dark grey are complex functions that have been opened up to take a closer look at the individual functions that they are composed off. The light grey functions are the functions that the more complex functions contain. The white functions are the functions that are not complex enough to warrant getting split up into smaller functions.
+A function list has been made from the use cases to take a further look at the complexity and function type of each of the functions. The functions coloured in dark grey are complex functions that have been opened up to take a closer look at the individual functions that they are composed off. The light grey functions are the functions that the more complex functions contain. The white functions are the functions that are not complex enough to warrant getting split up into smaller functions.
 
 % Please add the following required packages to your document preamble:
 % \usepackage[table,xcdraw]{xcolor}
@@ -98,7 +111,7 @@ A function list has been made to take a further look at the complexity and funct
 \begin{tabular}{|l|l|l|}
 \hline
 \rowcolor[HTML]{FFFFFF} 
-Function                                           & Complexity & FunctionType \\ \hline
+\textbf{Function}                                  & \textbf{Complexity} & \textbf{FunctionType} \\ \hline
 \rowcolor[HTML]{9B9B9B} 
 Follow Track                                       & Complex    & Calculating  \\ \hline
 \rowcolor[HTML]{C0C0C0} 
@@ -122,19 +135,43 @@ Detect available road for overtake                 & Medium     &              \
 Speed Controller                                   & Simple     & Update       \\ \hline
 Turn Controller                                    & Simple     & Update       \\ \hline
 Dark Sensor                                        & Simple     & Update       \\ \hline
-Speed Control(Limiter)                             & Simple     & Signaling    \\ \hline
+Speed Limiter                             & Simple     & Signaling    \\ \hline
 Push Stop Button                                   & Simple     & Signaling    \\ \hline
 Switch Lanes                                       & Medium     & Calculating  \\ \hline
 Cruise Control                                     & Medium     & Calculating  \\ \hline
 Detecting Obstacles(avoid)                         & Simple     & Calculating    \\ \hline
-Manoeuvre the bus                         & Simple     & Calculating    \\ \hline
+%Manoeuvre the bus                                  & Simple     & Calculating    \\ \hline
+Turn signal                                        & Simple     & Signaling    \\ \hline
 \end{tabular}
 \caption{The function list.}
 \label{functionlist}
 \end{table}
 
-
-
-
-
+The following is a brief explanation of the different functionality and what use case inspired that functionality:
+\begin{itemize}
+\item \textbf{Follow track}
+This functionality is that the bus has to stay within the outer lines of the track. Used in use case 3.
+\item \textbf{Bus stop calculations}
+For this functionality, the bus has to detect the bus stops as the bus approaches them. Used in use case 7.
+\item \textbf{Overtake}
+For this functionality, the bus has to detect that there is an obstacle ahead of it that blocks its path. It then tries to drive left around the object of there is sufficient space for it. Used in use case 8.
+\item \textbf{Speed controller}
+This functionality controls the speed of the bus. This is based on use case 5.
+\item \textbf{Turn controller}
+This functionality controls the turning of the busses wheels. Used in use cases 1,2,3 and 8.
+\item \textbf{Dark sensor}
+For this functionality, the bus has to detect how bright it is outside and turn on/off the headlights depending on how bright it is. Used in use case 10.
+\item \textbf{Speed Limiter}
+For this functionality, the bus has to maintain a speed under a specified threshold. Used in use case 9.
+\item \textbf{Push stop button}
+For this functionality, the bus has to register that the bus stop button has been clicked. Used in use case 6.
+\item \textbf{Switch lanes}
+For this functionality, the bus has to switch lanes, and also switch into the bus stops and out of them. Used in use cases 1 and 2.
+\item \textbf{Cruise Control}
+For this functionality, the bus has to follow an object in front of it and keep the speed of this object. Used in use case 12.
+\item \textbf{Detecting obstacles}
+For this functionality, the bus has to detect obstacles in front of it to prevent crashing. Used in use case 4.
+\item \textbf{Turn signal}
+For this functionality, the bus has to use its indicator signal to signal that it is switching lanes. Used in use case  11.
+\end{itemize}
 
