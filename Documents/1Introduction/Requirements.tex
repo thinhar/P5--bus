@@ -1,8 +1,8 @@
-\section{Project Requirements} \todo{Should be made more specific} \label{Requirements}
-In this section we describe the requirements that the final product will need to meet in order to solve the problem statement. \unsure{should we add: The requirements are listed in the order of importance they have been valued in this project.} %...the requirements for the project will be described. The requirements are meant to be guidelines for the project and the goals which need to be met. The order of appearance is dependant on their importance.
+\section{Project Requirements} \label{Requirements}
+In this section we describe the requirements that the final product will need to meet in order to solve the problem statement.%...the requirements for the project will be described. The requirements are meant to be guidelines for the project and the goals which need to be met. The order of appearance is dependant on their importance.
 
 %To test if the bus is able to meet its requirements, test tracks will be constructed. The requirements for the track and the bus will be specified below.
-\info{This section should concern additional elaboration of the chosen requirements from the brainstorm. It should not contain design choices, and it is also doubtful that the requirements should be split into vehicle requirements and track requirements.}
+%\info{This section should concern additional elaboration of the chosen requirements from the brainstorm. It should not contain design choices, and it is also doubtful that the requirements should be split into vehicle requirements and track requirements.}
 
 %\subsection{Vehicle Requirements}
 %Metatext
@@ -18,20 +18,20 @@ In this section we describe the requirements that the final product will need to
     The vehicle should be able to switch lanes. This functionality useful both for overtaking other vehicles and driving into dedicated bus lanes. 
     
     \item[(4) Detecting Obstacles]
-    Detecting obstacles is a crucial part of preventing crashes and other potential accidents. As such the bus needs to be able to detect obstacles in front of it and perform preventative measures to prevent the collision. In normal busses the response time and field of view of the human driving the bus is the obstacle detection.  As such the response time and field of view of our bus should be at least on par with normal human drivers. Seeing as this is highly improbable and unnecessary for a LEGO bus, we will consider this requirement fulfilled as long as it can: detect and react to obstacles in a 60 degree cone to the front within less than a second, and detect and react to obstacles within a 150 degree arch (60 degree cone in the front, and 90 degrees to whichever side the bus is turning) whenever the vehicle is switching lanes. \unsure{what are the rules for human? How many degrees do they need to watch (counting the mirrors)?}
+    Detecting obstacles is a crucial part of preventing crashes and other potential accidents. As such the bus needs to be able to detect obstacles in front of it and perform preventative measures to prevent the collision. In normal busses the response time and field of view of the human driving the bus is the obstacle detection. As such the response time and field of view of our bus should be at least on par with normal human drivers. Seeing as this is highly improbable and unnecessary for a LEGO bus, we will consider this requirement fulfilled as long as it can: detect and react to obstacles in a 60 degree cone to the front within less than a second, and detect and react to obstacles within a 150 degree arch (60 degree cone in the front, and 90 degrees to whichever side the bus is turning) whenever the vehicle is switching lanes. Additionally, we should be able to detect obstacles of a distance between 0 cm. from the bus to the distance it can cover within 2 seconds of driving at max speed \cite{holdAfstand}.
+
     
     \item[(5) Stop Button]
-    Busses are not required to stop at every bus stop, and therefore need a way for the passengers to signal at which stops they want to step off. 
+    Busses are not required to stop at every bus stop, and therefore need a way to signal at which stops the bus should stop. 
     
     \item[(6) Speed Limiter]
     The bus needs to keep track of current speed limits and keep the correct velocity in the different speed zones. Specifically, we will consider this requirement fulfilled if it can automatically switch between at least 2 different speeds, given 2 different signals/physical signals.
     
-    \item[(7) Indicator Signals]
+    \item[(7) Turn Signal]
     Signalling that a vehicle wants to turn is very helpful for the other vehicles on the road. The bus should have some way of indicating to the surroundings that it is turning/going to turn.
-\unsure{Do we want this as a requirement? I mean, we're probably not going to fulfil it}
-    
 \end{description}
 
+These requirements are the focus points for this project and every design decision will be valued based on these. Our core requirements for the minimally viable product are 1-5, whereas 6 and 7 are less essential. However we decided to keep 6-7 as part of the requirements even though they are more nice to have then need to have.
 %\subsection{Lego vehicle and sensors requirements}
 %This subsection will decide upon the requirements for the LEGO bus and the sensors that it uses.
 

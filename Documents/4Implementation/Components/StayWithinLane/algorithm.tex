@@ -1,0 +1,37 @@
+\subsection{Algorithm}
+In this section the algorithm that ensures that the bus always stays within the road lane is described. 
+
+The intent for the algorithm is to calculate an optimal line that the bus should follow in order to keep within lane markings. Using this result, it will call the Driving-component and inform it how much the bus should turn its wheels. 
+
+Using the coordinates gained through the NxtCamLineTrackController, we calculate a bézier curve to find a smooth line for the bus to drive. This is not quite as simple as it seems, as we need to handle the cases where the line tracker returns only very few points. For instance, if it returns only one coordinate for the left lane marking, then we cannot calculate a proper curve without knowledge of where at least one previous coordinate in the left lane was placed. 
+
+To solve this, we save old measurements. However, these need to be moved along the x or y-axis to fit with the new position of the bus compared to the place where the old measurement took place. Additionally, these measurement will need to be rotated if the bus has driven part of a road curve since the last measurement. Also, the bus will need to handle the case where there are zero measurement in the side.
+
+\todo{Add the pictures I created for pineTreeProblem and lane correction over time}
+%I feel like making the nxtCamLineTrack just return third order polynomials would have been better.
+
+\begin{description}
+    \item[NxtCamLineTrackController: Track Lines]
+    Gets the cleaned coordinates from a picture using the previously described NxtCamLineTrackController class. 
+    \item[Combine Old And New Coordinates]
+    Combines old and new coordinates, moving and rotating the measurements to fit with the new position and wheel angle of the bus. 
+    \item[Sort Data]
+    Splits the coordinates into measurements belonging to the left and the right lane marking. 
+    \item[Bézier Curve Calculation]
+    A bézier curve is calculated for the left and right lane markings. Using this, a number of points in the middle of the road between the two bézier curves is calculated.
+    \item[Calculate Driving Direction]
+    Calculates which direction the bus should turn optimally. 
+    \item[Call Driving Component]
+    Calls the driving and informs it of the results.
+\end{description}
+
+This algorithm has been implemented in the StayWithinLane-class of the program. 
+\todo{Describe part of code?}
+
+
+%() Stay Within Lines: Algoritme ()																	- Basically, den kører prik-til-prik med midtpunkter
+%	(Punkter på koordinatsystem) NxtCamV4 Line Tracking Driver: Track Line ()
+%	(Gamle + Nye punkter på koordinatsystem) Sammensæt gammelt og nyt data ([Nye] Punter på koordinatsystem, Bus Point, [Gammel] Midpoint Bezier Curve)
+%	(Sorteret Data Venstre, Sorteret Data Højre) Sorter Data (Gamle + Nye punkter på koordinatsystem)
+%	(0-8 Midtpoints) Bezier Curve Udregning (Sorteret Data Venstre, Sorteret Data Højre)
+%	*(Grader rotation, afstand der skal køres) Regn kørselsrute (0-8 Midtpoints)					- Hvis bussen ikke er i midten, skal den køre hen mod midtpoint. Håndterer også hvis den ikke får nok/nogle punkter

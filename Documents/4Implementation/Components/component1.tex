@@ -3,7 +3,7 @@
 \subsubsection{Component Requirements}
 The requirements for this component are a reduced amount of the total requirements for the project.
 
-From requirement 1, the component must be able to navigate a track constructed with the same relation between its width and the width of the bus as the \todo{Nej er først prototype.2}Danish Road Directorate dictates for danish roads. This means the bus needs to drive, brake and turn. The bus' maximum turning radius only needs to be at least as much as the maximal allowed curve on danish roads. 
+From requirement 1, the component must be able to navigate a track constructed with the same relation between its width and the width of the bus as the \todo{Nej er først prototype.2}Danish Road Directorate dictates for Danish roads. This means the bus needs to drive, brake and turn. The bus' maximum turning radius only needs to be at least as much as the maximally allowed curve on Danish roads. 
 
 As a less demanding requirement 4, the first component should avoid collisions with obstacles from the front. \unsure{The second requirement isn't strictly part of the steering "component", instead it's part of the overall bus prototype}
 
@@ -15,16 +15,15 @@ To create the component focused on steering the bus through the track, which wil
 The front wheels are used for turning and is powered by a LEGO Servo Motor. It should be able to turn the same amount of degrees to both sides, however, there is no requirement for a specific turning angle for this prototype. A thing to note is that the track for the bus should be designed such that the bus can perform the turn within the lines.
 
 \textbf{Obstacle Detection}\newline
-To prevent crashes, the prototype supports obstacle detection by having a LEGO ultrasonic sensor mounted at the very front of the bus in a fixed position. The sensor detects obstacles \todo{5?} cm ahead and \todo{30?} degrees to both sides. If it predicts that a collision might occur, the bus stops immediately, overriding both the driving and turning procedures. When the obstacle is no longer a hindrance, it will return to its normal state.  % Later prototype should be able to get out of this situation
+To prevent crashes, the prototype supports obstacle detection by having a LEGO ultrasonic sensor mounted at the very front of the bus in a fixed position. The sensor detects obstacles up to 70 cm ahead and 30 degrees to both sides. If it predicts that a collision might occur, the bus stops immediately, overriding both the driving and turning procedures. When the obstacle is no longer a hindrance, it will return to its normal state.  % Later prototype should be able to get out of this situation
 
 \textbf{Follow Track}\newline
-For the prototype to stay within the lines of the track, two LEGO NXT Light Sensors should be placed at the very front, one on each side to detect the lines on both sides. The sensors should aim directly at the ground with a distance of \todo{0.5?} cm to the ground. \info{Are we sure we won't be using the camera?}
-\todo{add ref eller skrive omkring algoritmen?}
+For the prototype to stay within the lines of the track, a LEGO NXTCam-v4 should be placed at the front in the center. The sensor should be aimed at the ground in front of the bus in order to see the tracks.
 
 The bus itself should be formed like a long rectangle so that it gets the form of a bus. It should have \todo{1:3?} length to width ratio.
 
 \subsubsection{Track requirements}
-The designed track for this prototype can be seen on figure \ref{Track1Layout}. The layout of the track is quite simple and only contain some of the requirements described in section \ref{Requirements}. The reason for this is to only test the features of this prototype and as such is designed uniquely for this prototype.
+The designed track for this prototype can be seen in figure \ref{Track1Layout}. The layout of the track is quite simple and only contain some of the requirements described in section \ref{Requirements}. The reason for this is to only test the features of this prototype and as such, it is designed uniquely for this prototype.
 
 The requirements for the track has therefore been limited to:
 \cite{DriveingCurves}

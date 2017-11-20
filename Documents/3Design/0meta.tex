@@ -1,4 +1,14 @@
-%\input{Documents/3Design/Achitecture/0meta}
-\input{Documents/3Design/Design/0meta}
+\chapter{Design}
 
-\input{Documents/4Implementation/Components/meta}
+Using the data gathered in the previous chapter, we design a product that can solve the requirements, listed at section \ref{Requirements}. In this chapter, we split the product into modular components that contain its functionality and use this to design the program architecture. Afterwards, we define interfaces to be used for implementing the software of the product. Besides the software, we also decide upon the physical design of the car, including which sensors we will use. Lastly, we will plan how we are going to test whether the individual components of the car conform to the requirements or not.
+
+\input{Documents/3Design/components}
+\input{Documents/3Design/softwareArchitecture}
+\input{Documents/3Design/systemArchitecture}
+\input{Documents/3Design/interfaces}
+
+Additional to the software and system architecture, we will also design the bus itself along with the track that it needs to drive on. 
+\todo{Write about the OSEK standard, And thereby also OIL, However, probably not in this chapter}
+
+\input{Documents/3Design/track}
+\input{Documents/3Design/bus}
