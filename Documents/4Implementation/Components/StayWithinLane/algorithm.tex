@@ -1,11 +1,13 @@
 \subsection{Algorithm}
 In this section the algorithm that ensures that the bus always stays within the road lane is described. 
 
-The intent for the algorithm is to calculate an optimal line that the bus should follow in order to keep within lane markings. Using this result, it will call the Driving-component and inform it how much the bus should turn its wheels. 
+The intent for the algorithm is to calculate an optimal line that the bus should follow in order to keep within lane markings. Using this result, it will call the Driving-component and inform it how much the bus should turn its wheels and for how long. 
 
 Using the coordinates gained through the NxtCamLineTrackController, we calculate a bézier curve to find a smooth line for the bus to drive. This is not quite as simple as it seems, as we need to handle the cases where the line tracker returns only very few points. For instance, if it returns only one coordinate for the left lane marking, then we cannot calculate a proper curve without knowledge of where at least one previous coordinate in the left lane was placed. 
 
-To solve this, we save old measurements. However, these need to be moved along the x or y-axis to fit with the new position of the bus compared to the place where the old measurement took place. Additionally, these measurement will need to be rotated if the bus has driven part of a road curve since the last measurement. Also, the bus will need to handle the case where there are zero measurement in the side.
+To solve this, we save old measurements from the last time we calculated the path for the bus. However, these need to be moved along the x or y-axis to fit with the new position of the bus compared to the place where the old measurement took place. Additionally, these measurement will need to be rotated if the bus has driven part of a road curve since the last measurement. Also, the bus will need to handle the case where there are zero measurement in the side. This is done by taking the measured point which is the farthest away, and the point previous to that in the same side. Next these two points are used to make a right-angle triangle so the farthest away point of the other side can me calculated \ref{}.  
+
+\todo{Indsæt billedee af trekant}
 
 \todo{Add the pictures I created for pineTreeProblem and lane correction over time}
 %I feel like making the nxtCamLineTrack just return third order polynomials would have been better.
@@ -24,12 +26,13 @@ To solve this, we save old measurements. However, these need to be moved along t
     \item[Call Driving Component]
     Calls the driving and informs it of the results.
 \end{description}
+\todo{1. LoadData, 2. Update Data to global space, 3. Sort New Data y and side, 4. Update OldData, 5. Combine Old and New data, 6. BezierCurves, 7. MidPoints, 8. Slope/Length.}
 
 This algorithm has been implemented in the StayWithinLane-class of the program. 
 \todo{Describe part of code?}
 
 
-%() Stay Within Lines: Algoritme ()																	- Basically, den kører prik-til-prik med midtpunkter
+%() Stay Within Lines: Algoritme ()- Basically, den kører prik-til-prik med midtpunkter
 %	(Punkter på koordinatsystem) NxtCamV4 Line Tracking Driver: Track Line ()
 %	(Gamle + Nye punkter på koordinatsystem) Sammensæt gammelt og nyt data ([Nye] Punter på koordinatsystem, Bus Point, [Gammel] Midpoint Bezier Curve)
 %	(Sorteret Data Venstre, Sorteret Data Højre) Sorter Data (Gamle + Nye punkter på koordinatsystem)
