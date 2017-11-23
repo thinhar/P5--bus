@@ -9,74 +9,48 @@ One of the questions to clear up is where we run the program from and where the 
 \subsubsection{Program Flow}
 The program flow and main function is defined within the .oil-files; see a description of these in section \ref{OILteo}. Inside the .oil-files we define functions as tasks to be called with specific priorities, periods and deadlines. 
 
-Imagine a case where the scheduler selects the DetectObstacle component to control the CPU, and an obstacle is detected, and the car is stopped. See the sequence diagram in figure \ref{fig:sequenceDetectObstacle} for how the program flow would look.
 
 
+
+
+
+One solution is to just just detect obstacles and if something is detected then immedeately execute the brake function. This being a real-time system, however, means that we cannot simply do that because we might start losing deadlines. Imagine the absolute worst case where the bus detects a bus stop and decides to stop there. Now the driving component gains control of the CPU for the next two seconds while it parks the bus. All deadlines are lost in that time, however, and if there's an obstruction on the road that was not detected prior, it might not be detected until it is too late. 
+Split sensor detection and execution of driving commands
 
 
 Every component needs to notify the driving-component about their optimal response to whichever input they are given. 
+We need to keep querying the different components at all times and also prioritize which commands to execute, because obviously, even if the SpeedZoneControl-component tells the bus to drive faster, the ObstacleDetection-component needs to be able to stop the bus. 
 
-This, however, means that the .oil-file needs to somehow be able to access the functions of the components. 
+\todo{Rename ObstacleAvoidance component to ObstacleDetection, also in figures}
 
+We contain the coupling of the program inside the driving component. It handles everything in regards to input and output of the different components, and also deals with prioritising the steering commands, to figure out what the motor should actually do. 
 
+Imagine a case where the scheduler selects the DetectObstacle component to control the CPU, and an obstacle is detected, and the car is stopped. See the sequence diagram in figure \ref{fig:sequenceDetectObstacle} for how the program flow would look.
 
-This means, for instance, that in order to call the ObstacleDetection-component, we need some  at some point, we require a public function to
+\begin{figure}[ht]
+    \includegraphics[width=\textwidth]{Images/Design/sequenceObstacleDetection.png}
+    \caption{Sequence diagram showing the program flow when the ObstacleDetection-component gains control of the CPU}
+    \label{fig:sequenceDetectObstacle}
+\end{figure}
 
+Task A calls the ObstacleDetection-component, which then returns results from the ultrasonic sensor, through the UlrasonicController. The priority of all currently saved steering-commands is calculated and saved locally in the Driving-component. The control is returned to the .oil file. Then task B assigns control of the CPU to the driving component a second time, which executes the highest priority steering command, which in this case would be to brake the car. Task B is fully separate from obstacle detection. Regardless of which task was executed prior, task B just executes the top priority command. Both tasks are called by the .oil file from the Driving-object. As such, the other objects can be kept separate, and we've contained any coupling to only the Driving-component instead of multiple classes. 
 
-.Oil needs some functions to call
-So we need a function for the program flow where the obstacle detection class checks for obstacles with the ultrasonic sensor. And others as well (give examples).
-Illustrate one example with a sequence diagram
-
-Explain what the Driving component does.
-
-The question is where our individual program flows are called. We have a few options, none of which seem immediately better than the rest:
-- Each component is called on its own. This makes it so the .oil programmer needs to know about the functions of all the different class functions (and where to initialize a call). This can be remedied with an interface that exposes a .Run() method. Problem here is what to do with the result of each call. If the Obstacle Detection class decides that the bus should now stop, what does it do? Does it have access to the Driving component and can it call the .Brake() function? But then all functions have access to the Driving component, which heavily increases the coupling of the program (not good). Does it expose its return value as an event that is subscribed to by the Driving component? But then the worst case execution time becomes difficult to control, because unless we know the entire program, we cannot say how many items are subscribed. Does it expose its value as a property? But then, all classes need to expose a property of the same type and also use it in the same way. Again, this increases the coupling of the program. 
-
-Something needs to know about the different classes.
-Usually we'd have a main function or a controller-layer that serves to bind
-the different components together. Calling them when needed, etc. 
-
-We cannot do that, because we need to schedule. For more information about how
-.oil scheduling works, see ref. 
-
-So we have two choices, neither of which appear optimal. Either we have a 
-class with access to all ....
-
-or all the individual classes have access to the class
-
-if the first, then all classes, when asked about what they want the car to 
-perform, they all need to return the same command-class that the
-driving component can evaluate. 
-Î prefer this option.
-
-The oop programming goal of low coupling is broken in this case, but we do 
-need to couple the components in some place. At least it's only broken in
-one singular place. 
-
-Add one line descriptions of the scope (intended functionality) of the 
-different classes. Add it into the class diagram perhaps. For instance:
-Maneouvre-component "high-level driving commands".
-Also mane maneuvre inherit from Driving. Everything now goes through that 
-instead. Driving still decides what to prioritize. 
-
-Driving has RequestSequenceOfCommands(list<enum DrivingCommand>, enum sender)
-drivingCommand cannot be enum, because it needs parameters, so just a class
+%The question is where our individual program flows are called. We have a few options, none of which seem immediately better than the rest:
+%- Each component is called on its own. This makes it so the .oil programmer needs to know about the functions of all the different class functions (and where to initialize a call). This can be remedied with an interface that exposes a .Run() method. Problem here is what to do with the result of each call. If the Obstacle Detection class decides that the bus should now stop, what does it do? Does it have access to the Driving component and can it call the .Brake() function? But then all functions have access to the Driving component, which heavily increases the coupling of the program (not good). Does it expose its return value as an event that is subscribed to by the Driving component? But then the worst case execution time becomes difficult to control, because unless we know the entire program, we cannot say how many items are subscribed. Does it expose its value as a property? But then, all classes need to expose a property of the same type and also use it in the same way. Again, this increases the coupling of the program. 
 
 
 
+\todo{Add one line descriptions of the scope (intended functionality) of the different classes. Add it into the class diagram perhaps. For instance: Maneouvre-component "high-level driving commands".Also make maneuvre inherit from Driving. Everything now goes through that instead. Driving still decides what to prioritize. Or make maneuvre a static class that can be called to get a fancy sequence of commands?}
 
+%Driving has RequestSequenceOfCommands(list<enum DrivingCommand>, enum sender)
+%drivingCommand cannot be enum, because it needs parameters, so just a class
 
+%The solution we chose:
+%One task for each component, with differing periods and deadlines.
+%One task for controlling the motors.
 
-The solution we chose:
+%These tasks are all initialized from the Driving-component. So in the case where we check for obstacles, see the following sequence diagram:
+%1. Oil -> Driving.DetectObstacles() -> DetectObstacles:GetResult() -> UltrasonicController.GetResult() -return to detectObstacles-> Driving.SetPriority() -return to Oil->
+%2. Oil -> Driving.Steer() -> SteeringController.Steer(Command) -> MotorForSteering -return to steeringController-> MotorForSpeed
 
-One task for each component, with differing periods and deadlines.
-One task for controlling the motors.
-
-These tasks are all initialized from the Driving-component. So in the case where we check for obstacles, see the following sequence diagram:
-1. Oil -> Driving.DetectObstacles() -> DetectObstacles:GetResult() -> UltrasonicController.GetResult() -return to detectObstacles-> Driving.SetPriority() -return to Oil->
-2. Oil -> Driving.Steer() -> SteeringController.Steer(Command) -> MotorForSteering -return to steeringController-> MotorForSpeed
-
-Task 1 detects whether there are any obstacles on the track and places the suggested response (probably braking) at the top of the priority queue. 
-Task 2 controlls the motor in regards to the priority queue of commands. This is separate from the obstacle detection. Regardless of what happened prior, it just executes the top priority command.
-
-Both are called by the .Oil file from the Driving-object. As such, the other objects can be kept separate, and we've contained any coupling to one class instead of multiple. 
+%Task 1 detects whether there are any obstacles on the track and places the suggested response (probably braking) at the top of the priority queue. 

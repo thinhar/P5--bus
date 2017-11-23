@@ -5,7 +5,10 @@ The intent for the algorithm is to calculate an optimal line that the bus should
 
 Using the coordinates gained through the NxtCamLineTrackController, we calculate a bézier curve to find a smooth line for the bus to drive. This is not quite as simple as it seems, as we need to handle the cases where the line tracker returns only very few points. For instance, if it returns only one coordinate for the left lane marking, then we cannot calculate a proper curve without knowledge of where at least one previous coordinate in the left lane was placed. 
 
-To solve this, we save old measurements from the last time we calculated the path for the bus. However, these need to be moved along the x or y-axis to fit with the new position of the bus compared to the place where the old measurement took place. Additionally, these measurement will need to be rotated if the bus has driven part of a road curve since the last measurement. Also, the bus will need to handle the case where there are zero measurement in the side. This is done by taking the measured point which is the farthest away, and the point previous to that in the same side. Next these two points are used to make a right-angle triangle so the farthest away point of the other side can me calculated \ref{}.  
+To solve this, we save old measurements from the last time we calculated the path for the bus. However, these need to be moved along the x or y-axis to fit with the new position of the bus compared to the place where the old measurement took place. Additionally, these measurement will need to be rotated if the bus has driven part of a road curve since the last measurement. Also, the bus will need to handle the case where there are zero measurement in the side. This is done by taking the measured point which is the farthest away, and the point previous to that in the same side. Next these two points are used to make a right-angle triangle so the farthest away point of the other side can me calculated \ref{}. By doing this we get the point farthest away in both sides, so then we make bézier curves for both we get the same length. And that will make our calculation of midpoints between the two curves more accurate 
+
+
+
 
 \todo{Indsæt billedee af trekant}
 
