@@ -1,19 +1,21 @@
 \section{Theory of Real Time Systems}
-In this section the rapport will explain some of the theory behind Real Time Systems. Firstly a brief explanations on some major technical terms used when speaking about real time systems. \unsure{this is meta text to the chapter maybe? RTS shouldn't be a chapter}
+In this section the report describes theories behind Real Time Systems. Firstly a brief explanations on some major technical terms used when speaking about real time systems. \unsure{this is meta text to the chapter maybe? RTS shouldn't be a chapter}
 
-Each task has a corresponding period, the period is the interval within which the task should run, determined based on what is required for the task to fulfil its purpose.
+Each task has a corresponding period, the period is the interval within which the task should run, determined based on what is required for the task to fulfil its purpose, for the i'th task this is denoted $P_{i}$.
 
-A task also has a corresponding deadline, Deadlines are the specific time before which a task should be completed, which will be determined based on what is required for the task to work optimally. A deadline could be the same as the period of the task, however if some task depends on the task, the deadline could be before the period of the task. 
+A task also has a corresponding deadline, Deadlines are the specific time before which a task should be completed, which will be determined based on what is required for the task to work optimally, this is denoted for the i'th task as $ D_{i} $ . A deadline could be the same as the period of the task, however if some task depends on the task, the deadline could be before the end of its period. 
 
-Additionally a task also has a worst case execution time, this defines the maximal time it needs direct control of the CPU to complete its task.
+Additionally a task also has a worst case execution time, this defines the maximal time it needs direct control of the CPU to complete its task, denoted for the i'th task $C_{i}$.
 
-And a task also has a worst case response time, this defines the maximal time from when it is gets released to when it is completed, this is different from the worst case execution time, because this includes the time spent being blocked by higher priority tasks.
+A task also has a worst case response time, this defines the maximal time from when it is gets released to when it is completed. this is different from the worst case execution time, because this includes the time spent being blocked by higher priority tasks. This can be calculated based on the tasks with higher priority. It can be calculated using the formula given here, where hp is higher priority.
 
-A system can be called schedule-able if and only if all of its tasks cant exceed their respective deadlines. This can be calculated by assuming the worst case execution time for all of the tasks, and calculation the worst case response time for all of the tasks. If the worst case response time for all of the tasks doesn't exceed the deadline for all of the tasks, you can call that system schedule-able. 
+$R_{i} = C_{i} + \underset{j\in hp(i)}{\Sigma} \lceil\frac{R_{i}}{T_{j}}\rceil*C_{j} $
 
-\todo{text about the different kinds of scheduling}
+A system can be called schedule-able if and only if all of its tasks cant exceed their respective deadlines. This can be calculated by assuming the worst case execution time for all of the tasks, and calculate the worst case response time for all of the tasks. If the worst case response time for all of the tasks doesn't exceed the deadline for all of the tasks, you can call that system schedule-able. 
+
+\todo{text about the different kinds of scheduling? needed. not needed. needed. not needed}
 %\subsection{Cyclic executive scheduling}
-%Perhaps the simplest form of scheduling, at least to understand, is Cyclic executive scheduling. Cyclic executive scheduling simply is a list in a never ending while loop. The list is contains all the necessary functions, arranged so that each task executes once in its period. The creation of the list is however a bit harder,   of functions needed to execute the program, this list 
+%Perhaps the simplest form of scheduling, at least to understand, is Cyclic executive scheduling. Cyclic executive scheduling is a list of function calls in a never ending while loop. The list is contains all the necessary functions, arranged so that each task executes once in its period. The creation of the list is however a bit harder,   of functions needed to execute the program, this list 
 
 %Event based scheduling
 
@@ -31,7 +33,7 @@ A system can be called schedule-able if and only if all of its tasks cant exceed
 %Deadline a specific time before which a task should be completed. 
 
 \subsection{\textbf{Fixed-Priority Scheduling}}\label{prioratySch}
-Our chosen platform supports two kinds of scheduling directly, Event based scheduling and Fixed-Priority scheduling\cite{OILManual}.
+Our chosen platform directly supports two kinds of scheduling directly, Event based scheduling and Fixed-Priority scheduling\cite{OILManual}.
 
 Fixed Priority scheduling works by giving each task a priority, the scheduler will then choice to run the task with the highest priority first. This is simple enough but there are somethings, like how we choose priority of the different tasks,  that must be taken into consideration. It has been proven that giving the tasks priority based on their period and it is not schedule-able then it wont be schedule-able with any other priority. Therefore the choice of priority is trivial, simply found according to the task's relative periods.
 
@@ -40,7 +42,7 @@ There is however also some dangers with this kind of scheduling, namely priority
 We did not want to deal will event based scheduling, because we did not have a clear understanding of how we can ensure "schedule-ability".\todo{this is the reason( selection by elimination), however we cant write this, word it differently or find a better sounding reason}
 
 preemptable task-- a task can be interrupted.
-\subsection{\textbf{OSEK Implementation Language}}
+\subsection{\textbf{OSEK Implementation Language}}\label{OILteo}
 In this section the report will go into detail with how the scheduling is supported. Most of the information about this can be found from this source\cite{OILManual}.
 
 OIL stands for OSEK implementation language, it was made as an attempt to create a industry standard for an open-ended architecture for distributed control units in vehicles\cite{OILManual}. It is compiled with the code, and provides some objects or constructions that aim to assist with the scheduling of the code. Since the OIL implementation is quite extensive, this rapport will limit its explanation to what is most relevant for this project. Since the project have decided to use Fixed-Prioraty Scheduling, see \ref{prioratySch}, the report will explain the important constructions in OIL files to support this form of scheduling, the report will therefore explain these three objects in the oil files.
@@ -54,18 +56,41 @@ OIL stands for OSEK implementation language, it was made as an attempt to create
     %AUTO START attribute: The AUTOSTART attribute determines whether the task is activated during the system startup procedure or not for some specific application modes. When set to TRUE, a list of application modes is defined in the APPMODE sub-attribute of type APPMODE\_TYPE. These define in which application modes the task is auto-started.
     %PRIORITY: This attribute is of type UINT32.  OSEK OS defines the lowest priority as zero (0); larger values of the PRIORITY attribute correspond to higher priorities.
     \item{\textbf{Counter}}
-    A global counter that should be incremented at a fixed interval and is necessary to be able to create a alarm. In the NXT platform, a specific interrupt is used to implement the counter. \todo{maybe more verbose?}
+    A COUNTER is a global counter that should be incremented at a fixed interval and is necessary to be able to create a alarm. In the oil file the ticks per call is declared and its max value. In the NXT platform, a specific interrupt is used to implement the counter. \todo{maybe more verbose?}
     %Random inforamtion:
     %A COUNTER serves as a base for the ALARM mechanism
     %The counter in NXTOsek can be implemented with a hooking function called "user\_1ms\_isr\_type2" what interrupts every 1 ms, wherein one would count up the counter accordingly\cite{nxtOSEKAPI}.
     \item{\textbf{Alarm}}
-    The alarm object controls the tasks, using the counter.  It has the attribute cycle time, which defines the \textbf{period} of a task. 
+    The alarm object controls the tasks, using a reference to a counter. It is the controling object and its atributetes dictates what heppens when, so the following will be a brief overview of the alarms atributes. It has the attribute cycle time, which defines the period of a task. It also possesses a attribute called alarm time that defines the start delay before the alarm starts. And an attribute, ACTION, that defines what action should happen when the alarm expires\unsure{rings? calls? another word maybe}. Also an AUTOSTART attribute that defines if the alarm should start itself and in what appmodes it should do so.  An example of a alarm is given with some comments in \ref{code:AlarmExample}.
     
-    Random information:
-    a Alarm has a reference to a counter
-    ACTION attribute: The ACTION attribute defines which type of notification is used when the alarm expires. This attribute is a parameterised ENUM can be used to ACTIVATETASK \{TASK\_TYPE TASK;\}
-    AUTOSTART: The AUTOSTART attribute of type BOOLEAN defines if an alarm is started automatically at system start-up depending on the application mode. 
-    OTHER:  ALARMTIME, i.e. the time when the ALARM shall expire first, the CYCLETIME, i.e. the cycle time of a cyclic ALARM 
+    \begin{lstlisting}[frame=single, label={code:AlarmExample}, caption={A example of an alarm in OIL}, xleftmargin=.00\textwidth, xrightmargin=.00\textwidth]
+    ALARM AlarmExample
+    {
+        COUNTER = SysTimerCnt;
+        /* reference to at counter */
+        ACTION = ACTIVATETASK 
+        /* the action attribute that decides what happens */
+            {
+                TASK = TaskExample;
+                /* task(s) that the action is affecting */
+            };
+        AUTOSTART = TRUE
+          /* autostart atribute, if false no further information is needed  */
+        { 
+            ALARMTIME = 250;
+            /*delay before alarm starts the first time*/
+            CYCLETIME = 400; 
+            /* Task is executed every 400msec */
+            APPMODE = appmode1;
+            /* the appmode(s) wherein the alarm should autostart */
+        };
+    };
+    \end{lstlisting}
+   %Random information:
+    %a Alarm has a reference to a counter
+    %ACTION attribute: The ACTION attribute defines which type of notification is used when the alarm expires. This attribute is a parameterised ENUM can be used to ACTIVATETASK \{TASK\_TYPE TASK;\}
+    %AUTOSTART: The AUTOSTART attribute of type BOOLEAN defines if an alarm is started automatically at system start-up depending on the application mode. 
+    %OTHER:  ALARMTIME, i.e. the time when the ALARM shall expire first, the CYCLETIME, i.e. the cycle time of a cyclic ALARM 
 \end{itemize}
 %\subsubsection*{\textbf{task}}
 %asd

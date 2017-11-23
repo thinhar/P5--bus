@@ -2,7 +2,7 @@
 
 The point of the controller is that we can call it to get the coordinates of the lines that have been detected by the camera sensor without having to worry about any NxtCam sensor specifics or behind the scenes calculations. 
 
-When called in line tracking mode, the NxtCam returns between 0 and 8 objects corresponding to the distance, height, width and position of a slice of a detected line. A number of data manipulations must now be performed in order to convert these points into coordinates that correspond with the distance of the line from the camera. The intent is that we can use the clean data points to calculate the direction which the bus must drive in order to stay in the middle of the road. 
+When called in line tracking mode, the NxtCam returns between 0 and 8 objects with corresponding height, width and position of a slice of a detected line. A number of data manipulations must now be performed in order to convert these points from the cameras local space \ref{Measure With NxtCam} into a new 2 dimensions local space with origin in the NxtCam position \ref{??}. The coordinates in this space correspond with the real world based on where is NxtCam is in world space, so the distance can be calculated. The intent is that we can use the clean data points to calculate the direction which the bus must drive in order to stay in the middle of the road. 
 
 The steps that are performed to clean up the NxtCam measurements and their return values are written in order: 
 
