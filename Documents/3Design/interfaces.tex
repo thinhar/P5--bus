@@ -1,14 +1,10 @@
 \section{Interfaces}
-In this section, we specify interfaces for all objects in the software model, as seen in figure \ref{fig:softwareArchitecture}. This includes the controller-objects, which are intended to abstract from hardware specific information like the calibration of sensors and filtering out incorrect measurements from the raw data. 
+In this section, we specify interfaces for all objects in the software model, as seen in figure \ref{fig:softwareArchitecture}. This includes the sensor controllers, which are intended to abstract from hardware specific information like the calibration of sensors and filtering out incorrect measurements from the raw data. 
 
-\todo{Change API to Controller}
+\subsection{Sensor Controllers}
+These all require a calibrate-method, which is called whenever the bus starts in order to ensure the sensors work as intended. Inheritance is utilised to show this similarity between the individual Sensor Controllers. See figure \ref{} for a class diagram showing the hierarchy, functions and properties of the Sensor Controllers. 
 
-\todo{Probably do this inside a draw.io diagram}
-
-\subsection{Controller classes}
-They all require a calibrate-method, which is called whenever the bus starts in order to ensure the sensors work as intended. 
-
-\unsure{HOW DOES THIS WORK IN RELATION TO RTS and .oil files? How do we split all these functions into multiple tasks that can be scheduled using .oil files?}
+Constructors and destructors have been omitted.
 
 \begin{description}
     \item [Motor]

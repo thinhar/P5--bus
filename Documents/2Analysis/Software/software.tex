@@ -1,5 +1,5 @@
 \subsubsection{NXT-G}
-Despite the NXT and EV3's different platforms, they both ship with the NXT-G programming language. NXT-G is a programming language based on LabView\cite{LabView}. The language uses a drag and drop block system, instead of writing code, illustrated in figure \ref{NXT-G}. This also provides a visual representation of the program.
+Despite the NXT ship with the NXT-G programming language. NXT-G is a programming language based on LabView\cite{LabView}. The language uses a drag and drop block system, instead of writing code, illustrated in figure \ref{NXT-G}. This also provides a visual representation of the program.
 
 \begin{figure}[H]
     \centering
@@ -8,14 +8,14 @@ Despite the NXT and EV3's different platforms, they both ship with the NXT-G pro
     \label{NXT-G}
 \end{figure}
 
-This approach is easier to understand, but is limited when it comes to low level programming and when creating more complex programs. Luckily both the EV3 and NXT are flexible platforms, as they allow for custom firmware to be installed, which in turn allows for different programming languages to be used.
+This approach is easier to understand, but is limited when it comes to low level programming and when creating more complex programs. Luckily the NXT is a flexible platform, as it allows for custom firmware to be installed, which in turn allows for different programming languages to be used.
 Some of these include RobotC\cite{RobotC}, leJOS\cite{leJOS} and nxtOSEK\cite{nxtOSEK}.
 
 \subsubsection{RobotC}
 This programming language is designed specifically for robot platforms. It is built on top of C, and is built with the primary purpose of being a educational platform. Noteworthy is that it is not free to use and requires a license.
 
 \subsubsection{leJOS}
-leJOS is a open-source firmware that includes the Java Virtual Machine\cite{Java}, and as such allows for writing Java programs. Originally written for LEGO RCX, a earlier version of the NXT\unsure{maybe rewrite this added sentence}, it has since been updated to run on NXT and EV3.
+leJOS is a open-source firmware that includes the Java Virtual Machine\cite{Java}, and as such allows for writing Java programs. Originally written for LEGO RCX, a earlier version of the NXT, it has since been updated to run on the NXT.
 
 leJOS has plugins for both Netbeans\cite{Netbeans} and Eclipse\cite{Eclipse} for making development more convenient.
 
@@ -39,7 +39,8 @@ There are different ways to run nxtOSEK on a NXT. These approaches have differen
 
 nxtOSEK supports scheduling using priority based scheduling\todo{Explain somewhere else and reference}. It uses alarms to define priorities and the execution rate.
 
-\todo{Restructure all of this. Make a new subsection for scheduling: why it is needed (and why it's not needed in usual software projects). Reference the theory section for all kinds of different scheduling protocols and then present OSEK and how it is a robust model that makes priority based scheduling simple. Decide that we are going to be using it.}
+\todo{Restructure all of this. Make a new subsection for scheduling: why it is needed (and why it's not needed in usual software projects). Reference the theory section for all kinds of different scheduling protocols and then present nxtOSEK and how it is a robust model that makes priority based scheduling simple. Decide that we are going to be using it.}
+\info{To the todo above: I do not think that any mentioning of scheduling is needed as off yet, and that it will be sufficient that we haev already mentioned that we are dealing with real-time systems. Scheduling is an implicit component of real-time systems.}
 
 \subsubsection{Choice of software}
-We have chosen to go use the nxtOSEK software because...?\todo{Finish this text.}
+We have chosen to go use the nxtOSEK because it does not cost us any money, it has the functionality that we need, and it allows for sufficiently low level programming languages, which is important when real-time systems are considered.

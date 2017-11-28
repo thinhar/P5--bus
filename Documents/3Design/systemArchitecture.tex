@@ -1,4 +1,7 @@
 \section{System Architecture}
+
+\todo{Physical Architectural View}
+
 As previously mentioned, there are many layers of abstraction in the program before one actually reaches the hardware level of the sensors. In this section, we will describe these layers, going from the high-level programming of the model, e.g. the architecture described in figure \ref{fig:softwareArchitecture}, down to the hardware specifics of the sensors themselves. 
 
 The intent is, of course, that these software abstractions will not affect our model implementation, aside from the fact that we have to include some libraries to facilitate sensor communication (for instance "ecrobot\_interface.h" and similar). See figure \ref{fig:abstractionLayers} for the system architecture and its layers of abstraction. The dark blue object "Components" consists of all the software inside the components planned in the previous section \ref{fig:softwareArchitecture}. 
