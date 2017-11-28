@@ -1,0 +1,42 @@
+\section{Bézier Curve}
+Bézier curves are a method to draw curved lines between points, and are used in many different domains like computer graphics and animation, where it can be used to describe the velocity over time of an object. 
+
+The core principle of Bézier Curves is they works by running from some start point, to some end point over a time T. And are influenced by control points along the way, that direct how the curve will turn. 
+
+However to get a understanding of Bézier Curves it's a good idea to look at it's simplest form and work from there. In this section we are gonna cover the 3 first forms, since they bring something new each time, and after the 3rd it's more of the same. It's important to note that Bézier Curves can be defined in any degree n, but also becomes much more complex, and slow each time. 
+
+\begin{itemize}
+  \item Linear Bézier curves / Linear interpolation
+  \item Quadratic Bézier curves (pow(2))
+  \item Cubic Bézier curves (pow(3))
+\end{itemize}
+
+
+
+
+The Bézier Curve works with the use of control points that direct how the curve will smooth. Furthermore the curve will always pass through the first and last control points. This is also why Bézier Curves are useful for creating curves for the tape, and that the curve is completely contained in the convex hull of its control points.  
+
+
+
+
+
+P - Drag Points
+T - 0 -> 1
+
+
+
+
+
+
+Linear Bézier curves / Linear interpolation
+
+
+Quadratic Bézier curves (pow(2))
+
+
+
+Cubic Bézier curves (pow(3))
+
+
+
+
