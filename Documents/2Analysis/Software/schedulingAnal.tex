@@ -1,0 +1,20 @@
+\section{Scheduling} \label{analysis:scheduling}% \todo{Where does this section come from? It's out of place since nothing in this entire chapter has anything to do with scheduling. Should it be moved to the theory chapter?}
+
+%Short, what is scheduling and why do we need it? Why do ordinary software projects not need scheduling?
+
+In this section there will be a brief explanation of what scheduling are used for, a small discussion about what scheduling method would be best suited for this project.\unsure{seems like this should come before we choice nxtOSEK}\unsure{i would like to use some of the terms i explained in the theory section}
+
+A scheduler is required to ensure that each tasks is given the necessary time to perform its calculations and  concludes before its deadline. Since the correctness of our system requires its tasks to conclude within a time frame, and the amount of computation power on a NXT block is limited, we will have to implement some form of scheduling. 
+
+There are multiple ways to schedule, for instance: event based scheduling, earliest deadline first, fixed priority scheduling and cyclic executive scheduling. \unsure{an explanation of everyone of these would take like 1-2 pages is it worth?}
+
+
+%\subsection{Cyclic executive scheduling}
+%Perhaps the simplest form of scheduling, at least to understand, is Cyclic executive scheduling. Cyclic executive scheduling is a list of function calls in a never ending while loop. The list is contains all the necessary functions, arranged so that each task executes once in its period. The creation of the list is however a bit harder,   of functions needed to execute the program, this list 
+
+All of those methods could be used as basis to implement our scheduler. There are however some of these methods that are directly supported in the OS. nxtOSEK directly supports both event based and fixed priority scheduling. The implementation of nxtOSEK is build on a very robust standard used by the automotive industry\cite{OILManual}.
+
+Due to Fixed priority scheduling being more rigid compared to the more lucid event based scheduling, model checking Fixed priority scheduling is simpler than even based scheduling.\todo{give an actual reason}
+
+%What do we need in accordance with our requirements? 
+The theory behind priority based scheduling can be found at: \ref{prioratySch}

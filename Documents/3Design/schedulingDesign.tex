@@ -9,7 +9,7 @@ One of the questions that we need to clear up is where we run the program from a
 \subsubsection{Program Flow}
 The program flow and main function is defined within the .oil-files; see a description of these in section \ref{OILteo}. Inside the .oil-files we define functions as tasks which will be called with specific priorities, periods and deadlines. 
 
-The ObstacleDetection-component (uses the ultrasonic sensor to check for obstacles ahead of the vehicle) will be used as an example to illustrate the issue. If the program did not have to be a real-time system, then the obvious solution would simply be to detect obstacles regularly. If any are found, then the Driving-component is immediately alerted, which then calls the motor controls and adjust the direction of the bus.
+The \code{ObstacleDetection}-component (which uses the ultrasonic sensor to check for obstacles ahead of the vehicle) will be used as an example to illustrate the issue. If the program did not have to be a real-time system, then the obvious solution would simply be to detect obstacles regularly. If any are found, then the Driving-component is immediately alerted, which then calls the motor controls and adjust the direction of the bus.
 
 The issue in this case is that the bus might miss a lot of other deadlines while the Driving-component has control of the CPU. This is of course unacceptable, because, depending on the circumstances, the bus might no longer meet its other requirements. 
 
@@ -21,7 +21,7 @@ This works by having the .oil-files call the individual components as often as n
 
 Additionally, this contains the coupling of the program entirely inside the Driving-component and .oil-files. The Driving-component now handles everything in regards to input and output of the different components, and also deals with prioritising the steering commands, to figure out what the motor should actually do if there is any ambiguity (imagine it both found a bus stop and an obstruction in the road). 
 
-Imagine a case where the scheduler first selects the ObstacleDetection-component to control the CPU, and an obstacle is detected, and the car is stopped. See the sequence diagram in figure \ref{fig:sequenceDetectObstacle} for how the program flow would look.
+Imagine a case where the scheduler first selects the \code{ObstacleDetection}-component to control the CPU, and an obstacle is detected, and the car is stopped. See the sequence diagram in figure \ref{fig:sequenceDetectObstacle} for how the program flow would look.
 
 \begin{figure}[ht]
     \includegraphics[width=\textwidth]{Images/Design/sequenceObstacleDetection.png}
@@ -29,7 +29,7 @@ Imagine a case where the scheduler first selects the ObstacleDetection-component
     \label{fig:sequenceDetectObstacle}
 \end{figure}
 
-Task A calls the ObstacleDetection-component, which then returns results from the ultrasonic sensor. The priority of all currently saved steering-commands is then calculated and saved locally in the Driving-component. At this point the control is returned to the .oil file. 
+Task A calls the \code{ObstacleDetection}-component, which then returns results from the ultrasonic sensor. The priority of all currently saved steering-commands is then calculated and saved locally in the Driving-component. At this point the control is returned to the .oil file. 
 
 Then task B assigns control of the CPU to the driving component a second time, which executes the highest priority steering command, which in this case is to brake the car. Task B is fully separate from obstacle detection, and regardless of which task was executed prior, task B just executes the top priority command. 
 
@@ -38,7 +38,7 @@ Then task B assigns control of the CPU to the driving component a second time, w
 
 
 
-\todo{Add one line descriptions of the scope (intended functionality) of the different classes. Add it into the class diagram perhaps. For instance: Maneouvre-component "high-level driving commands".Also make maneuvre inherit from Driving. Everything now goes through that instead. Driving still decides what to prioritize. Or make maneuvre a static class that can be called to get a fancy sequence of commands?}
+\todo{Add one line descriptions of the scope (intended functionality) of the different classes. Add it into the class diagram perhaps. For instance: Maneouvre-component "high-level driving commands".Remove maneuvre from all this shit}
 
 %Driving has RequestSequenceOfCommands(list<enum DrivingCommand>, enum sender)
 %drivingCommand cannot be enum, because it needs parameters, so just a class

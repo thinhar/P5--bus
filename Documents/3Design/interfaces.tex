@@ -2,97 +2,50 @@
 In this section, we specify interfaces for all objects in the software model, as seen in figure \ref{fig:softwareArchitecture}. This includes the sensor controllers, which are intended to abstract from hardware specific information like the calibration of sensors and filtering out incorrect measurements from the raw data. 
 
 \subsection{Sensor Controllers}
-These all require a calibrate-method, which is called whenever the bus starts in order to ensure the sensors work as intended. Inheritance is utilised to show this similarity between the individual Sensor Controllers. See figure \ref{} for a class diagram showing the hierarchy, functions and properties of the Sensor Controllers. 
+The sensor controller classes all require a calibrate-method, which is called whenever the bus starts, in order to ensure the sensors and motors work as intended. Inheritance is utilised to show this similarity between the individual Sensor Controllers. See figure \ref{fig:interfaceSensorControllers} for a class diagram showing the hierarchy, functions and properties of the Sensor Controllers. Note that constructors and destructors are omitted from this, as they provide little insight to the functionality of the classes. 
 
-Constructors and destructors have been omitted.
+\subsection{SensorControllers}
+See figure \ref{fig:interfaceSensorControllers} 
 
-\begin{description}
-    \item [Motor]
-    FindCentrum(); ???? Does this make sense for the motor for speed?
-    SetRotation(int rpm, enum direction);
-    
-    \todo{Do I need an API for turning as well? or can I combine speed and turning in one?}
-    
-    The enum contains the choices: forwards and backwards. Rpm abbreviates rotations per minute.
-    
-    \item [LightSensor]
-    \item [SoundSignaling]
-    \item [Bluetooth]
-    \item [Ultrasonic]
-    \item [CamDetectObjects]
-    \item [CamLineTracking]
-    All the steps:
-    (Ren punktdata) NxtCamV4 Line Tracking Driver: Track Line ()
-	(Rå punktdata) Mål med NxtCamV4 ()
-	(Rykket koordinatsystem) Flyt og vend koordinatsystem (Rå punktdata)
-	*(Let modificeret punktdata) Funktion for distortion (Rykket punktdata)
-	*(Ren punktdata) Funktion der sorterer dårlige målinger fra (Let modificeret punktdata)			- Målinger der ligger helt forkert, for eksempel
-	(Punkter på koordinatsystem) NxtCamV4 Line Tracking Driver: Map Points to Koordinates (Ren punktdata)
-	- Property: Bus Point
+\begin{figure}[ht]
+    \includegraphics[width=\textwidth]{Images/Design/InterfaceSensorControllers.png}
+    \caption{Class diagram showing the sensor controller interfaces}
+    \label{fig:interfaceSensorControllers}
+\end{figure}
 
-    
-\end{description}
+\code{Turn} is a class containing the degrees and direction of the specified turn that is to be executed. \code{Direction} and \code{Colour} are both enumeration types that contain a number of associated options (e.g. left or right, or different colours). Rpm from \code{CurrentSpeedRpm} abbreviates rotations per minute.
 
-\subsection{Other classes}
-\subsection{Controller-objects}
-\begin{description}
-    \item [Signaling]
-    void StartManeuvre(enum maneuvre);
-    void EndManeuvre(enum maneuvre);
-    enum CurrentManeuvre;
-    
-    The enum contains the choices: stopped, straight, turnLeft, turnRight, brake, reverse and emergency. 
-\end{description}
+\subsection{Components}
+The components call the sensor controllers in order to obtain the necessary sensor measurements, and also call the calibration of their corresponding sensors. See figure \ref{fig:interfaceComponents} for a class diagram describing the planned interface structure.
 
-\subsection{Component classes}
-\begin{description}
-    \item [Driving]
-    void RequestTurnDegrees(int targetDegrees, enum direction);
-    void RequestTurnDegrees(int degrees, enum inDirection);
-    void RequestSetSpeed(int targetKmHr, bool smooth);
-    void RequestIncreaseSpeed(int kmHr, bool smooth);
-    void RequestReduceSpeed(int kmHr, bool smooth);
-    void RequestStop(bool smooth);
-    
-    enum currentDirection;
-    int currentTurnDegrees;
-    int MaxSpeed;
-    int CurrentSpeed;
+\begin{figure}[ht]
+    \includegraphics[width=\textwidth]{Images/Design/InterfaceComponents.png}
+    \caption{Class diagram showing the component interfaces}
+    \label{fig:interfaceComponents}
+\end{figure}
 
-    The enum contains the choices: left and right. The bool "smooth" decides whether the speed increase/decrease is gradual or not. 
-    
-    \item [Maneuvre]
-    \item [StayWithinLane]
-    \item [CruiseControl]
-    \item [ObstacleAvoidance]
-    \item [SpeedZoneControl]
-    \item [StopButton]
-    \item [DetectBusStop]
-\end{description}
+All components have their \code{CalculateSteering}-method called by the \code{Driving}-component, to which they then return the \code{SteeringSequence} that they suggest the bus should drive. Based on the values it gets, the \code{Driving}-component later decides how to actually drive. 
 
-
-All components send their speed/turning degrees to the driving component, which then prioritizes those and decides how fast to actually drive. 
-
-Turn-kald er mutually exclusive
-
-Kald fra maneurvre er atomare, og må ikke opdeles. 
-
-Det er IKKE de andre componenter der kalder driving, men i stedet så læser driving felter/events fra de andre komponenter i den rigtige rækkefølge. ???
-
-Det bliver det vist nødt til at være, for ellers er der ikke noget klart programflow, og det bliver mærkeligt (?) at schedule
+The class \code{SteeringSequence} contains one or multiple \code{SteeringCommands}, which contains a distance, speed and a \code{Turn} that the bus should drive. Multiple \code{SteeringCommands} can be used for things like braking the bus smoothly through multiple steps, or stopping at a bus stop and other similar manoeuvres. 
 
 
 
-Hvordan fungerer .oil scheduling? Hvordan deler vi programmet op i tasks? Skal det være klasser? Hvordan taler de med hinanden? Skal hver sensor være en task? (Nok hellere sensor-controller klasserne, no?)
-planlæg hvordan vi scheduler med .oil: hvor er vores tasks? Hvad skal kaldes for at starte det hele?
-Hvordan sørger vi for at kalde obstacle detection oftere end de andre? Det skal så være den, som kalder driving component. Den må vel have direkte access til driving, no?
+\todo{This has changed, so change the diagram: remove the ISteeringSuggestionComponent superclass, remove calibration and add the different return values below. Similarly, the entirety of the design chapter has a few outdated diagrams, which need to be fixed.}
 
-De andre skriver til driving en gang imellem.
-Senere får driving selv kontrol og styrer så hvad der skal prioriteres. 
+%Right now it's planned the following way: Every time we start executing a new command we note how much distance that command wants to cover (fx. drive 50km/hr for 30 meters). Then, every time steer is called, we start a new command only if the current command is finished. If the SteeringSequence is still at the top of the queue, we move on with the next command in the sequence, and if it's not then we do the other SteeringCommand, then later we continue the Sequence.
 
-ELLER?
-De har alle sammen direkte adgang til driving. Driving sørger bare for at beholde det gamle data. Så snart en komponent siger at drivnig skal gøre noget, så tjekker driving hvad den skal gøre mht prioriteter. 
-Tror det er den rigtige løsning. 
+%Maybe we need to give the components information about what they signalled last time? They should keep that info themselves, if necessary. 
 
-Tegn diagram med programflow: Scheduling -> Bus Stop Detection -> Maneuvre -> Driving -> Signalling -> Sound -> MotorController -> Motor
-Det kan så oversættes til en enkelt "linje" i et uppaal gantt chart. 
+\subsection{Driving}
+\code{Driving} is the class that couples the system. As such, it initialises the classes (calibrating the sensors at the same time), calls the components and decides how to steer the bus. See figure \ref{fig:interfaceDriving} for the interface of the \code{Driving} class.
+
+\begin{figure}[ht]
+    \includegraphics[]{Images/Design/interfaceDriving.png}
+    \caption{Interface of the driving class}
+    \label{fig:interfaceDriving}
+\end{figure}
+
+
+
+\todo{Write the following comment in english to cap off the section:}
+%I programmet bruger vi ikke rent faktiske interfaces af to grunde. Først og fremmest programmerer vi i C++, der ikke giver elegant understøttelse af interfaces. Derudover laver vi et realtidssystem, og da der ikke direkte er noget krav for klar modularitet og udskiftelige komponenter, så er det så at sige en unødvendig brug af den begrænsede hukommelse vi har på Nxt'en.

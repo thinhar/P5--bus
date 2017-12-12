@@ -31,3 +31,5 @@ The steps that are performed to clean up the NxtCam measurements and their retur
 
 \subsubsection{Field of View Corrections}
 See appendix \ref{fieldOfViewCorrections} for our algorithm to correct for field of view. The rest of the steps in the NxtCamLineTrackController will not be described in more detail. The algorithm for field of view was translated into C++ as the class FieldOfViewCorrector where it works as described in the document. 
+
+The values given for the field of view corrections are not fixed, meaning that the camera can be moved higher, lower and tilted towards or away from the ground without causing issues in regards to these calculations. 

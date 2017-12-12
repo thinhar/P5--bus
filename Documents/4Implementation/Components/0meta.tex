@@ -1,10 +1,22 @@
 \section{Components}
-The functionality of the bus has been split into four components, that can be designed, implemented and tested independently. The following section will describe the components in this section. Additionally, the tracks will be tested using tracks designed specifically to test whether the components conform to the individual requirements \ref{Requirements}.
+%The functionality of the bus has been split into four components, that can be designed, implemented and tested independently. The following section will describe the components in this section. Additionally, the tracks will be tested using tracks designed specifically to test whether the components conform to the individual requirements \ref{Requirements}.
 
 %This section lists the different prototypes with their design, purpose, and objectives that it needs to fulfil in order to be a completed prototype. Furthermore, it will describe the tracks that are designed for testing the functionality of each prototype. The prototypes will take base from the requirements in section \ref{Requirements}.
 
+The functionality of the bus has been split into four components of functionality, which can be implemented and tested independently. They do require basic driving functionality, however. For this reason, we first implement the \code{Driving} component along with the \code{MotorController}, and then the following components. As we implement the components of functionality thereafter, we test the bus on a track specifically tailored to challenge that functionality. The creation of these tracks will also be recounted. 
 
+\input{Documents/4Implementation/Components/Driving/0meta}
 \input{Documents/4Implementation/Components/StayWithinLane/0meta}
+\input{Documents/4Implementation/Components/ObstacleDetection/0meta.tex}
+\input{Documents/4Implementation/Components/BusStopDetection/0meta.tex}
+\input{Documents/4Implementation/Components/SpeedZoneDetection/0meta.tex}
+
+
+
+
+\todo{Split whatever is within the old components into the new implementation setup}
+
+\todo{Fix the components below. What should be in implementation, what should be in design?}
 
 \input{Documents/4Implementation/Components/component1}
 \input{Documents/4Implementation/Components/component2}
