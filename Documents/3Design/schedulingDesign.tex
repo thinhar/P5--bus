@@ -52,3 +52,6 @@ Then task B assigns control of the CPU to the driving component a second time, w
 %2. Oil -> Driving.Steer() -> SteeringController.Steer(Command) -> MotorForSteering -return to steeringController-> MotorForSpeed
 
 %Task 1 detects whether there are any obstacles on the track and places the suggested response (probably braking) at the top of the priority queue. 
+
+
+\todo{Oprems ALLE tasks. Skriv også om vores TaskMain, som har prioritet på 0, men startes først, og har en uendelig while løkke hvor programmet busy-waiter hvis ikke det ellers kører andre tasks. Kunne man have gjort det på en anden måde? }

@@ -1,18 +1,27 @@
 \subsection{Object-Oriented Design}
+\unsure{Giv section et nyt navn?, app domain?}
+
+From the previous section the scope of the problem statement got narrowed down. In this subsection we builds upon and instead of focusing on the already implemented system, we instead look at how our implementation of the system should be and still fulfill our problem statement. So the purpose of this section is to find our project requirements based on use cases that will be descried, so a prioritising can be made with Value vs Complexity prioritization framework.
+
 
 %\info{old}We will now use object-oriented design to figure out how our own system should be, i.e. figure out what the requirements for our system should be.
 
-We are now done with analysing the problem domain using the object-oriented methods. We have gained a lot of knowledge about how the system with real busses work, and we can thus decide upon which elements we want to do different in the design off our own system.
-First of all the bus will be scaled down by a lot lot since we will be using LEGO as our hardware as was also stated earlier. The bus driver will be replaced and the drivers functionality will be taken over by the LEGO platform.
-The passenger will be removed since  they can no longer fit into a bus that is scaled down, and thus there will also no longer be a ticketing system.
-Although there are no passengers there will still need to be some way to determine whether or not the bus should stop at the next bus stop.
-The real road will be replaced by a track that we will make, although it will be correct in its relative size to the bus.
-We will have to use sensors instead of the bus drivers ears and eyes.
-With all of this in mind we will make some use cases. After the use cases we will have a function list based on the use cases.
-
+%We are now done with analysing the problem domain using the object-oriented methods. We have gained a lot of knowledge about how the system with real busses work, and we can thus decide upon which elements we want to do different in the design off our own system.
+%First of all the bus will be scaled down by a lot lot since we will be using LEGO as our hardware as was also stated earlier. The bus driver will be replaced and the drivers functionality will be taken over by the LEGO platform.
+%The passenger will be removed since  they can no longer fit into a bus that is scaled down, and thus there will also no longer be a ticketing system.
+%Although there are no passengers there will still need to be some way to determine whether or not the bus should stop at the next bus stop.
+%The real road will be replaced by a track that we will make, although it will be correct in its relative size to the bus.
+%We will have to use sensors instead of the bus drivers ears and eyes.
+%With all of this in mind we will make some use cases. After the use cases we will have a function list based on the use cases.
 
 \subsubsection{Use Cases}
-Bellow are some use cases for how our system should behave. The different actors are the LEGO platform, which is undecided as of yet, and the testers of the system. The scope of all the use cases are a bus system. \todo{Somewhat unsure that scope is correct.} Possible levels: very high summary(++), summary(+), user goal(!), subfunction(-), Too low(--).
+In this section use cases that our project requirements are based on, are described. The purpose is to lay down the functionalities that the system require to handle different cases. 
+\unsure{Skriv at storys burde komme fra actors?, men vi har set os selv som det?}
+
+
+%Bellow are some use cases for how our system should behave. The different actors are the LEGO platform, which is undecided as of yet, and the testers of the system. The scope of all the use cases are a bus system. \todo{Somewhat unsure that scope is correct.} Possible levels: very high summary(++), summary(+), user goal(!), subfunction(-), Too low(--).
+
+\todo{Har Use Cases ikke 2 storys?}
 
 Use case 1:\\
 Goal: Switching into the bus lane\\
@@ -101,11 +110,145 @@ Level: ! User goal\\
 Story: The LEGO platform detects the distance to an object ahead of it, and then makes the bus go faster or slower in order to maintain the distance to the object ahead of it, while staying within the speed limit.
 
 \subsubsection{Function List}
-A function list has been made from the use cases to take a further look at the complexity and function type of each of the functions. The functions coloured in dark grey are complex functions that have been opened up to take a closer look at the individual functions that they are composed off. The light grey functions are the functions that the more complex functions contain. The white functions are the functions that are not complex enough to warrant getting split up into smaller functions.
+\unsure{Slet function type?, hvad bruger vi den til?, Bogen siger man har den. What to do?!?}
+Based on the use cases descried in the previous section, a function list has been made. The purpose is to categories the functionalities into four different function types Read, Update, Signaling and Calculation\cite{OOD_FunctionTypes}. And thereby determine the complexity of the functionality. If the complexity is valued as "complex" the function is expanded, to simplify. This approach provides information used for prioritising the functionalities based on the risk vs value model descried in \ref{section_riskVsValue}.
 
-% Please add the following required packages to your document preamble:
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\todo{Make table great again. :kajplz:}
+
+
+
+\newcolumntype{Z}{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}X}
+
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture} %Follow Track
+\node (tbl) {
+\begin{tabularx}{0.9\textwidth}{| Z | Z | Z |}
+\arrayrulecolor{purple}
+\large \textbf{Function} & \large \textbf{Complexity} & \large \textbf{FunctionType} \\
+\addlinespace[1.0ex]
+\textbf{Follow Track} & \textbf{Complex} & \textbf{Calculating}  \\
+Detect Lines + Shape & Medium \rule{0pt}{3.0ex} \\
+\hline
+Calculate next action & Medium \\[-1.2ex]
+\end{tabularx}};
+\begin{pgfonlayer}{background}
+\draw[rounded corners,top color=red!50,bottom color=red!80,
+    draw=red!80] ($(tbl.north west)+(0.13,0.0)$)
+    rectangle ($(tbl.north east)-(0.13,0.7)$);
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,-0.6)$)
+    rectangle ($(tbl.north east)-(0.13, 1.2)$);
+\draw[top color=blue!15,bottom color=blue!20,draw=blue!20]
+    ($(tbl.north east)-(0.13,1.2)$)
+    rectangle ($(tbl.south west)+(0.13,0.0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+
+\begin{tikzpicture} %Bus Stop
+\node (tbl) {
+\begin{tabularx}{0.9\textwidth}{| Z | Z | Z |}
+\arrayrulecolor{purple}
+\textbf{Bus Stop} & \textbf{Complex} & \textbf{Calculating} \\
+Calculate stop Position & Simple\rule{0pt}{3.0ex} \\
+\hline
+Detect Bus Stop & Medium \\[-0.8ex]
+\end{tabularx}};
+\begin{pgfonlayer}{background}
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,0.)$)
+    rectangle ($(tbl.north east)-(0.13, 0.6)$);
+\draw[top color=blue!15,bottom color=blue!20,draw=blue!20]
+    ($(tbl.north east)-(0.13,0.6)$)
+    rectangle ($(tbl.south west)+(0.13,0.0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+
+\begin{tikzpicture} %Overtake
+\node (tbl) {
+\begin{tabularx}{0.9\textwidth}{| Z | Z | Z}
+\arrayrulecolor{purple}
+\textbf{Overtake} & \textbf{Complex} & \textbf{Calculating} \\
+Calculate relative speed & Simple\rule{0pt}{3.0ex} \\
+\hline
+Detect available road for overtake & Medium \\
+\hline
+Detect nearby vehicles & Complex \\[-0.8ex]
+\end{tabularx}};
+\begin{pgfonlayer}{background}
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,0.)$)
+    rectangle ($(tbl.north east)-(0.13, 0.6)$);
+\draw[top color=blue!15,bottom color=blue!20,draw=blue!20]
+    ($(tbl.north east)-(0.13,0.6)$)
+    rectangle ($(tbl.south west)+(0.13,0.0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+
+\begin{tikzpicture} %Simple & Medium Tasks
+\node (tbl) {
+\begin{tabularx}{0.9\textwidth}{| Z | Z | Z |}
+\arrayrulecolor{purple}
+\textbf{Speed Controller} & \textbf{Simple} & \textbf{Update} \\
+\textbf{Turn Controller} & \textbf{Simple} & \textbf{Update} \\
+\textbf{Dark Sensor} & \textbf{Simple} & \textbf{Update} \\
+\textbf{Speed Limiter} & \textbf{Simple} & \textbf{Signaling} \\
+\textbf{Push Stop Button} & \textbf{Simple} & \textbf{Signaling} \\
+\textbf{Switch Lanes} & \textbf{Medium} & \textbf{Calculating} \\
+\textbf{Cruise Control} & \textbf{Medium} & \textbf{Calculating} \\
+\textbf{Detecting Obstacles} & \textbf{Simple} & \textbf{Calculating} \\
+\textbf{Turn Signal} & \textbf{Simple} & \textbf{Signaling} \\
+\end{tabularx}};
+\begin{pgfonlayer}{background}
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,0.)$)
+    rectangle ($(tbl.north east)-(0.13, 0.6)$);
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,-0.5)$)
+    rectangle ($(tbl.north east)-(0.13, 1.0)$);
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,-1.5)$)
+    rectangle ($(tbl.north east)-(0.13, 1.0)$);
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,-1.5)$)
+    rectangle ($(tbl.north east)-(0.13, 2.0)$);
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,-2.5)$)
+    rectangle ($(tbl.north east)-(0.13, 2.0)$);
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,-2.5)$)
+    rectangle ($(tbl.north east)-(0.13, 3.0)$);
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,-3.5)$)
+    rectangle ($(tbl.north east)-(0.13, 3.0)$);
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,-3.5)$)
+    rectangle ($(tbl.north east)-(0.13, 4.0)$);
+\draw[rounded corners,top color=red!60,bottom color=red!80, %Last
+    middle color=orange,draw=blue!20] ($(tbl.south west)
+    +(0.12,0.2)$) rectangle ($(tbl.south east)-(0.12,0.4)$);
+\draw[top color=orange!40,bottom color=orange!60,
+    draw=orange!60] ($(tbl.north west)+(0.13,-4.5)$)
+    rectangle ($(tbl.north east)-(0.13, 4.0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+
+\caption{:kaj:} \label{fig:KillMe}
+\end{center}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
@@ -147,14 +290,14 @@ Turn signal                                        & Simple     & Signaling    \
 \label{functionlist}
 \end{table}
 
-The following is a brief explanation of the different functionality and what use case inspired that functionality:
+The following is a brief explanation of each functionality and what use cases inspired that functionality:\unsure{"This Functionality bliver brugt hele vejen ned, slet ved alle?}
 \begin{itemize}
 \item \textbf{Follow track}
-This functionality is that the bus has to stay within the outer lines of the track. Used in use case 3.
+This functionality is the bus has to stay within the outer lines of the track. Used in use case 3.
 \item \textbf{Bus stop calculations}
 For this functionality, the bus has to detect the bus stops as the bus approaches them. Used in use case 7.
 \item \textbf{Overtake}
-For this functionality, the bus has to detect that there is an obstacle ahead of it that blocks its path. It then tries to drive left around the object of there is sufficient space for it. Used in use case 8.
+For this functionality, the bus has to detect if any obstacles is blocking it's path ahead. It then tries to drive left around the object of there is sufficient space for it. Used in use case 8.
 \item \textbf{Speed controller}
 This functionality controls the speed of the bus. This is based on use case 5.
 \item \textbf{Turn controller}
@@ -164,7 +307,7 @@ For this functionality, the bus has to detect how bright it is outside and turn 
 \item \textbf{Speed Limiter}
 For this functionality, the bus has to maintain a speed under a specified threshold. Used in use case 9.
 \item \textbf{Push stop button}
-For this functionality, the bus has to register that the bus stop button has been clicked. Used in use case 6.
+For this functionality, the bus has to register that the bus stop button has been pressed. Used in use case 6.
 \item \textbf{Switch lanes}
 For this functionality, the bus has to switch lanes, and also switch into the bus stops and out of them. Used in use cases 1 and 2.
 \item \textbf{Cruise Control}

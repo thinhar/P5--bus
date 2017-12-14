@@ -1,1 +1,11 @@
 \section{Discussion}
+
+
+Dependability??
+
+
+\subsection{Consequences of missing colour sensor}\todo{Is this descriptive enough?}
+
+We wanted to use a colour sensor to implement some of our functionality(speed zone, bus stop). Initially, we had gotten a colour sensor that according to tests, performed at the start of the project period, worked fine. However, when we wanted to use the colour sensor as a part of the implementation it no longer worked, and it was not possible to receive another colour sensor instead.
+The colour sensor was meant to be attached underneath the bus where it could read the colour of whatever the bus drove over. One colour would signal that it was entering a speed zone, and another would signal that a bus stop was coming up. When it entered the speed zone, a speed limit would be set for the bus, such that it never exceeded a set speed. When it was noticed a bus stop was coming up it was supposed to start a procedure to pull over into the bus stop and stand still for a little while to allow for simulating passengers getting on board.
+Both of the two tasks would be using the colour sensor however they are not both able to get data from the colour sensor at the same time since we only have a single processor. The solution to this issue would be to have a single task that puts the colour data into a buffer. The two tasks could then look into this buffer to determine what the colour is. 

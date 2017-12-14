@@ -41,7 +41,7 @@ Now a constant of midpoints is calculated and the slope and length between each 
 
 
 
-\todo{Add the pictures I created for pineTreeProblem and lane correction over time}
+\todo{Add the pictures I created for pineTreeProblem and lane correction over time}\todo{This is made according to the old ways. It needs to be changed to the new ways that we implement it.}
 %I feel like making the nxtCamLineTrack just return third order polynomials would have been better.
 
 \begin{description}
@@ -51,7 +51,7 @@ Now a constant of midpoints is calculated and the slope and length between each 
     Combines old and new coordinates, moving and rotating the measurements to fit with the new position and wheel angle of the bus. 
     \item[Sort Data]
     Splits the coordinates into measurements belonging to the left and the right lane marking. 
-    \item[Bézier Curve Calculation]
+    \item[Bézier Curve Calculation]\todo{Remove this part since it is no longer relevant?}
     A bézier curve is calculated for the left and right lane markings. Using this, a number of points in the middle of the road between the two bézier curves is calculated.
     \item[Calculate Driving Direction]
     Calculates which direction the bus should turn optimally. 
