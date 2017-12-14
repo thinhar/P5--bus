@@ -1,29 +1,25 @@
 \section{Theory of Real Time Systems}
-The following section goes into the theories behind Real-Time Systems. Firstly brief explanations on some major technical terms used when speaking about real-time systems. \unsure{this is meta text to the chapter maybe? RTS shouldn't be a chapter}
+The following section goes into the theories behind Real-Time Systems, this source\cite{RTSbook} is used for most of the details. Firstly brief explanations on some major technical terms used when speaking about real-time systems. %\unsure{this is meta text to the chapter maybe? RTS shouldn't be a chapter}
 
-A task that can be preempted is a task that can be interrupted, whereas a task that can't be preempted is a task that can't be interrupted.\todo{Lack of intro}
+A task that can be preempted is a task that can be interrupted, whereas a task that can't be preempted is a task that can't be interrupted.
 
 Each task has a corresponding period, the period is the interval within which the task should run, determined based on what is required for the task to fulfil its purpose, for the i-th task this is denoted $P_{i}$.
-
 
 A task also has a corresponding deadline, Deadlines are the specific time before which a task should be completed, which will be determined based on what is required for the task to work optimally, this is denoted for the i-th task as $ D_{i} $. A deadline could be the same as the period of the task, however, if some task depends on the task, the deadline could be before the end of its period. 
 
 Additionally, tasks have a worst-case execution time, which defines the maximum amount of time needed to complete its task, denoted as the i-th task $C_{i}$.
 
-Tasks also have a worst-case response time, that defines the maximum time of time spent between it being released and when it has completed. This is different from the worst-case execution time, as this takes into account the amount of time spent while blocked by higher priority tasks. This can be calculated based on the tasks with higher priority. The following formula calculates the worst-case response time, in which hp is of a higher priority.
-
+Tasks also have a worst-case response time, that defines the maximum time of time spent between it being released and when it has completed. This is different from the worst-case execution time, as this takes into account the amount of time spent while blocked by higher priority tasks. This can be calculated based on the tasks with higher priority. The following formula calculates the worst-case response time, in which hp is of a higher priority. 
 $R_{i} = C_{i} + \underset{j\in hp(i)}{\Sigma} \lceil\frac{R_{i}}{T_{j}}\rceil*C_{j} $
 
-This formulae is simple version with $R_{i}$ on both sides of the equation and ignoring . when actualy calculation worst case response time the following formula is used:
+This is a fixed point equation that will steadily increase, due too $R_{i}$ being on both sides. It can only be considered solved when $ R_{i}^n = R_{i}^{n+1}$. This formula is a simple version with $R_{i}$ on both sides of the equation and ignoring the cost of context switches. It's here to give an overview of what is generally needed to calculate the worst-case response.  When actually calculating the worst-case response time the following formula is used:
 
-$ lallalalalalal matematik lallalalallala matematik lallalallalalallalal$
+$W_{i}^{n+1} =  C_{i} + \underset{j\in hp(i)}{\Sigma} \lceil\frac{W_{i}^n}{T_{j}}\rceil*C_{j} $
 
-However this formula assumes the absolute worst case which is generally a overestimation. A more precise method to find the worst case response time is to use the tool uppaal.
+However, this formula assumes the absolute worst-case which is generally an overestimation. A more precise method to find the worst-case response time is to use the tool uppaal.
 
+A system can be called schedulable if and only if all of its tasks can't exceed their respective deadlines. This can be calculated by calculating the worst-case response time for all of the tasks. If the worst-case response time for all of the tasks doesn't exceed the deadline for all of the tasks, you can call that system schedule-able.\cite{roadRules}
 
-A system can be called schedulable if and only if all of its tasks can't exceed their respective deadlines. This can be calculated by calculateing the worst-case response time for all of the tasks. If the worst-case response time for all of the tasks doesn't exceed the deadline for all of the tasks, you can call that system schedule-able.\cite{roadRules}
-
-\todo{text about the different kinds of scheduling? needed. not needed. needed. not needed}
 %\subsection{Cyclic executive scheduling}
 %Perhaps the simplest form of scheduling, at least to understand, is Cyclic executive scheduling. Cyclic executive scheduling is a list of function calls in a never ending while loop. The list is contains all the necessary functions, arranged so that each task executes once in its period. The creation of the list is however a bit harder,   of functions needed to execute the program, this list 
 
@@ -43,7 +39,7 @@ A system can be called schedulable if and only if all of its tasks can't exceed 
 %Deadline a specific time before which a task should be completed. 
 
 \subsection{\textbf{Fixed-Priority Scheduling}}\label{prioratySch}
-The chosen platform supports two kinds of scheduling: Event-based scheduling and Fixed-Priority scheduling\cite{OILManual}.
+The chosen platform supports two kinds of scheduling: Event-based scheduling and Fixed-Priority scheduling\cite{OILManual}. \todo{we decided to use fixed?? give a ref to there}
 
 Fixed Priority scheduling works by assigning a priority to each task. The scheduler will then chose to run the task with the highest priority first. However how we choose the priority of the different tasks,  that must be considered. If a task is given a priority based on their periods, and it's not schedulable then it is proven that it won't be schedulable on any other priority. Therefore the choice of priority is trivial, simply found according to the task's relative periods.
 
@@ -73,9 +69,9 @@ OIL stands for OSEK implementation language, it was made as an attempt to create
     %AUTO START attribute: The AUTOSTART attribute determines whether the task is activated during the system startup procedure or not for some specific application modes. When set to TRUE, a list of application modes is defined in the APPMODE sub-attribute of type APPMODE\_TYPE. These define in which application modes the task is auto-started.
     %PRIORITY: This attribute is of type UINT32.  OSEK OS defines the lowest priority as zero (0); larger values of the PRIORITY attribute correspond to higher priorities.
     \item{\textbf{Counter}}
-    A \code{COUNTER} is a global counter that should be incremented at a fixed interval and is necessary to be able to create an alarm. In the oil file, the ticks per call are declared as is its max value. In the NXT platform, a specific interrupt is used to implement the counter.
+    A \code{COUNTER} is a global counter that should be incremented at a fixed interval and is necessary to be able to create an alarm. In the oil file, the ticks per call are declared as it's max value. In the NXT platform, a specific interrupt is used to implement the counter.
     
-    This is a special interrupt that nxtOSEK throws every 1 MS, this is connected to a interrupt service routine that calls a modifiable function called \code{user\_1ms\_isr\_type2}. If we insert a simple counter inside this function, nxtOSEC will handle the frequency of the interval, which makes it an simple way to implement the counter.
+    This is a special interrupt that nxtOSEK throws every 1 MS, this is connected to an interrupt service routine that calls a modifiable function called \code{user\_1ms\_isr\_type2}. If we insert a simple counter inside this function, nxtOSEC will handle the frequency of the interval, which makes it a simple way to implement the counter.
     \todo{maybe more verbose?}
     %Random inforamtion:
     %A COUNTER serves as a base for the ALARM mechanism
@@ -125,30 +121,30 @@ There are 3 different kinds of time constraints on a system, soft, hard or firm 
 
 %We have concluded that our system is a soft Real-time system, i.e a system that can handle some missed deadlines without failing in its task. This conclusion is based on the task with the "hardest" deadline, the obstacle detection task
 
-\subsection{\textbf{UPPAAL}}
-We will be using the UPPAAL tool to model check our schedule to determine whether or not any of the projects tasks can exceed their deadlines.
+%\subsection{\textbf{UPPAAL}}
+%We will be using the UPPAAL tool to model check our schedule to determine whether or not any of the project tasks can exceed their deadlines. It is also used to find the worst-case response time for all the task in the system. 
 
 \subsection{\textbf{Communication primitives}}
-There are two kinds of communication primitives, shared memory and Message Passing. 
-Shared memory is when a number of tasks has access to the same data, whereas message passing is when you send the data. This requires no overhead and no wait time is introduced by this strategy, however it introduces shared resources.
+There are two kinds of communication primitives, shared memory and Message Passing, the primary source for this subsection is\cite{RTSbook}. 
+Shared memory is when a number of tasks have access to the same data, whereas message passing is when you send the data. This requires no overhead and no wait time is introduced by this strategy, however, it introduces shared resource, the theory of which will be discussed in \ref{sharedReources}.
 
-The way massage passing is implemented its usually either synchronous, asynchronous or remote invocation communication. 
+The way message passing is implemented its usually either synchronous, asynchronous or remote invocation communication. 
 
-In synchronous communication there are two kinds of communication either the sender or the receiver waits, the following is a explanation of both of them.
-Lets start with the sender waiting, it will send a message and then wait for a response, a acknowledgement. If it doesn't get a acknowledgement it will send the message once more, and only when it gets its acknowledgement it will continue its calculations. 
-Then there is kind where the receiver waits, the receiver will perform its calculations, until it reaches a point where it needs a message to proceed, it will then wait until it gets a message, and then send an acknowledge back to the sender and proceed with its calculations. \unsure{add ilustations?}
+In synchronous communication there are two kinds of communication either the sender or the receiver waits, the following is an explanation of both of them.
+Let's start with the sender waiting, it will send a message and then wait for a response / an acknowledgement. If it doesn't get an acknowledgement it will send the message once more, and only when it gets its acknowledgement it will continue its calculations. 
+Then there is the kind where the receiver waits, the receiver will perform its calculations until it reaches a point where it needs a message to proceed, it will then wait until it gets a message, and then send an acknowledge back to the sender and proceed with its calculations. \unsure{add ilustations?}
 
-In asynchronous communication, nobody waits. At some point a receiver will get a message while its performing its calculating, it will send an acknowledge back to the sender and keep working. A sender will perform its calculations, reach a spot where it needs to send a message, send it continue working, and if it doesn't get an acknowledge within a time-frame it will send its message again.
+In asynchronous communication, nobody waits. At some point a receiver will get a message while it is performing its calculation, it will send an acknowledge back to the sender and keep working. A sender will perform its calculations, reach a spot where it needs to send a message, send it to continue working, and if it doesn't get an acknowledgement within a time-frame it will send its message again.
 
-Message passing requires some overhead, and due to 
-
+Message passing requires some overhead and computation time, due to requiring actual sending of information and acknowledgements. Whereas shared memory only requires pointers to the information, however this implementation does introduce the non trivial possible error that is shared resources, see \ref{sharedReources} for an explanation of the possible error.
 %Most of our communication will be made using shared memory, since this is fast and simple.
 
 
 %Shared memory is going to be used as it is faster and simpler. It is more difficult to manage and understand the data locality. \todo{Huh?}
 
-\subsection{\textbf{Shared Resources}} \info{prob not something that should be in to much detail}
- We will be trying to avoid any shared resources?
+\subsection{\textbf{Shared Resources}}\label{sharedReources}
+Within the context of computer science a shared resource is when a resource is available to multiple computers/systems/tasks. It is possible to have multiple computers on a local area network(lan), that can all access the same resource, it is also possible to have shared resources over the internet. Examples of shared resources are printers, storage devices, sensors, and motors.
+When having shared resources some form of concurrency control must also be used to prevent errors from happening. The errors that can happen are: The lost update problem, the dirty read problem, and the incorrect summary problem.\todo{Should these be specified?}
 
 %\subsection{Focus on real-time systems} \todo{This section has been moved and thus the section is not correct anymore. A bit of the section might be salvageable, but much of it will have to be removed or otherwise changed.}
 %As written in section \ref{Requirements} the project involves a vehicle, that has to detect and react to the tasks ahead, like detecting bus stops or avoid obstacles, further described in the requirements. In general, the solution will be a control system for the vehicle which has to handle many different tasks. Therefore it is critical that the deadlines for the different functions are met if the actions that the control system takes is to be correct.

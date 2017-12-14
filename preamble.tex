@@ -262,7 +262,7 @@ basicstyle=\ttfamily\small,
 %\usepackage{subfig}
 
 \usepackage{multirow}
-\usepackage[table,xcdraw]{xcolor}
+%\usepackage[table,xcdraw]{xcolor}
 
 \usepackage{pdfpages}
 
@@ -271,11 +271,29 @@ basicstyle=\ttfamily\small,
 
 \newcommand{\code}[1]{\texttt{\textit{\textcolor{black}{#1}}}}
 
-
-
-
-
-
+\newcommand{\centered}[1]{\begin{center}{#1}\end{center}}
 
 
 \usepackage[]{algorithm2e}
+
+
+%\usetheme{default}
+\usepackage{uppaal}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+%\setbeamertemplate{background canvas}[vertical shading]%
+%  [top=blue!1,bottom=blue!30]
+%\setbeamertemplate{navigation symbols}{}
+\newcommand*\up{\textcolor{green}{%
+  \ensuremath{\blacktriangle}}}
+\newcommand*\down{\textcolor{red}{%
+  \ensuremath{\blacktriangledown}}}
+\newcommand*\const{\textcolor{darkgray}%
+  {\textbf{--}}}

@@ -1,10 +1,29 @@
-\section{Uppaal}
+\section{UPPAAL}\label{UPPAALTheory}
 
-Uppaal is a powerful tool that allows for the user to model, validate and verify real-time systems. Uppaal has been made in a collaboration between the department of information technology in Uppsala university, and the department of computer science at Aalborg university.
+Uppaal is an integrated tool environment for modelling, validation and verification of systems. Uppaal has been made in a collaboration between the department of information technology in Uppsala University, and the department of computer science at Aalborg University\unsure{Synes det skal væk- syntes ikke det skal væk}.
 
-Uppaal consists of 3 elements. There is a description language, there is a simulator, and lastly there is a model-checker.\\
-The purpose of the description language is to serve as a way to describe system behavior in the form of networks of automata. It is a non-deterministic guarded command language which have data types.\\
-The simulator is used as a validation tool. It can examine the possible dynamic executions of the system in the early design.\\
-The model-checker is the last element of Uppal, and it covers the exhaustive dynamic behavior of the system. \cite{uppaal}
+% why uppaal
+Uppaal validates and verifies by performing a number of simulations, based on one or more directed graphs. The fact that it is a simulation and not calculated based on the worst case means that you are able to check whether or not the worst case can occur, thus providing a more correct result. This also means that a graph with edges and nodes that conform to the UPPAAL's syntax must be made. The following paragraphs will give an overview of the different attributes a node and edge can possess is UPPAAL.
 
-Uppaal is used to check our model, and detect the possible faults in our system. 
+UPPAAL provides an area wherein you can code and declare user-specified functions, initialise the graphs, declare global clocks, local clocks and more. This enables the users of UPPAAL to design and execute exactly what they want to happen when they want it to happen. Basically, it introduces the freedom and specificity of coding into the tool, that is sometimes is required to create a model of a system. \unsure{makes no sense, snakker vi om templetes eller ->declarations files<- eller drawing environment}
+
+% important objects in uppaal
+In UPPAAL a node has an attribute attached to it, a Boolean statement that must be true in the given node. The edges likewise also have attributes, the following are the attributes the edge has:
+\begin{itemize}
+\item{\textbf{Select}}: defines a non-deterministic choice, e.g giving a variable a value within some range. it is primarily used to introduce non-determinism in the graph. 
+\item{\textbf{Guard}}: defines a restriction that must be true to traverse the edge this is given in the form of a Boolean expression. 
+\item{\textbf{Synchronisation}}: It can be used to send/receive a signal between different graphs.
+\item{\textbf{Update}} : this allows you to change the value of values when a given edge is traversed.
+\end{itemize}
+
+These attributes and a directed graph are used to create the model\unsure{skriv template istedet, og forklar den oven over?-tror ikke template kan bruges}, however, further than this, as previously stated, UPPAAL also provides support for validation and verification. this is done based on queries. The user of UPPAAL can enter queries and by performing simulations on the graph UPPAAL will determine the answer to the query. An example of this can be if you have designated a node in a graph as an error state, you can make a query that will determine whether or not the simulation enters this state. This can be done using the following query: \uppProp{A[] not (Task.Error)} this is to be understood as: for all paths/simulations invariantly Task.Error is not true/reachable. By using the simulations based on the graph and the query's to verify and validate the attributes of the simulation. Thereby, if we have made a correct model of the system, we can vaildate and verify our system.
+
+We will not go into detail with the syntax of UPPAAL, both the queries and model syntax since it is beyond our scope. However, the tests and results of UPPAAL test will be presented here.\todo{add ref to UPPAAL test} \todo{add ref til further reading af syntax.}
+
+
+
+%Uppaal consists of 3 elements. There is a description language, there is a simulator, and lastly there is a model-checker.\\
+%The purpose of the description language is to serve as a way to describe system behavior in the form of networks of automata. It is a non-deterministic guarded command language which have data types.\\
+%The simulator is used as a validation tool. It can examine the possible dynamic executions of the system in the early design.\\
+%The model-checker is the last element of Uppal, and it covers the exhaustive dynamic behavior of the system. \cite{uppaal}
+

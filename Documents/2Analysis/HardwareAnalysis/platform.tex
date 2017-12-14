@@ -1,11 +1,36 @@
-In this chapter, we will take a closer look at potential hardware components that can be used to construct the bus. The first subsection will be about the platform the bus is driven by. The options, due to the choice of LEGO, are: LEGO NXT and LEGO EV3.
-The second subsection will be about the possible sensors for the bus. The options are: LEGO ultrasound sensor, LEGO light sensor, NXTCam\cite{Mindsensors}, and NXT Acceleration / Tilt Sensor\cite{HiTechnic}. EV3 and NXT got slightly different sensors that serve the same functionality. The EV3 can use the sensors from the NXT, but the NXT cannot use the sensors fromt the EV3.
-The third subsection is about the possible motors that we can use to make the bus move. The possible option is: NXT motor or the EV3 motor. 
-At the end of every subsection, there will be a small discussion where the choice of hardware is made. This choice will influence the possible options for hardware in the sections following that section.
+In this chapter the potential LEGO platforms and operating systems will be analysed and chosen based on their pros and cons for the project. Furthermore the hardware components considered in the project will be described and tested to determine any margin of error they might present.  
+
+
+
+%Add til sensors
+%The hardware components has been choosen based on the problem statement and the project requirements. 
+
+%Nævn LEgo fastlagt fra krav, og problem statement
+% Lego brick valgt fra pga. specs så ingen analyse
+% diss af de 2
+% conclu
+
+
+\section{Hardware Analysis}
+The purpose of this section is to determine the best platform for the project but also to emphasize any errors in the hardware. So the construction of the software and the bus can compensate some of these errors in the design phase. 
+
+
+%since replacing the hardware is not possible in this project because the hardware components.
+
+
+% In this chapter, we will take a closer look at potential hardware components that can be used to construct the bus. The first subsection will be about the platform the bus is driven by. The options, due to the choice of LEGO, are: LEGO NXT and LEGO EV3.
+% The second subsection will be about the possible sensors for the bus. The options are: LEGO ultrasound sensor, LEGO light sensor, NXTCam\cite{Mindsensors}, and NXT Acceleration / Tilt Sensor\cite{HiTechnic}. EV3 and NXT got slightly different sensors that serve the same functionality. The EV3 can use the sensors from the NXT, but the NXT cannot use the sensors fromt the EV3.
+% The third subsection is about the possible motors that we can use to make the bus move. The possible option is: NXT motor or the EV3 motor. 
+% At the end of every subsection, there will be a small discussion where the choice of hardware is made. This choice will influence the possible options for hardware in the sections following that section.
 
 \subsection{Platform}
+As descried in the problem statement \ref{problemStatement} the scope of available platforms have been downsized to LEGO MINDSTORMS platforms, this leaves the three programmable brick platforms LEGO RCX, NXT and EV3\cite{legoRoboticsHistory}. The following analysis will not include the first-generation platform RCX as it was deiced that it's specs was too restricted, and the lack of sensors like the ultrasonic will be too problematic for the project.
 
-The hardware platform has all sensors and motors attached to it. The hardware platform runs the software to make the bus use its sensors and motors. As mentioned, the options are: LEGO NXT and LEGO EV3. In \ref{LEGOComparisonChart} comparisons are made between the hardware of the two platforms.
+This leaves the two platforms NXT and EV3, which both works by attaching motors and sensors to their corresponding ports. And with the use of an USB cable, the software the platform should run, can be transferred to the brick. In table \ref{LEGOComparisonChart} a comparison between NXT and EV3 can be seen based on their corresponding specs. 
+
+
+
+%The hardware platform has all sensors and motors attached to it. The hardware platform runs the software to make the bus use its sensors and motors. As mentioned, the options are: LEGO NXT and LEGO EV3. In \ref{LEGOComparisonChart} comparisons are made between the hardware of the two platforms.
 
 %\subsection{Lego NXT}
 %The LEGO NXT is a small programmable computer made by LEGO and shaped like a brick. The Intended use of the NXT is in a combination with their LEGO Mindstorms software to program robots. The LEGO NXT set was released late July of 2006.\\
@@ -49,5 +74,15 @@ Communication & \makecell[l]{Bluetooth \\ USB 2.0} & \makecell[l]{Bluetooth v2.1
 \end{table}
 
 \subsubsection{Choice of platform}
+From the comparison table the EV3 seem as the obvious choice, since it's superior in all categories, and it has the ability to use both NXT sensors as well as it's own improved sensors. However the group assessment is that the EV3 may be too powerful for the scope of the project. This could mean that optimisations will not be as a big part of the design and implementation. Furthermore the improvements made to the EV3 sensors not that important
 
-In the end, NXT was chosen as the platform. At first glance the NXT should be sufficient, although it may lead to having to get the most out of the hardware, and possibly push it to its limits, and as such using the NXT instead of the much more powerful EV3 would put more focus on these limitations.
+
+- High part Price
+- Sensor Improvements not that important
+- Optimisation not as important
+
+\todo{god grund til valg af nxt over ev3.}
+
+
+
+%In the end, NXT was chosen as the platform. At first glance the NXT should be sufficient, although it may lead to having to get the most out of the hardware, and possibly push it to its limits, and as such using the NXT instead of the much more powerful EV3 would put more focus on these limitations.
