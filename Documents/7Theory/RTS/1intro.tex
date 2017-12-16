@@ -1,7 +1,12 @@
 \section{Theory of Real Time Systems}
-The following section goes into the theories behind Real-Time Systems, this source\cite{RTSbook} is used for most of the details. Firstly brief explanations on some major technical terms used when speaking about real-time systems. %\unsure{this is meta text to the chapter maybe? RTS shouldn't be a chapter}
+The following section goes into the theories behind Real-Time Systems. This source\cite{RTSbook} is used for most of the details. Firstly brief explanations on some major technical terms used when speaking about real-time systems. %\unsure{this is meta text to the chapter maybe? RTS shouldn't be a chapter}
 
-A task that can be preempted is a task that can be interrupted, whereas a task that can't be preempted is a task that can't be interrupted.
+\todo{From supervisor: Consider explaining the concepts in a more structured way, e.g.:
+Definition of a Task. Task has the following properties:
+- period specifies the time duration between task releases...
+- deadline ...
+- ...
+Some tasks are periodic, other sporadic (then they are characterised by minimal interarrival time), some tasks may depend on each other -- many things can be enumerated here, but it would be nice to focus on some particular framework that you are going to use.}A task that can be preempted is a task that can be interrupted, whereas a task that can't be preempted is a task that can't be interrupted.
 
 Each task has a corresponding period, the period is the interval within which the task should run, determined based on what is required for the task to fulfil its purpose, for the i-th task this is denoted $P_{i}$.
 
@@ -9,7 +14,7 @@ A task also has a corresponding deadline, Deadlines are the specific time before
 
 Additionally, tasks have a worst-case execution time, which defines the maximum amount of time needed to complete its task, denoted as the i-th task $C_{i}$.
 
-Tasks also have a worst-case response time, that defines the maximum time of time spent between it being released and when it has completed. This is different from the worst-case execution time, as this takes into account the amount of time spent while blocked by higher priority tasks. This can be calculated based on the tasks with higher priority. The following formula calculates the worst-case response time, in which hp is of a higher priority. 
+Tasks also have a worst-case response time, that defines the maximum time of time spent between it being released and when it has completed. This is different from the worst-case execution time, as this takes into account the amount of time spent while blocked by higher priority tasks. This can be calculated based on the tasks with higher priority. The following formula calculates the worst-case response time, in which hp is of a higher priority.\\
 $R_{i} = C_{i} + \underset{j\in hp(i)}{\Sigma} \lceil\frac{R_{i}}{T_{j}}\rceil*C_{j} $
 
 This is a fixed point equation that will steadily increase, due too $R_{i}$ being on both sides. It can only be considered solved when $ R_{i}^n = R_{i}^{n+1}$. This formula is a simple version with $R_{i}$ on both sides of the equation and ignoring the cost of context switches. It's here to give an overview of what is generally needed to calculate the worst-case response.  When actually calculating the worst-case response time the following formula is used:
@@ -41,9 +46,9 @@ A system can be called schedulable if and only if all of its tasks can't exceed 
 \subsection{\textbf{Fixed-Priority Scheduling}}\label{prioratySch}
 The chosen platform supports two kinds of scheduling: Event-based scheduling and Fixed-Priority scheduling\cite{OILManual}. \todo{we decided to use fixed?? give a ref to there}
 
-Fixed Priority scheduling works by assigning a priority to each task. The scheduler will then chose to run the task with the highest priority first. However how we choose the priority of the different tasks,  that must be considered. If a task is given a priority based on their periods, and it's not schedulable then it is proven that it won't be schedulable on any other priority. Therefore the choice of priority is trivial, simply found according to the task's relative periods.
+Fixed Priority scheduling works by assigning a priority to each task. The scheduler will then chose to run the task with the highest priority first. However how the tasks are assigned a priority must be considered. If a task is given a priority based on their periods, and it's not schedulable then it is proven that it won't be schedulable on any other priority\todo{Need prof of this.}. Therefore the choice of priority is trivial, simply found according to the task's relative periods.
 
-There are issues concerning this type of scheduling, namely priority inversion. Priority inversion exists if there is a task with higher priority waiting for lower priority tasks. This can occur if a low priority task holds a resource that the higher priority also needs, and it is unable to release until its finished some calculations. But the low priority task is then able to be preempted by other tasks with a relatively higher priority, however lower priority than the high priority task waiting for the release of a resource. This is illustrated in \ref{priorityInvertion}, where task 1 takes a resource, denoted by the purple line, which is also required by task 3. Since task 1 can't release the resource it is required that this task runs before task 3 can get its resource, however since task 1 is preempted by a higher priority, task 2, this makes task 3 wait on task 2, which is priority inversion.
+There are issues concerning this type of scheduling, namely priority inversion. Priority inversion exists if there is a task with higher priority waiting for lower priority tasks. This can occur if a low priority task holds a resource that the higher priority also needs, and it is unable to release until it has finished some calculations. But the low priority task is then able to be preempted by other tasks with a relatively higher priority. However lower priority than the high priority task waiting for the release of a resource\todo{This sentence makes no sense. What does it mean?}. This is illustrated in \ref{priorityInvertion}, where task 1 takes a resource, denoted by the purple line, which is also required by task 3. Since task 1 can't release the resource it is required that this task runs before task 3 can get its resource, however since task 1 is preempted by a higher priority, task 2, this makes task 3 wait on task 2, which is priority inversion.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Images/Analysis/priorityInvertion.png}
@@ -58,18 +63,19 @@ We did not want to deal with event-based scheduling because we did not have a cl
 \subsection{\textbf{OSEK Implementation Language}}\label{OILteo}
 In this section, the report will go into detail with how the scheduling is supported. Most of the information about this can be found from this source\cite{OILManual}.
 
-OIL stands for OSEK implementation language, it was made as an attempt to create an industry standard for an open-ended architecture for distributed control units in vehicles\cite{OILManual}. It is compiled with the code and provides some objects or constructions that aim to assist with the scheduling of the code. Since the OIL implementation is quite extensive, this rapport will limit its explanation to what is most relevant for this project. Since the project has decided to use Fixed-Priority Scheduling, see \ref{prioratySch}, the report will explain the important constructions in OIL files to support this form of scheduling, the report will, therefore, explain these three objects in the oil files.
+OIL stands for OSEK implementation language, it was made as an attempt to create an industry standard for an open-ended architecture for distributed control units in vehicles\cite{OILManual}. It is compiled with the code and provides some objects or constructions that aim to assist\todo{How does it assist? Tool check?} with the scheduling of the code. Since the OIL implementation is quite extensive, this rapport will limit its explanation to what is most relevant for this project. Since the project has decided to use Fixed-Priority Scheduling, see \ref{prioratySch}, the report will explain the important constructions in OIL files to support this form of scheduling, the report will, therefore, explain these three objects in the oil files.
 
 \begin{itemize}
     \item{\textbf{Task}}
-    The task in the OIL file is the primitive that the other objects control. The task within the OIL file is directly connected to a task within the c file, which describes the functionality of the task. The task within the OIL file describes the properties of the task. The interesting properties are: \code{ SCHEDULE}, this value describes whether or not the task can be preempted, where \code{FULL} corresponds to a preemptable task and \code{NON} a non-preemptable task. \code{AUTOSTART} this property determines whether or not the task starts itself once at the start. 
+    The task in the OIL file is the primitive that the other objects control. The task within the OIL file is directly connected to a task within the c file, which describes the functionality of the task. The task within the OIL file describes the properties of the task. The interesting properties are: \code{ SCHEDULE}, this value describes whether or not the task can be preempted, where \code{FULL} corresponds to a preemptable task and \code{NON} a non-preemptable task. \code{AUTOSTART} this property determines whether or not the task starts itself at the start of the program. 
     \code{PRIORITY} unsurprisingly this attribute describes the priority of a task, the lowest value corresponds to the lowest priority.
     %Random inforamtion:
     %Schedule value: The FULL value of this attribute corresponds to a preemptable task, the NON value to a nonpreemptable task.
     %AUTO START attribute: The AUTOSTART attribute determines whether the task is activated during the system startup procedure or not for some specific application modes. When set to TRUE, a list of application modes is defined in the APPMODE sub-attribute of type APPMODE\_TYPE. These define in which application modes the task is auto-started.
     %PRIORITY: This attribute is of type UINT32.  OSEK OS defines the lowest priority as zero (0); larger values of the PRIORITY attribute correspond to higher priorities.
     \item{\textbf{Counter}}
-    A \code{COUNTER} is a global counter that should be incremented at a fixed interval and is necessary to be able to create an alarm. In the oil file, the ticks per call are declared as it's max value. In the NXT platform, a specific interrupt is used to implement the counter.
+    A \code{COUNTER} \todo{What kind of counter is it? timing counter?}is a global counter that should be incremented at a fixed interval and is necessary to be able to create an alarm. In the oil file, the ticks per call are declared as it's max value. In the NXT platform, a specific interrupt \todo{From supervisor: There might be various hierarchies of interrupts, but the important property is whether this interrupt can always happen (i.e. preempt any task no matter what), or could it be disabled? or prevented from running due to some very high priority task?
+What happens if multiple interrupts occur? do they preempt each other?} is used to implement the counter.
     
     This is a special interrupt that nxtOSEK throws every 1 MS, this is connected to an interrupt service routine that calls a modifiable function called \code{user\_1ms\_isr\_type2}. If we insert a simple counter inside this function, nxtOSEC will handle the frequency of the interval, which makes it a simple way to implement the counter.
     \todo{maybe more verbose?}
@@ -124,7 +130,7 @@ There are 3 different kinds of time constraints on a system, soft, hard or firm 
 %\subsection{\textbf{UPPAAL}}
 %We will be using the UPPAAL tool to model check our schedule to determine whether or not any of the project tasks can exceed their deadlines. It is also used to find the worst-case response time for all the task in the system. 
 
-\subsection{\textbf{Communication primitives}}
+\subsection{\textbf{Communication primitives}} \label{commnucationPrimitives}
 There are two kinds of communication primitives, shared memory and Message Passing, the primary source for this subsection is\cite{RTSbook}. 
 Shared memory is when a number of tasks have access to the same data, whereas message passing is when you send the data. This requires no overhead and no wait time is introduced by this strategy, however, it introduces shared resource, the theory of which will be discussed in \ref{sharedReources}.
 
@@ -133,6 +139,8 @@ The way message passing is implemented its usually either synchronous, asynchron
 In synchronous communication there are two kinds of communication either the sender or the receiver waits, the following is an explanation of both of them.
 Let's start with the sender waiting, it will send a message and then wait for a response / an acknowledgement. If it doesn't get an acknowledgement it will send the message once more, and only when it gets its acknowledgement it will continue its calculations. 
 Then there is the kind where the receiver waits, the receiver will perform its calculations until it reaches a point where it needs a message to proceed, it will then wait until it gets a message, and then send an acknowledge back to the sender and proceed with its calculations. \unsure{add ilustations?}
+
+There are also the more high level remote invocation\todo{add theory for this}.
 
 In asynchronous communication, nobody waits. At some point a receiver will get a message while it is performing its calculation, it will send an acknowledge back to the sender and keep working. A sender will perform its calculations, reach a spot where it needs to send a message, send it to continue working, and if it doesn't get an acknowledgement within a time-frame it will send its message again.
 

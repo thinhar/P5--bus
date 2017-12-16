@@ -13,14 +13,16 @@ See figure \ref{fig:interfaceSensorControllers}
     \label{fig:interfaceSensorControllers}
 \end{figure}
 
-\code{Turn} is a class containing the degrees and direction of the specified turn that is to be executed. \code{Direction} and \code{Colour} are both enumeration types that contain a number of associated options (e.g. left or right, or different colours). Rpm from \code{CurrentSpeedRpm} abbreviates rotations per minute.
+\code{Turn} is a class containing the degrees of the specified turn that is to be executed. \code{Direction} and \code{Colour} are both enumeration types that contain a number of associated options (e.g. left or right, or different colours). Rpm from \code{CurrentSpeedRpm} abbreviates rotations per minute.
 
 \subsection{Components}
 The components call the sensor controllers in order to obtain the necessary sensor measurements, and also call the calibration of their corresponding sensors. See figure \ref{fig:interfaceComponents} for a class diagram describing the planned interface structure.
 
 \begin{figure}[ht]
     \includegraphics[width=\textwidth]{Images/Design/InterfaceComponents.png}
-    \caption{Class diagram showing the component interfaces}
+    \caption{Class diagram showing the component interfaces\todo[inline]{From supervisor: It is very nice to have a unified interface to each piece of code -- it should help to formalize the tasks for scheduling.
+So the top interface is very usefull, but the lower ones are interfaces too?
+Do you expect a class diagram to continue down below the inheritance hierarchy?}}
     \label{fig:interfaceComponents}
 \end{figure}
 
@@ -37,12 +39,14 @@ The class \code{SteeringSequence} contains one or multiple \code{SteeringCommand
 %Maybe we need to give the components information about what they signalled last time? They should keep that info themselves, if necessary. 
 
 \subsection{Driving}
-\code{Driving} is the class that couples the system. As such, it initialises the classes (calibrating the sensors at the same time), calls the components and decides how to steer the bus. See figure \ref{fig:interfaceDriving} for the interface of the \code{Driving} class.
+\code{Driving} is the class that couples the system together as a supervisory control. As such, it initialises the classes (calibrating the sensors at the same time), calls the components and decides how to steer the bus. See figure \ref{fig:interfaceDriving} for the interface of the \code{Driving} class.
 
 \begin{figure}[ht]
-    \includegraphics[]{Images/Design/interfaceDriving.png}
+\begin{centering}
+    \includegraphics[scale=0.8]{Images/Design/interfaceDriving.png}
     \caption{Interface of the driving class}
     \label{fig:interfaceDriving}
+    \end{centering}
 \end{figure}
 
 

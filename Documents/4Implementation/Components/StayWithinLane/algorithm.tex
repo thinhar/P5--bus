@@ -1,18 +1,18 @@
-\subsection{Algorithm}
+\subsection{Algorithm}\todo{We have a new Algorithm that does something else. This subsection needs to be re-written.}
 In this section the algorithm that ensures that the bus always stays within the road lane is described. 
 
 The intent for the algorithm is to calculate an optimal line that the bus should follow in order to keep within lane markings. Using this result, it will call the Driving-component and inform it how much the bus should turn its wheels and for how long with it's current speed. 
 
-Before the points gained through the NxtCamLineTrackController can be used, they need to be sorted in left and right side. After this we calculate a bézier curve for each side to find a smooth midpoint line for the bus to follow. This is not quite as simple as it seems, as we need to handle the cases where the line tracker returns only very few points. For instance, if it returns only one coordinate for the left lane marking, then we cannot calculate a proper curve without knowledge of where at least one previous coordinate in the left lane was placed. 
+Before the points gained through the NxtCamLineTrackController can be used, they need to be sorted in left and right side. After this we calculate a bézier curve\todo{We dont juse this anymore} for each side to find a smooth midpoint line for the bus to follow. This is not quite as simple as it seems, as we need to handle the cases where the line tracker returns only very few points. For instance, if it returns only one coordinate for the left lane marking, then we cannot calculate a proper curve without knowledge of where at least one previous coordinate in the left lane was placed. 
 
-To solve this, we save old measurements from the last time we calculated the path for the bus. However, these need to be moved along the x or y-axis to fit with the new position of the bus compared to the place where the old measurement took place. Additionally, these measurement will need to be rotated if the bus has driven part of a road curve since the last measurement. Also the bus will need to handle the case where there are zero measurement in the side. This is done by taking the measured point which is the farthest away, and the point previous to that in the same side. Next these two points are used to make a right-angle triangle so the farthest away point of the other side can me calculated \ref{fig:findK}. By doing this we get the point farthest away the camera can see in both sides. Now the bézier curves for both side will show approximately same length of the road. And that will make our calculation of midpoints between the two curves more accurate since the amount of points calculated on each bézier curves is a constant.
+To solve this, we save old measurements from the last time we calculated the path for the bus. However, these need to be moved along the x or y-axis to fit with the new position of the bus compared to the place where the old measurement took place. Additionally, these measurement will need to be rotated if the bus has driven part of a road curve since the last measurement. Also the bus will need to handle the case where there are zero measurement in the side. This is done by taking the measured point which is the farthest away, and the point previous to that in the same side. Next these two points are used to make a right-angle triangle so the farthest away point of the other side can be calculated, see figure \ref{fig:findK}. By doing this we get the point farthest away the camera can see in both sides. Now the bézier curves for both side will show approximately same length of the road. And that will make our calculation of midpoints between the two curves more accurate since the amount of points calculated on each bézier curves is a constant.
 
 Now a constant of midpoints is calculated and the slope and length between each point is found. The slope tells the angle the bus needs to turn, if the slope is negative it means turn left, if positive turn right. And the length is the distance to be driven with the found slope. 
 
 
 \begin{figure}[ht]
     \includegraphics[width=\textwidth]{Images/Design/findK.PNG}
-    \caption{Balance left/right data length.}
+    \caption{Balance left/right data length.\todo[inline]{We need a better description of what is going on in this Figure. Do we even use the figure for anything now?}}
     \label{fig:findK}
 \end{figure}
 
