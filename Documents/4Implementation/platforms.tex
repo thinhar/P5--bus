@@ -1,7 +1,7 @@
 \section{Choice of Hardware \& Software}\todo{What is this section supposed to be about? What already decide upon our hardware and software in the chapter about analysis, and the chapter about design.}
 
 \subsection*{Hardware}
--
+\todo{Put a couple of pictures from different angles of the bus here.}
 
 
 \subsection*{Software}
@@ -28,8 +28,8 @@ The motors use Pulse Width Modulation\info{Do we talk about this elsewhere?}, sh
 \begin{figure}[H]
     \label{software_duty_cycles}
     \centering
-    \includegraphics[width=0.8\textwidth]{Images/Software/NXT/duty_cycle.jpg}
-    \caption{Example of duty cycles}
+    \includegraphics[scale=0.8]{Images/Software/NXT/duty_cycle.jpg}
+    \caption{Example of duty cycles\todo[inline]{Do we know the frequency?}}
 \end{figure}
 
 If it is high during the entire duration it translates to 100\%. This means that the output of the motor is given on a percentage basis.
@@ -61,7 +61,7 @@ It is structured such that the initial byte indicates the number of objects give
     \caption{Packets structure of cam data transfer.}
 \end{figure}
 
-In figure \ref{software_packet_cam} the initial byte is the number of objects, followed by the X and Y coordinates, width, height and colour of the n-th object. The colour is a value between 1 and 8 which is based on the colormaps. 
+\todo{Short introduction of what the USB connection/Bluetooth connection is for.}In figure \ref{software_packet_cam} the initial byte is the number of objects, followed by the X and Y coordinates, width, height and colour of the n-th object. The colour is a value between 1 and 8 which is based on the colormaps. 
 The camera only tracks 8 elements, meaning that with 5 elements per object, it uses $5 * 8$ elements, meaning that the camera objects occupy 40 bytes, where it is important to remember the first element that counts the number of objects. Meaning that it uses 41 out of 64 available bytes.
 This leaves room for monitoring other factors, such as the turning angle.
 

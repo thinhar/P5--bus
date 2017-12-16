@@ -10,8 +10,11 @@ The intent is, of course, that these software abstractions will not affect our m
 \todo{More corrections from 8/11-2017}
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{Images/Design/abstractionLayerDiagram.png}
-    \caption{Layer diagram of the system architecture of the product, going from high-level programming down to low-level hardware specifics}
+    \caption{Layer diagram of the system architecture of the product, going from high-level programming down to low-level hardware specifics.
+    \todo[inline]{From supervisor: These arrows mean different things than other arrows inside the box, so they must be drawn somehow differently.
+I am reading these as layers in OSI model, e.g.
+http://www.flickriver.com/photos/phploveme/2911722148/}}
     \label{fig:abstractionLayers}
 \end{figure}
 
-The note "Coupling to hardware" and the "N/A" edges exists because those are implementation details inside nxtOSEK, which we do not really have access to. In the hardware frame, the edges signify communication protocols such as PWM (pulse width modulation, as described in section \ref{analysisMotors}). 
+The note "Coupling to hardware" and the "N/A" edges exists because those are implementation details inside nxtOSEK, which we do not really have access to\todo{From supervisor: Just treat it as a different abstraction layer. It is not realy an API, nor protocol, but something that "runs on top".}. In the hardware frame, the edges signify communication protocols such as PWM (pulse width modulation, as described in section \ref{analysisMotors}). 

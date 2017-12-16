@@ -1,8 +1,8 @@
 \section{Class Structure and Scheduling}
 
-Previously we broke down the requirements for the functionality of the bus into a number of components, and created a class diagram \todo{Can I call it a class diagram? Call it something else if I change it.} to structure how those would interact. The next step is to create interfaces and thereby clear, concrete contracts of the intended functionality of each major class in the program. 
+Previously we broke down the requirements for the functionality of the bus into a number of components, and created a class diagram \todo{Can I call it a class diagram? Call it something else if I change it.}\todo{Missing ref to the class diagram} to structure how those would interact. The next step is to create interfaces and thereby clear, concrete contracts of the intended functionality of each major class in the program. 
 
-In non real-time systems the class and system structure may be enough to start creating interfaces, but in this case we still need to figure out we will reconcile the class structure with the chosen scheduling method. As mentioned in \ref{analysis:scheduling}, we will be using fixed priority scheduling to decide when the tasks in the bus are run. 
+In non real-time systems the class and system structure may be enough to start creating interfaces, but in this case we still need to figure out we will reconcile the class structure with the chosen scheduling method. As mentioned in \ref{analysis:scheduling}, we will be using fixed priority scheduling\todo{With or without preemption?} to decide when the tasks in the bus are run. 
 
 One of the questions that we need to clear up is where we run the program from and where the main function resides. Where do we initialise our components and ensure that they deliver their data to the correct receiver? Besides answering these questions, we must ensure that conventions of good object-oriented design are still followed. Specifically, the trouble is keeping a low coupling between the components, even though they all need to communicate with the driving-component. 
 
@@ -13,7 +13,7 @@ The \code{ObstacleDetection}-component (which uses the ultrasonic sensor to chec
 
 The issue in this case is that the bus might miss a lot of other deadlines while the Driving-component has control of the CPU. This is of course unacceptable, because, depending on the circumstances, the bus might no longer meet its other requirements. 
 
-Imagine the following worst case. The bus detects a bus stop and decides to park there. Now the driving component gains control of the CPU for the next two seconds while it parks the bus. All deadlines are lost in that time, and if there's an obstruction on the road that was not detected prior, it might not be detected until it is too late. 
+Imagine the following worst case. The bus detects a bus stop and decides to park there. Now the driving component gains control of the CPU for the next two seconds while it parks the bus. All deadlines are lost in that time, and if there's an obstruction on the road that was not detected prior, it might not be detected until it is too late.\todo{Use a tool to figure this out. Can't think of every situation manually.}
 
 The solution to this is splitting the above task into separate, smaller tasks: sensor detection and the execution of driving commands. Both of these are then be scheduled and executed entirely independently. This means that the system might wait longer before executing a stop-command. However, this should not be a problem, as long as we ensure that the period is short enough, so that the bus can always stop in time before crashing into something. 
 
@@ -25,13 +25,18 @@ Imagine a case where the scheduler first selects the \code{ObstacleDetection}-co
 
 \begin{figure}[ht]
     \includegraphics[width=\textwidth]{Images/Design/sequenceObstacleDetection.png}
-    \caption{Sequence diagram showing the program flow while detecting obstacles and reacting to this}
+    \caption{Sequence diagram showing the program flow while detecting obstacles and reacting to this.}
     \label{fig:sequenceDetectObstacle}
 \end{figure}
 
+s\todo{From supervisor: This communication can be through shared variable(s): e.g. obstacle detector is being run periodically and then marks some variables that there is some obstacle somewhere, then the driver could be running at its own pace and check the obstable variables.
+It is not clear how/why do you actually structure/map classes to tasks and how/why things are connected.
+In this picture it is clear that communication between classes are synchronous function/method calls, but it does not neccessarily have to be this way.
+It seems that you are not exploiting (pseudo)parallelism and your tasks seem sequential (one after another).}
+
 Task A calls the \code{ObstacleDetection}-component, which then returns results from the ultrasonic sensor. The priority of all currently saved steering-commands is then calculated and saved locally in the Driving-component. At this point the control is returned to the .oil file. 
 
-Then task B assigns control of the CPU to the driving component a second time, which executes the highest priority steering command, which in this case is to brake the car. Task B is fully separate from obstacle detection, and regardless of which task was executed prior, task B just executes the top priority command. 
+Then task B assigns control of the CPU to the driving component a second time, which executes the highest priority steering command, which in this case is to brake the car\todo{Couldn't this be done with a quick command instead? "motor speed = 0", no need to have the driving component to do this.}. Task B is fully separate from obstacle detection, and regardless of which task was executed prior, task B just executes the top priority command. 
 
 %The question is where our individual program flows are called. We have a few options, none of which seem immediately better than the rest:
 %- Each component is called on its own. This makes it so the .oil programmer needs to know about the functions of all the different class functions (and where to initialize a call). This can be remedied with an interface that exposes a .Run() method. Problem here is what to do with the result of each call. If the Obstacle Detection class decides that the bus should now stop, what does it do? Does it have access to the Driving component and can it call the .Brake() function? But then all functions have access to the Driving component, which heavily increases the coupling of the program (not good). Does it expose its return value as an event that is subscribed to by the Driving component? But then the worst case execution time becomes difficult to control, because unless we know the entire program, we cannot say how many items are subscribed. Does it expose its value as a property? But then, all classes need to expose a property of the same type and also use it in the same way. Again, this increases the coupling of the program. 
