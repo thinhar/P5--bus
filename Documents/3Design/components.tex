@@ -16,12 +16,13 @@ We split the program into five components, four of which contain one piece of fu
 
 Note that while these components refer mostly to the software for the NXT, we cannot design the components in a vacuum. Specifically, incorrect sensor measurements, track/lane inconsistencies and similar situations need to be taken into account during programming, because otherwise, the product might not work as expected. 
 
-This means that on both a software and hardware level
+In the following sections, we will consider this general architecture with a higher degree of granularity, to decide exactly how the software will work and how it will interact with the hardware. 
+
 
 \subsection{Assumptions and Guarantees}
 For now, we are imagining each component as a black box. What it contains is not of importance, only what it can do. Each component guarantees specific functionality as long as certain assumptions are met.
 
-Most of the assumptions\todo{What assumptions in particular} are made for the sake of simplicity in order to not delude the design with unnecessary detail. In this section, we will specify assumptions and guarantees that are not immediately obvious. Other, common assumptions, however, like the fact that the bus needs gravity to drive properly, will still be left implicit. The specifications will later\todo{Where? section x?} be used for informing the creation of interfaces for the classes of the program. 
+Most of the assumptions\todo{What assumptions in particular} are made for the sake of simplicity in order to not delude the design with unnecessary detail. In this section, we will specify assumptions and guarantees that are not immediately obvious. Other, common assumptions, however, like the fact that the bus needs gravity to drive properly, will still be left implicit. 
 
 \begin{description}
     \item[Driving]

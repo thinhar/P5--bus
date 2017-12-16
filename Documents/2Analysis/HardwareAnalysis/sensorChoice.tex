@@ -1,0 +1,22 @@
+
+\section{Choice of Sensors}
+
+Vi har ikke vildt specifikke krav for sensor performance, så det er lidt ligegyldigt hvad vi vælger
+
+Derudover er nogle sensorer langt nemmere for os at vælge, fordi vi allerede har dem på lager
+
+Fordi vi laver en bus (ie. stor), så kunne det have været godt med en motor bagerst som er lidt stærkere end den som styrer retningen (link evt. til Motor sammenligningsafsnit, men nok ikke, for det er jo ligegyldigt hvad vi sammenligner når vi ikke kunne få halvdelen af det)
+
+Der er altså ikke vildt god argumentation for hvorfor vi har valgt dem vi har, men vi bruger bare det vi har.
+
+Så længe de sådan cirka kan bruges til vores krav, så vil vi koncentrere os om at lave software der får det til at virke, regardless of how their performance is compared to similar sensors.
+
+Line tracking: two choices, either light/colour sensor to detect when we hit the road lane markings, or a camera sensor to track the lane markings by analysing pictures it snaps. 
+
+This is smart because it provides us with lookahead, meaning that the bus doesn't have to hit the line before it realizes that it needs to readjust its position
+
+As we thought the camera sensor seemed the most sensible choice given our particular needs. We managed to procure a NXTCam-v4 that has a line tracking feature.
+
+
+
+Because sensors don't always provide reliable results, we will now experiment with these sensors to determine which corrections we will need to apply and what data we will need to sort out with software during the implementation. 
