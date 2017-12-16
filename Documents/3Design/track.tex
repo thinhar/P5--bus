@@ -1,4 +1,4 @@
-\section{Design of the track}
+\section{Design of the track}\label{trackDesign}
 
 In order to validate that the requirements of the project are met. A track for the bus which is designed based on the requirements had to be made. This section will detail the design decisions made when designing this track. 
 
@@ -25,7 +25,7 @@ For the curved roads, the Danish road directorate has set forth a number of cond
 A bus 12 meters in length, must be able to pass through the road with a front wheel turning angle of maximum  28.6 degrees, see 2.1 in appendix \ref{laneCalculations}, while keeping 0.3 meters leeway to each side at any point\cite{DriveingCurves}, or it must have an area to be able to turn a bit to the opposing side, so that it can make a sharper turn. However, we have chosen to refer to the simple turn as our requirement. According to these requirements, the calculations found in section 2 appendix \ref{laneCalculations} were made, to ensure that the track conforms to this rule.
 The length of the bus stop has been found by finding the minimum distance that the bus needs to drive into and out of the bus lane, and then added to the length of the bus. The formula can be seen in \cite{busstoplength} and comes out to ~56.4. However, this would require the bus to enter the bus stop at a very steep angle that will not be possible at most roads, so a big amount of additional space has been added to the bus stop.
 
-According to these rules, the following design in Figure \ref{fig:TrackDesign} was made. The image is not to scale.
+According to these rules, the following design in Figure \ref{fig:TrackDesign} was made. The image is not to scale and its given in cm.
 
 \begin{figure}[ht]
     \includegraphics[width=1\textwidth]{Images/Design/TrackDesign.PNG}
