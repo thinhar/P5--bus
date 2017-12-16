@@ -12,11 +12,11 @@ See figure \ref{fig:components} for a class diagram showing a separation of conc
     \label{fig:components}
 \end{figure}
 
-
-\todo{explain diagram and composition}
-
+We split the program into five components, four of which contain one piece of functionality each. The last, the \code{Driving}-component is responsible for coupling the other components and for steering the bus based on their provided results. 
 
 Note that while these components refer mostly to the software for the NXT, we cannot design the components in a vacuum. Specifically, incorrect sensor measurements, track/lane inconsistencies and similar situations need to be taken into account during programming, because otherwise, the product might not work as expected. 
+
+This means that on both a software and hardware level
 
 \subsection{Assumptions and Guarantees}
 For now, we are imagining each component as a black box. What it contains is not of importance, only what it can do. Each component guarantees specific functionality as long as certain assumptions are met.
