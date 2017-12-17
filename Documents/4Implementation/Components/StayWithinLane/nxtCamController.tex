@@ -1,24 +1,38 @@
-\subsection{NxtCamLineTrackController}
+\subsection{NxtCamLineTrackController} 
+
+\todo{We need some version of this chapter. Write what data we actually sort out, what we don't and then mention how we could have used FieldOfViewCorrections but choose not to}
 
 The point of the controller is that we can call it to get the coordinates of the lines that have been detected by the camera sensor without having to worry about any NxtCam sensor specifics or behind the scenes calculations. 
 
-When called in line tracking mode, the NxtCam returns between 0 and 8 objects with corresponding height, width and position of a slice of a detected line. A number of data manipulations must now be performed in order to convert these points from the cameras local space \ref{Measure With NxtCam} into a new 2 dimensions local space with origin in the NxtCam position \ref{??}. The coordinates in this space correspond with the real world based on where is NxtCam is in world space, so the distance can be calculated. The intent is that we can use the clean data points to calculate the direction which the bus must drive in order to stay in the middle of the road. 
 
-The steps that are performed to clean up the NxtCam measurements and their return values are written in order: 
+WRITE SOMETHING
 
 
-\begin{description}
-    \item[Measure With NxtCam]
-    Raw measurements from the nxtCam. The camera starts mapping in the top-left corner (coordinate 0,0) down to the bottom-right (coordinate 144,176).
-    \item[Displace and Flip Coordinate Plot]
-    Moves the origin of plot to the bottom-middle (coordinate 0,88) where the camera is placed and flips the x-coordinates. As such, the top-left becomes coordinate 144,-88 and the bottom-right point becomes coordinate 144,88. 
-    \item[Correct for Lens Distortion]
-    The bend of the camera lens distorts the position of points in regards to where they are actually placed. This is corrected in this function. 
-    \item[Sort Out Bad Measurements]
-    Any measurements that are not placed within either the left or right road markings are sorted out. 
-    \item[Correct for Field of View]
-    The coordinates and distances between points are incorrect because the picture was taken at an angle, and as such the objects at the top are further away from the camera than the objects at the bottom of the picture. This is corrected in this function. 
-\end{description}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%When called in line tracking mode, the NxtCam returns between 0 and 8 objects with corresponding height, width and position of a slice of a detected line. A number of data manipulations must now be performed in order to convert these points from the cameras local space \ref{Measure With NxtCam} into a new 2 dimensions local space with origin in the NxtCam position \ref{??}. The coordinates in this space correspond with the real world based on where is NxtCam is in world space, so the distance can be calculated. The intent is that we can use the clean data points to calculate the direction which the bus must drive in order to stay in the middle of the road. 
+
+%The steps that are performed to clean up the NxtCam measurements and their return values are written in order: 
+
+
+%\begin{description}
+%    \item[Measure With NxtCam]
+%    Raw measurements from the nxtCam. The camera starts mapping in the top-left corner (coordinate 0,0) down to the bottom-right (coordinate 144,176).
+%    \item[Displace and Flip Coordinate Plot]
+%    Moves the origin of plot to the bottom-middle (coordinate 0,88) where the camera is placed and flips the x-coordinates. As such, the top-left becomes coordinate 144,-88 and the bottom-right point becomes coordinate 144,88. 
+%    \item[Correct for Lens Distortion]
+%    The bend of the camera lens distorts the position of points in regards to where they are actually placed. This is corrected in this function. 
+%    \item[Sort Out Bad Measurements]
+%    Any measurements that are not placed within either the left or right road markings are sorted out. 
+%    \item[Correct for Field of View]
+%    The coordinates and distances between points are incorrect because the picture was taken at an angle, and as such the objects at the top are further away from the camera than the objects at the bottom of the picture. This is corrected in this function. 
+%\end{description}
 
 %(Ren punktdata) NxtCamV4 Line Tracking Driver: Track Line ()
 %	(Rå punktdata) Mål med NxtCamV4 ()
@@ -27,6 +41,10 @@ The steps that are performed to clean up the NxtCam measurements and their retur
 %	*(Ren punktdata) Funktion der sorterer dårlige målinger fra (Let modificeret punktdata)			- Målinger der ligger helt forkert, for eksempel
 %	(Punkter på koordinatsystem) NxtCamV4 Line Tracking Driver: Map Points to Koordinates (Ren punktdata)
 %	- Property: Bus Point
+
+
+
+
 
 
 \subsubsection{Field of View Corrections}
