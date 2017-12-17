@@ -23,8 +23,18 @@ We could have used less fancy sensors and in stead focused our efforts on coding
 \subsection{Implementation does not fully fit Design}
 The functionality of the bus that we prioritised the highest and spent by far the most time on was for it to drive within a lane by use of the NXTCamSensor. So much so, that we started experimenting and tinkering with it prior to the design being finished. 
 
-\subsection{The Driving Algorithm}
-Is it optimal? It pingpongs between the road markings. 
+\subsection{The Driving Algorithm}\label{pingpong}
+The Algorithm that drives the bus makes it "pingpong" back and forth between the two sides.
+Whilst it can work, all the excessive turning causes the bus to wiggle even more (see subsection: \ref{wiggle}). Furthermore it also strains the bus and will cause additional wear and tear on the bus, making the algorithm non ideal for the long run. Passengers where abstracted away earlier, but if this was to be implemented in a real bus that had passengers, then the algorithm would cause the passengers to be shaken around, making for a rather unpleasant bus ride.
 
 \subsection{Camera Placement}
 Something we figured out too late was that the camera should have probably been placed lower. Its angle of view should have been tweaked as well to allow for less lookahead, but still enough knowledge about the lines. Problem is that during a turn, we lose sight of the line beacuse it's within the 8 \todo{8?? Look at mathcad calcs} cm. between the sensor and the bus, that the sensor cannot detect. It would have also made the camera more stable, which could have made measurements slightly more reliable. We did not need as large of a lookahead as what we ended with (42 cm? \todo{Look at mathcad calcs}). 
+
+% probably delete this
+\subsection{Wiggling of bus}\label{wiggle}
+An issue with the bus is that its center of gravity is very high compared to how wide the bus is. This causes the whole bus to wiggle when the front wheels turn. Since the camera is on top of the bus this is the point that wiggles the most. Wiggling of the camera causes the data input that it receives to be slightly inaccurate.
+
+\subsection{Design of the physical bus}
+It was okay
+There is something to be said for keeping a design and not changing it too much. This allows us to better write software that is specifically directed at the hardware situation that we are in, instead of changing it based on every whim and then having to rewrite the software. 
+However, parts of our design may still be too vulnerable on a single point of failure. For instance, some LEGO\copyright parts are simply less tight than others, so it's not optimal to rely on them.

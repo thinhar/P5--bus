@@ -11,13 +11,13 @@ In this section the project requirements the final product will need to meet in 
 
 \begin{description}
     \item [(1) Follow Track]
-    The bus should be able to detect the lines, marking the edges of the lane and stay within these. The relation between the size of the track and the LEGO bus should be the same as the relation real busses have with real roads in Denmark. This also applies to the turning degrees of any road turns. \todo{Første gang læseren hører om dette, mangler et afsnit eller noget, som gav os denne design beslutning}
+    The bus should be able to detect the lines which indicates where the lane is, and stay within these bounds. The size of the track and the LEGO bus should be of similar proportions to the busses driving on danish roads. This also applies to the turning degrees of any road turns. \todo{Første gang læseren hører om dette, mangler et afsnit eller noget, som gav os denne design beslutning}
     
     \item[(2) Stop at Bus Stops]
     The bus should detect, and stop at bus stops on its route if needed, and resume driving afterwards. 
 
     \item[(3) Switching Lanes] 
-    The vehicle should be able to switch lanes. This functionality is useful, both for overtaking other vehicles and driving over in dedicated bus lanes. 
+    The vehicle should be able to switch lanes. This functionality is useful, both for overtaking other vehicles and switching to dedicated bus lanes. 
     
     \item[(4) Detecting Obstacles]
     Detecting obstacles is a crucial part of preventing crashes and other potential accidents. As such the bus needs to be able to detect obstacles in front of it and perform preventative measures to prevent the collision. In normal busses the response time and field of view of the human driving the bus is the obstacle detection. As such the response time and field of view of our bus should be at least on par with normal human drivers. Seeing as this is highly improbable and unnecessary for a LEGO bus, we will consider this requirement fulfilled as long as it can: detect and react to obstacles in a 60 degree cone to the front within less than a second, and detect and react to obstacles within a 150 degree arch (60 degree cone in the front, and 90 degrees to whichever side the bus is turning) whenever the vehicle is switching lanes. Additionally, we should be able to detect obstacles of a distance between 0 cm. from the bus to the distance it can cover within 2 seconds of driving at max speed \cite{holdAfstand}.

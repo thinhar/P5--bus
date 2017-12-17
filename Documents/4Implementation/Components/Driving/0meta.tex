@@ -1,1 +1,15 @@
 \subsection{Driving Component}
+This section will describe the important features implemented in the driving component. 
+
+The Driving component is the most basic of the components in this project, however its role is essential to the project.
+
+The functionality the driving component is responsible for basic stuff like: turn left turn right and increase/decrease speed. It is also responsible for the calibration of the motors. The component is simple, however it was designed as such to allow us to limit the access to the motors. Since the project includes multiple components which use the motors as output, the motors are shared resources, an explanation of what shared resources are can be found at \ref{sharedReources}. This limited access to the motors meant that there had to be a way to identify from among the commands which should be given precedence. This is done by giving some of the commands sent by the different components a 
+
+
+
+%Basic stuff:
+%turn left turn right increase speed/ decrease speed calibration
+
+%however the most important thing in this component
+%Update
+%- angle speed. because of\ref{design:processView}

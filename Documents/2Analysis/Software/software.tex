@@ -1,4 +1,4 @@
-\subsection{Software Platforms}
+\subsection{Software Platforms} \label{softwareplatforms}
 The LEGO NXT is a flexible platform, as it allows for custom firmware to be installed, which in turn allows for different programming languages to be used.
 Some of these include RobotC\cite{RobotC}, leJOS\cite{leJOS} and nxtOSEK\cite{nxtOSEK}.
 
@@ -21,10 +21,13 @@ NXT-G is the development environment supplied with the LEGO NXT. NXT-G is a prog
 \subsubsection{RobotC}
 This programming language is designed specifically for robot platforms. It is built on top of C, and with the primary purpose of being an educational platform. Noteworthy is that it is not free to use and requires a license.
 
+However RobotC does have easy to use support for priority based scheduling, with round robin scheduling scheme if multiple task are ready to run, with the highest priority\cite{robotCScheduling}.  
+
+
 \subsubsection{leJOS}
 leJOS is an open-source firmware that includes the Java Virtual Machine\cite{Java}, and as such allows for writing Java programs. leJOS was originally written for the LEGO RCX, an earlier version of the NXT, it has since been updated to run on the NXT.
 
-leJOS has plugins for both Netbeans\cite{Netbeans} and Eclipse\cite{Eclipse} for making development more convenient.
+leJOS has plugins for both Netbeans\cite{Netbeans} and Eclipse\cite{Eclipse} for making development more convenient. Furthermore leJOS support priority based scheduling\cite{leJOSScheduling}.\unsure{dynamic priority based scheduling?}
 
 \subsubsection{nxtOSEK} \label{nxtOSEK}
 nxtOSEK is a hybrid firmware of leJOS and TOPPERS\cite{TOPPERS}. nxtOSEK supports programming in C and C++, which gives nxtOSEK the possibility of very optimised code. Furthermore since nxtOSEK is based on OSEK software architecture \unsure{Brugt til biler?, ved ikke helt om det skal nævnes}.
@@ -46,12 +49,20 @@ There are three ways to run nxtOSEK on a NXT. These approaches have different pr
     \label{firmCom}
 \end{table}
 
+\todo{Skriv hvad for en vi vil vælge hvis, nxtOSEK blev vores valg.}
+
 nxtOSEK supports scheduling using priority based scheduling\todo{reference needed}. It uses alarms to define priorities and the execution rate.
+\todo{add event-based scheduling?}
 
 \subsection{Choice of software}
+In the previous section \ref{softwareplatforms}, four of the many software platforms available for LEGO NXT, was looked into.
+
+Out of the four software, nxtOSEK was chosen. The reason were that NXT-G was too abstract, since it only allowed for block programming. RobotC required a license and was therefor not free to use. 
+
+leJOS and nxtOSEK both seemed as good choices, since they both had support for scheduling. However nxtOSEK was deiced to be the better choice, since it allowed for better optimisation in code, because it supports c and c++, were leJOS supports java. And as written in section \ref{hardwareplatform} optimisations are important, because of our hardware limits in the choice of the LEGO NXT.  
 
 
-We have chosen to use the nxtOSEK because it does not cost us any money, it has the functionality that we need, and it allows for sufficiently low level programming languages, which is important when real-time systems are considered.
+%We have chosen to use the nxtOSEK because it does not cost us any money, it has the functionality that we need, and it allows for sufficiently low level programming languages, which is important when real-time systems are considered.
 
 
 % Ikke analyseret så mange

@@ -43,7 +43,7 @@ A system can be called schedulable if and only if all of its tasks can't exceed 
 
 %Deadline a specific time before which a task should be completed. 
 
-\subsection{\textbf{Fixed-Priority Scheduling}}\label{prioratySch}
+\subsection{Fixed-Priority Scheduling}\label{prioratySch}
 The chosen platform supports two kinds of scheduling: Event-based scheduling and Fixed-Priority scheduling\cite{OILManual}. \todo{we decided to use fixed?? give a ref to there}
 
 Fixed Priority scheduling works by assigning a priority to each task. The scheduler will then chose to run the task with the highest priority first. However how the tasks are assigned a priority must be considered. If a task is given a priority based on their periods, and it's not schedulable then it is proven that it won't be schedulable on any other priority\todo{Need prof of this.}. Therefore the choice of priority is trivial, simply found according to the task's relative periods.
@@ -60,7 +60,7 @@ This can be solved using priority inheritance. This is an inheritance of priorit
 
 We did not want to deal with event-based scheduling because we did not have a clear understanding of how we can ensure schedulability.\todo{this is the reason( selection by elimination), however, we cant write this, word it differently or find a better sounding reason}
 
-\subsection{\textbf{OSEK Implementation Language}}\label{OILteo}
+\subsection{OSEK Implementation Language}\label{OILteo}
 In this section, the report will go into detail with how the scheduling is supported. Most of the information about this can be found from this source\cite{OILManual}.
 
 OIL stands for OSEK implementation language, it was made as an attempt to create an industry standard for an open-ended architecture for distributed control units in vehicles\cite{OILManual}. It is compiled with the code and provides some objects or constructions that aim to assist\todo{How does it assist? Tool check?} with the scheduling of the code. Since the OIL implementation is quite extensive, this rapport will limit its explanation to what is most relevant for this project. Since the project has decided to use Fixed-Priority Scheduling, see \ref{prioratySch}, the report will explain the important constructions in OIL files to support this form of scheduling, the report will, therefore, explain these three objects in the oil files.
@@ -121,7 +121,7 @@ What happens if multiple interrupts occur? do they preempt each other?} is used 
 %\subsubsection*{\textbf{Alerm}}
 %asd
 
-\subsection{\textbf{Time Constraints}}
+\subsection{Time Constraints}
 There are 3 different kinds of time constraints on a system, soft, hard or firm time constraints. A hard real-time system is a system that is ruined by a missed deadline, e.g a system that gets destroyed if it misses a deadline. A firm real-time system is a system that if a task misses its deadline, its calculations are unusable. A soft constrained real-time system is a system that can miss some of its deadlines and still produce usable calculations.
 
 
@@ -130,7 +130,7 @@ There are 3 different kinds of time constraints on a system, soft, hard or firm 
 %\subsection{\textbf{UPPAAL}}
 %We will be using the UPPAAL tool to model check our schedule to determine whether or not any of the project tasks can exceed their deadlines. It is also used to find the worst-case response time for all the task in the system. 
 
-\subsection{\textbf{Communication primitives}} \label{commnucationPrimitives}
+\subsection{Communication primitives} \label{commnucationPrimitives}
 There are two kinds of communication primitives, shared memory and Message Passing, the primary source for this subsection is\cite{RTSbook}. 
 Shared memory is when a number of tasks have access to the same data, whereas message passing is when you send the data. This requires no overhead and no wait time is introduced by this strategy, however, it introduces shared resource, the theory of which will be discussed in \ref{sharedReources}.
 
@@ -140,7 +140,7 @@ In synchronous communication there are two kinds of communication either the sen
 Let's start with the sender waiting, it will send a message and then wait for a response / an acknowledgement. If it doesn't get an acknowledgement it will send the message once more, and only when it gets its acknowledgement it will continue its calculations. 
 Then there is the kind where the receiver waits, the receiver will perform its calculations until it reaches a point where it needs a message to proceed, it will then wait until it gets a message, and then send an acknowledge back to the sender and proceed with its calculations. \unsure{add ilustations?}
 
-There are also the more high level remote invocation\todo{add theory for this}.
+There are also the more high level form of communication called remote invocation. This can be understood as two way synchronous communication, i.e. using synchronous communication to both send the the query and reply.
 
 In asynchronous communication, nobody waits. At some point a receiver will get a message while it is performing its calculation, it will send an acknowledge back to the sender and keep working. A sender will perform its calculations, reach a spot where it needs to send a message, send it to continue working, and if it doesn't get an acknowledgement within a time-frame it will send its message again.
 
@@ -150,7 +150,7 @@ Message passing requires some overhead and computation time, due to requiring ac
 
 %Shared memory is going to be used as it is faster and simpler. It is more difficult to manage and understand the data locality. \todo{Huh?}
 
-\subsection{\textbf{Shared Resources}}\label{sharedReources}
+\subsection{Shared Resources}\label{sharedReources}
 Within the context of computer science a shared resource is when a resource is available to multiple computers/systems/tasks. It is possible to have multiple computers on a local area network(lan), that can all access the same resource, it is also possible to have shared resources over the internet. Examples of shared resources are printers, storage devices, sensors, and motors.
 When having shared resources some form of concurrency control must also be used to prevent errors from happening. The errors that can happen are: The lost update problem, the dirty read problem, and the incorrect summary problem.\todo{Should these be specified?}
 
