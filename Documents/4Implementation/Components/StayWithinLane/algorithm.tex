@@ -1,4 +1,24 @@
-\subsection{Algorithm}\todo{We have a new Algorithm that does something else. This subsection needs to be re-written.}
+\subsection{Algorithm}
+
+While we have sensor controllers that try to abstract away detail, we realized that this wasn't nearly enough for the NXTCam sensor. Even after sorting out zero-size boxes, max-length bars and boxes that were simply too large, we would still be left with a large amount of erroneous measurements that would be really tough to identify as faulty.
+
+Multiple measurements and statistical analysis of their placement might get us halfway there, but we concluded it to be safer to build an algorithm for staying within a lane that was resistant against singular faulty measurements.
+
+We experimented with other approaches, but we had the most success with a reactionary algorithm that made incremental changes to the turning angle that it suggested the bus should drive. 
+
+As such, we made ???
+
+
+It detects which objects it is on collision course with, and corrects based on the one it's going to hit first. 
+
+\todo{Finish this chapter and add in a piece of the code to examine. Delete the rest.}
+
+
+
+
+
+
+\todo{We have a new Algorithm that does something else. This subsection needs to be re-written.}
 In this section the algorithm that ensures that the bus always stays within the road lane is described. 
 
 The intent for the algorithm is to calculate an optimal line that the bus should follow in order to keep within lane markings. Using this result, it will call the Driving-component and inform it how much the bus should turn its wheels and for how long with it's current speed. 
