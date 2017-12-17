@@ -1,0 +1,8 @@
+\section{Embedded System Coding Approach}
+
+Before we started coding, we set a number of rules that needed to be adhered to while coding the program. These rules are different from a simple coding style and coding conventions, and are chosen specifically because this project is about writing a real-time embedded system.
+
+Because the product is an embedded system, we decided to be very stringent and precise about our memory management. This means that we decided to never use lists, vectors or similar dynamic size memory allocations in the program; instead we use statically allocated arrays. Similarly, we decided to never use the keywords \code{new} and \code{delete}, thereby avoiding any and all potential memory leaks. Instead, we pass objects around by either value or by pointer. These objects are then destroyed as they go out of scope. 
+
+Because of the real-time requirement for the system, the code execution time needs to be deterministic. Only then can we be sure that the program will always comply by its task deadlines. For this reason we decided to never write any recursive code. Even if its execution would be deterministic, we demand that the code is written using loops. 
+

@@ -1,14 +1,21 @@
 \section{NXTCam-v4 Sensor Analysis}\label{CamAnalysis}
 
-Why are we using the NXTCam? Have we already decided at this point?
-Line tracking is pretty much what we need, so therefore?
 
 \todo{Finish}
 
 We are using the NXTCam version 4. We will be referring to it as simply the NXTCam.
-The NXTCam sensor with high level of abstraction.
-Tracks lines, returns 0-8 boxes with coordinates, height and width 
-Can also track objects, but we're not planning to use this for now, so we will not go into further detail. 
+
+The source for this section is \cite{NXTCamUserGuide}
+
+Sensor with a high level of abstraction.
+
+The NXTCam is a real-time image processing engine that provides high-level post-processed data of the image that the camera sees. This means it does not send the image that it can see directly to the NXT, instead it only sends data about the contents of the image. The image itself can be viewed if the NXTCam is connected directly to a computer. 
+
+It supports two tracking modes, object tracking and line tracking.
+In the context of this project, only its line tracking capabilities is useful, and as such solely the line tracking will be tested.
+
+It can track up to 8 differently coloured objects at 30 frames per second at a resolution of 88 times 144. It returns boxes with x and y coordinates, height and width that correspond to the position of the line. While, according to the user guide, it has an image tracking resolution of 88 times 144 pixels. Although through testing it is found that the camera returns x values ranging between 0 and 176, and the y values range between 0 and 144, which seems contradictory. It does however somewhat match the dimensions that is given when taking pictures. In a more general sense, flawed, missing and incorrect documentation has plagued much of the research and experimentation with the NXTCam. 
+
 
 Working with the sensor through LEGO Mindstorms should be simple. They probably have very extensive driver software and calibration. Because we're planning to use a different framework that supports real-time systems, however, we will have to write much of this ourselves. This means we have to handle much erroneous data and ensure that the bus keeps driving properly regardless. 
 
@@ -17,7 +24,7 @@ Data sheet and others are available for download. We've mostly been consulting t
 Calibration by static and thorough testing, thorough testing would be very delicate, difficult and time consuming to do properly. Reason being that there are a number of different parameters that affect the NXTCam's output, some of which are very difficult to control reliably. 
 
 For instance:
-The NXTCam needs to be held completely still, otherwise it may mess up the picture.
+The NXTCam needs to be held completely still, otherwise it may mess up the picture by changing the parameters of the test.
 The light levels need to be the same, difficult because time of day
 The position of the NXTCam in comparison to the line that it should track need to be the same.
 
@@ -41,7 +48,8 @@ Here's a birds eye view of the sensor\ref{fig:BirdsEyeView}.
 
 
 To conduct the tests, we used two different programs, NXTCamView and BusRemoteTool. 
-NXTCamView is a program made by LEGO MINDSTORMS\copyright community member P. Tingey to configure, view the output data from the cam and control the NXTCam sensor. 
+NXTCamView is a program made by LEGO MINDSTORMS\copyright community member Paul Tingey to configure, view the output data from the cam and control the NXTCam sensor. 
+\todo{NxtCam user manual refererer til nxtcamview, så jeg tror faktisk ikke jeg kan sige han bare er et community member}
 
 BusRemoteTool is a program that we created ourselves to more easily see the measurements in real time, and also being able to test possible algorithms for calculating the direction that the bus should drive. There will be a more thorough description of this program in the later testing section \ref{Test:RemoteDebugging}. 
 
